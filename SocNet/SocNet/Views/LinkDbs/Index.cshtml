@@ -1,0 +1,51 @@
+﻿@model IEnumerable<SocNet.Models.LinkDb>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.date_modified)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NetworkDb.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VertexDb.identifier)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VertexDb1.identifier)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.date_modified)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NetworkDb.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VertexDb.identifier)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VertexDb1.identifier)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

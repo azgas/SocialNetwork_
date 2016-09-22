@@ -1,0 +1,88 @@
+﻿@model SocNet.Models.VertexFactorsDb
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>VertexFactorsDb</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.betweeness_centrality)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.betweeness_centrality)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.closeness_centrality)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.closeness_centrality)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.indegree_centrality)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.indegree_centrality)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.influence_range)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.influence_range)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.outdegree_centrality)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.outdegree_centrality)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.up_to_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.up_to_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VertexDb.identifier)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VertexDb.identifier)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

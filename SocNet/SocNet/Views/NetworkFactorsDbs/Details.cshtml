@@ -1,0 +1,90 @@
+﻿@model SocNet.Models.NetworkFactorsDb
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>NetworkFactorsDb</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.density)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.density)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.av_betweeness_centrality)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.av_betweeness_centrality)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.av_closeness_centrality)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.av_closeness_centrality)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.av_indegree_centrality)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.av_indegree_centrality)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.av_influence_range)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.av_influence_range)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.av_outdegree_centrality)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.av_outdegree_centrality)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.up_to_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.up_to_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NetworkDb.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NetworkDb.name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

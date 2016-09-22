@@ -1,0 +1,81 @@
+﻿@model IEnumerable<SocNet.Models.NetworkFactorsDb>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.density)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.av_betweeness_centrality)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.av_closeness_centrality)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.av_indegree_centrality)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.av_influence_range)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.av_outdegree_centrality)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.up_to_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NetworkDb.name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.density)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.av_betweeness_centrality)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.av_closeness_centrality)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.av_indegree_centrality)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.av_influence_range)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.av_outdegree_centrality)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.up_to_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NetworkDb.name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

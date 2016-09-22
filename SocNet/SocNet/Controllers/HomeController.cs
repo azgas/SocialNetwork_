@@ -9,7 +9,7 @@ namespace SocNet.Controllers
 {
     public class HomeController : Controller
     {
-        private Credentials asd = new Credentials();
+        //private Credentials asd = new Credentials();
         //private NetworkDb ada =new NetworkDb();
         //private LinkDb lin = new LinkDb();
         public ActionResult Index()

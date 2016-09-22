@@ -158,7 +158,14 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CredentialsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LinkDbsController.cs" />
+    <Compile Include="Controllers\NetworkDbsController.cs" />
+    <Compile Include="Controllers\NetworkFactorsDbsController.cs" />
+    <Compile Include="Controllers\ServiceDbsController.cs" />
+    <Compile Include="Controllers\VertexDbsController.cs" />
+    <Compile Include="Controllers\VertexFactorsDbsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -260,6 +267,41 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\LinkDbs\Create.cshtml" />
+    <Content Include="Views\LinkDbs\Delete.cshtml" />
+    <Content Include="Views\LinkDbs\Details.cshtml" />
+    <Content Include="Views\LinkDbs\Edit.cshtml" />
+    <Content Include="Views\LinkDbs\Index.cshtml" />
+    <Content Include="Views\Credentials\Create.cshtml" />
+    <Content Include="Views\Credentials\Delete.cshtml" />
+    <Content Include="Views\Credentials\Details.cshtml" />
+    <Content Include="Views\Credentials\Edit.cshtml" />
+    <Content Include="Views\Credentials\Index.cshtml" />
+    <Content Include="Views\NetworkDbs\Create.cshtml" />
+    <Content Include="Views\NetworkDbs\Delete.cshtml" />
+    <Content Include="Views\NetworkDbs\Details.cshtml" />
+    <Content Include="Views\NetworkDbs\Edit.cshtml" />
+    <Content Include="Views\NetworkDbs\Index.cshtml" />
+    <Content Include="Views\NetworkFactorsDbs\Create.cshtml" />
+    <Content Include="Views\NetworkFactorsDbs\Delete.cshtml" />
+    <Content Include="Views\NetworkFactorsDbs\Details.cshtml" />
+    <Content Include="Views\NetworkFactorsDbs\Edit.cshtml" />
+    <Content Include="Views\NetworkFactorsDbs\Index.cshtml" />
+    <Content Include="Views\ServiceDbs\Create.cshtml" />
+    <Content Include="Views\ServiceDbs\Delete.cshtml" />
+    <Content Include="Views\ServiceDbs\Details.cshtml" />
+    <Content Include="Views\ServiceDbs\Edit.cshtml" />
+    <Content Include="Views\ServiceDbs\Index.cshtml" />
+    <Content Include="Views\VertexDbs\Create.cshtml" />
+    <Content Include="Views\VertexDbs\Delete.cshtml" />
+    <Content Include="Views\VertexDbs\Details.cshtml" />
+    <Content Include="Views\VertexDbs\Edit.cshtml" />
+    <Content Include="Views\VertexDbs\Index.cshtml" />
+    <Content Include="Views\VertexFactorsDbs\Create.cshtml" />
+    <Content Include="Views\VertexFactorsDbs\Delete.cshtml" />
+    <Content Include="Views\VertexFactorsDbs\Details.cshtml" />
+    <Content Include="Views\VertexFactorsDbs\Edit.cshtml" />
+    <Content Include="Views\VertexFactorsDbs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
