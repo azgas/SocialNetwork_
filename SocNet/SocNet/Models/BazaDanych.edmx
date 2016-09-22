@@ -5,6 +5,15 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="Networkv3Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Credentials">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="key" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="secret" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="service id" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="LinkDb">
           <Key>
             <PropertyRef Name="id" />
@@ -81,6 +90,18 @@
           <Property Name="outdegree centrality" Type="int" Nullable="false" />
           <Property Name="up to date" Type="bit" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Credentials_ServiceDb">
+          <End Role="ServiceDb" Type="Self.ServiceDb" Multiplicity="1" />
+          <End Role="Credentials" Type="Self.Credentials" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceDb">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Credentials">
+              <PropertyRef Name="service id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Factors_Vertex">
           <End Role="VertexDb" Type="Self.VertexDb" Multiplicity="1" />
           <End Role="VertexFactorsDb" Type="Self.VertexFactorsDb" Multiplicity="*" />
@@ -166,6 +187,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Networkv3ModelStoreContainer">
+          <EntitySet Name="Credentials" EntityType="Self.Credentials" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LinkDb" EntityType="Self.LinkDb" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NetworkDb" EntityType="Self.NetworkDb" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NetworkFactorsDb" EntityType="Self.NetworkFactorsDb" Schema="dbo" store:Type="Tables" />
@@ -173,6 +195,10 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VertexDb" EntityType="Self.VertexDb" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VertexFactorsDb" EntityType="Self.VertexFactorsDb" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Credentials_ServiceDb" Association="Self.FK_Credentials_ServiceDb">
+            <End Role="ServiceDb" EntitySet="ServiceDb" />
+            <End Role="Credentials" EntitySet="Credentials" />
+          </AssociationSet>
           <AssociationSet Name="FK_Factors_Vertex" Association="Self.FK_Factors_Vertex">
             <End Role="VertexDb" EntitySet="VertexDb" />
             <End Role="VertexFactorsDb" EntitySet="VertexFactorsDb" />
@@ -207,6 +233,16 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Networkv3Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Credentials">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="key" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="secret" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="service_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ServiceDb" Relationship="Self.FK_Credentials_ServiceDb" FromRole="Credentials" ToRole="ServiceDb" />
+        </EntityType>
         <EntityType Name="LinkDb">
           <Key>
             <PropertyRef Name="id" />
@@ -256,6 +292,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Credentials" Relationship="Self.FK_Credentials_ServiceDb" FromRole="ServiceDb" ToRole="Credentials" />
           <NavigationProperty Name="NetworkDb" Relationship="Self.FK_Network_Service" FromRole="ServiceDb" ToRole="NetworkDb" />
           <NavigationProperty Name="VertexDb" Relationship="Self.FK_Vertex_Service" FromRole="ServiceDb" ToRole="VertexDb" />
         </EntityType>
@@ -297,6 +334,18 @@
           <Property Name="up_to_date" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="VertexDb" Relationship="Self.FK_Factors_Vertex" FromRole="VertexFactorsDb" ToRole="VertexDb" />
         </EntityType>
+        <Association Name="FK_Credentials_ServiceDb">
+          <End Role="ServiceDb" Type="Self.ServiceDb" Multiplicity="1" />
+          <End Role="Credentials" Type="Self.Credentials" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceDb">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Credentials">
+              <PropertyRef Name="service_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Link_Network">
           <End Role="NetworkDb" Type="Self.NetworkDb" Multiplicity="1" />
           <End Role="LinkDb" Type="Self.LinkDb" Multiplicity="*" />
@@ -381,7 +430,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Networkv3Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Networkv3Entities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Credentials" EntityType="Self.Credentials" />
           <EntitySet Name="LinkDb" EntityType="Self.LinkDb" />
           <EntitySet Name="NetworkDb" EntityType="Self.NetworkDb" />
           <EntitySet Name="NetworkFactorsDb" EntityType="Self.NetworkFactorsDb" />
@@ -389,6 +439,10 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="VertexDb" EntityType="Self.VertexDb" />
           <EntitySet Name="VertexFactorsDb" EntityType="Self.VertexFactorsDb" />
+          <AssociationSet Name="FK_Credentials_ServiceDb" Association="Self.FK_Credentials_ServiceDb">
+            <End Role="ServiceDb" EntitySet="ServiceDb" />
+            <End Role="Credentials" EntitySet="Credentials" />
+          </AssociationSet>
           <AssociationSet Name="FK_Link_Network" Association="Self.FK_Link_Network">
             <End Role="NetworkDb" EntitySet="NetworkDb" />
             <End Role="LinkDb" EntitySet="LinkDb" />
@@ -423,7 +477,17 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Networkv3ModelStoreContainer" CdmEntityContainer="Networkv3Entities">
+        <EntityContainerMapping StorageEntityContainer="Networkv3ModelStoreContainer" CdmEntityContainer="Networkv3Entities1">
+          <EntitySetMapping Name="Credentials">
+            <EntityTypeMapping TypeName="Networkv3Model.Credentials">
+              <MappingFragment StoreEntitySet="Credentials">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="key" ColumnName="key" />
+                <ScalarProperty Name="secret" ColumnName="secret" />
+                <ScalarProperty Name="service_id" ColumnName="service id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="LinkDb">
             <EntityTypeMapping TypeName="Networkv3Model.LinkDb">
               <MappingFragment StoreEntitySet="LinkDb">

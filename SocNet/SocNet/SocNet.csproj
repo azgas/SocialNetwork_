@@ -177,6 +177,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BazaDanych.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Credentials.cs">
+      <DependentUpon>BazaDanych.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\LinkDb.cs">
       <DependentUpon>BazaDanych.tt</DependentUpon>
     </Compile>

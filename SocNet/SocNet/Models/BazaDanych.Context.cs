@@ -13,10 +13,10 @@ namespace SocNet.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Networkv3Entities : DbContext
+    public partial class Networkv3Entities1 : DbContext
     {
-        public Networkv3Entities()
-            : base("name=Networkv3Entities")
+        public Networkv3Entities1()
+            : base("name=Networkv3Entities1")
         {
         }
     
@@ -25,6 +25,7 @@ namespace SocNet.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Credentials> Credentials { get; set; }
         public virtual DbSet<LinkDb> LinkDb { get; set; }
         public virtual DbSet<NetworkDb> NetworkDb { get; set; }
         public virtual DbSet<NetworkFactorsDb> NetworkFactorsDb { get; set; }

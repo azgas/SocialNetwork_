@@ -4,14 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="7a16b87d55fd42d981ccee0cb6727f09" Name="Diagram1">
-        <EntityTypeShape EntityType="Networkv3Model.LinkDb" Width="1.5" PointX="8.25" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Networkv3Model.NetworkDb" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Networkv3Model.NetworkFactorsDb" Width="1.5" PointX="5.25" PointY="6.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Networkv3Model.ServiceDb" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+      <Diagram DiagramId="11a8c00e5ce646b9b72b0fda8a2da4d4" Name="Diagram1">
+        <EntityTypeShape EntityType="Networkv3Model.Credentials" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Networkv3Model.LinkDb" Width="1.5" PointX="8.25" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="Networkv3Model.NetworkDb" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="Networkv3Model.NetworkFactorsDb" Width="1.5" PointX="5.25" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Networkv3Model.ServiceDb" Width="1.5" PointX="0.75" PointY="6.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Networkv3Model.sysdiagrams" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Networkv3Model.VertexDb" Width="1.5" PointX="3" PointY="11" IsExpanded="true" />
-        <EntityTypeShape EntityType="Networkv3Model.VertexFactorsDb" Width="1.5" PointX="5.25" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Networkv3Model.VertexDb" Width="1.5" PointX="3" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Networkv3Model.VertexFactorsDb" Width="1.5" PointX="5.25" PointY="13.75" IsExpanded="true" />
+        <AssociationConnector Association="Networkv3Model.FK_Credentials_ServiceDb" ManuallyRouted="false" />
         <AssociationConnector Association="Networkv3Model.FK_Link_Network" ManuallyRouted="false" />
         <AssociationConnector Association="Networkv3Model.FK_Link_Vertex" ManuallyRouted="false" />
         <AssociationConnector Association="Networkv3Model.FK_Link_Vertex1" ManuallyRouted="false" />
