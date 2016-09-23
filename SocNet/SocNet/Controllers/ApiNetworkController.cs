@@ -11,13 +11,14 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Http.Results;
 using System.Web.Hosting;
+using AlgorytmyMVC.Models;
 using Microsoft.Ajax.Utilities;
 
 namespace AlgorytmyMVC.Controllers
 {
     public class ApiNetworkController : ApiController
     {
-        private Model1 db = new Model1();
+        private Networkv3Entities1 db = new Networkv3Entities1();
 
         public Network MakeNetworkFromDb(int id, string date)
         {
