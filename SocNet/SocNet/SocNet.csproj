@@ -166,6 +166,7 @@
     <Compile Include="Controllers\ServiceDbsController.cs" />
     <Compile Include="Controllers\VertexDbsController.cs" />
     <Compile Include="Controllers\VertexFactorsDbsController.cs" />
+    <Compile Include="Controllers\VisualisationController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -302,6 +303,7 @@
     <Content Include="Views\VertexFactorsDbs\Details.cshtml" />
     <Content Include="Views\VertexFactorsDbs\Edit.cshtml" />
     <Content Include="Views\VertexFactorsDbs\Index.cshtml" />
+    <Content Include="Views\Visualisation\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
