@@ -43,7 +43,9 @@ namespace SocNet.Controllers
             user.ApiSecret = credentials[0].secret;
             //pobieranie followersow uzytkownika z formularza
             var flickrFollowers = user.ContactsGetPublicList(form.initialVertex);
+            //dodanie uzytkownika poczatkowego do tabeli vertex
             IsUserIdInVertex(form.initialVertex, serviceObj[0].id);
+            //pobranie id uzytkonika poczatkowego w tabeli vertex
             var userId = network.VertexDb.Where<VertexDb>(x => x.identifier == form.initialVertex && x.service_id == serviceId).ToList();
             int numberOfPages = flickrFollowers.Pages;
             //zapis pierwszej partii do bazy danych
