@@ -23,7 +23,7 @@ namespace SocNet.Controllers
                 network.SaveChanges();
             }
         }
-        // POST: api/ApiFlickrFollower/UsersFlickrFollowers
+        // POST: api/ApiFlickrFollowers/UsersFlickrFollowers
         //pobieranie wszystkich followersów odpowiedniej liczby uzytkownikow flickr
         [HttpPost]
         public IHttpActionResult UsersFlickrFollowers([FromBody]AskApiFlickrFollowers form)

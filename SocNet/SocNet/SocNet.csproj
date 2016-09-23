@@ -208,6 +208,7 @@
     <Compile Include="Controllers\ApiFlickrFollowersController.cs" />
     <Compile Include="Controllers\CredentialsController.cs" />
     <Compile Include="Controllers\GetFlickrUserFollowersController.cs" />
+    <Compile Include="Controllers\GetFlickrUsersFollowersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LinkDbsController.cs" />
     <Compile Include="Controllers\NetworkDbsController.cs" />
@@ -358,6 +359,7 @@
     <Content Include="Views\VertexFactorsDbs\Index.cshtml" />
     <Content Include="Views\Visualisation\Index.cshtml" />
     <Content Include="Views\GetFlickrUserFollowers\Index.cshtml" />
+    <Content Include="Views\GetFlickrUsersFollowers\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,25 @@
+﻿@model SocNet.Models.AskApiFlickrFollowers
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Formularz pobierania Followersów użytkowników serwisu Flickr</h2>
+@using (Html.BeginForm())
+{
+    <div>
+        @Html.LabelFor(model => model.networkID)
+        @Html.TextBoxFor(model => model.networkID)
+    </div>
+    <div>
+        @Html.LabelFor(model => model.initialVertex)
+        @Html.TextBoxFor(model => model.initialVertex)
+    </div>
+    <div>
+        @Html.LabelFor(model => model.numberOfQueries)
+        @Html.TextBoxFor(model => model.numberOfQueries)
+    </div>
+
+
+    <input type="submit" value="Zbierz Followersów" />
+}
