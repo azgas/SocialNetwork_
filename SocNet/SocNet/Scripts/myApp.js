@@ -213,7 +213,10 @@ myApp.directive("myGraph",
                                     .attr("r", 7)
                                     .attr("fill",
                                         function (d) {
-                                            return "rgb(0, 0, " + (Object.keys(d.edges).length * 30) + ")";
+                                            if (d.id === $scope.selectedVertex.id)
+                                                return "SlateBlue";
+                                            else
+                                                return "black";
                                         }
                                     )
                                     .on("mouseover",
@@ -225,12 +228,15 @@ myApp.directive("myGraph",
                                             d3.select(this)
                                                 .attr("fill",
                                                     function (d) {
-                                                        return "rgb(0, 0, " + (Object.keys(d.edges).length * 30) + ")";
+                                                        if (d.id === $scope.selectedVertex.id)
+                                                            return "SlateBlue";
+                                                        else
+                                                            return "black";
                                                     });
                                         })
                                     .on("click",
                                         function (d) {
-                                            $timeout(myService.toggle(d.id, d.edges));
+                                            $timeout(myService.toggle(d.identifier, d.name));
                                         })
                                     .call(d3.drag()
                                         .on("start", dragstarted)
