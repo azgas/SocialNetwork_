@@ -23,13 +23,12 @@ namespace SocNet.Controllers
                 network.VertexDb.Add(vertex);
                 network.SaveChanges();
             }
-
         }
 
-        // POST: api/GetFlickrFollowersAPI/GetFlickrFollowers
+        // POST: api/ApiFlickrFollower/UserFlickrFollowers
         //pobieranie wszystkich followersów użytkownika flickr
         [HttpPost]
-        public IHttpActionResult GetFlickrFollowers([FromBody]AskApiFlickrFollower form)
+        public IHttpActionResult UserFlickrFollowers([FromBody]AskApiFlickrFollower form)
         {
             //data rozpoczęcia pobierania
             var data = DateTime.Now;
