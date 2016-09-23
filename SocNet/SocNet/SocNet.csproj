@@ -170,6 +170,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AskApiFlickrFollowers.cs" />
+    <Compile Include="Models\AskApiFlickrFollower.cs" />
+    <Compile Include="Models\AskApiTwitterFollower.cs" />
+    <Compile Include="Models\AskApiTwitterFollowers.cs" />
     <Compile Include="Models\BazaDanych.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
