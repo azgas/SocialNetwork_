@@ -209,6 +209,7 @@
     <Compile Include="Models\LinkDb.cs">
       <DependentUpon>BazaDanych.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Network.cs" />
     <Compile Include="Models\NetworkDb.cs">
       <DependentUpon>BazaDanych.tt</DependentUpon>
     </Compile>
