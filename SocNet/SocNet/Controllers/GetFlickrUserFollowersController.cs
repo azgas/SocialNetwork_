@@ -26,7 +26,7 @@ namespace SocNet.Controllers
             client.DefaultRequestHeaders.Accept.Clear();
             client.Timeout = new TimeSpan(0, 30, 0);
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            HttpResponseMessage response = client.PostAsJsonAsync("api/GetFlickrFollowersAPI/GetFlickrFollowers", form).Result;
+            HttpResponseMessage response = client.PostAsJsonAsync("api/ApiFlickrFollower/UserFlickrFollowers", form).Result;
             return RedirectToAction("Index", "LinkDbs");
         }
     }

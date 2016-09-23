@@ -8,7 +8,7 @@ using System.Web.Http;
 
 namespace SocNet.Controllers
 {
-    public class AskApiFlickrFollowersController : ApiController
+    public class ApiFlickrFollowersController : ApiController
     {
         private Networkv3Entities1 network = new Networkv3Entities1();
         public void IsUserIdInVertex(string VertexId, int serviceID)
