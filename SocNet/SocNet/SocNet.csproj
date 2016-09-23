@@ -186,8 +186,8 @@
     </Compile>
     <Compile Include="Models\AskApiFlickrFollowers.cs" />
     <Compile Include="Models\AskApiFlickrFollower.cs" />
-    <Compile Include="Models\AskApiTwitterFollower.cs" />
-    <Compile Include="Models\AskApiTwitterFollowers.cs" />
+    <Compile Include="Models\AskApiTwitterFollowerFriend.cs" />
+    <Compile Include="Models\AskApiTwitterFollowersFriendsNetworks.cs" />
     <Compile Include="Models\BazaDanych.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
