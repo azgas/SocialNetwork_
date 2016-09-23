@@ -54,8 +54,8 @@ namespace SocNet.Controllers
                 var link = new LinkDb();
                 link.date_modified = data;
                 link.network_id = form.networkID;
-                link.source_id = userId[0].id;
-                link.target_id= followerId[0].id;
+                link.source_id = followerId[0].id;
+                link.target_id= userId[0].id;
                 network.LinkDb.Add(link);
             }
             network.SaveChanges();
@@ -70,8 +70,8 @@ namespace SocNet.Controllers
                     var link = new LinkDb();
                     link.date_modified = data;
                     link.network_id = form.networkID;
-                    link.source_id = userId[0].id;
-                    link.target_id = followerId[0].id;
+                    link.source_id = followerId[0].id;
+                    link.target_id = userId[0].id;
                     network.LinkDb.Add(link);
                 }
                 network.SaveChanges();
