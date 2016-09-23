@@ -1,7 +1,112 @@
-﻿
-@{
-    ViewBag.Title = "Index";
-}
+﻿<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<head>
 
-<h2>Index</h2>
+    <style>
+        .node {
+            stroke: #fff;
+            stroke-width: 1.5px;
+        }
 
+        .link {
+            fill: none;
+            stroke: #bbb;
+        }
+
+        .page1 {
+            text-align: center;
+            width: 75%;
+            height: 100%;
+            float: left;
+        }
+
+        .page2 {
+            text-align: left;
+            padding-left: 10px;
+            padding-right: 10px;
+            width: 25%;
+            height: 100%;
+            float: left;
+            background-color: lightgray;
+        }
+
+        .pageHolder {
+            overflow: auto;
+            width: 100%;
+            height: 600px;
+        }
+    </style>
+    @section scripts{
+
+        <script src="~/Scripts/angular.min.js"></script>
+        <script src="~/Scripts/d3.min.js"></script>
+        <script src="~/Scripts/myApp.js"></script>
+    }
+
+
+</head>
+<!-- // call the app -->
+<body ng-app="myApp">
+    <div class="pageHolder" ng-controller="refreshCtrl">
+        <div id="id1" class="page1">
+            <div>
+                <button ng-click="refresh()" ng-show="false">odśwież</button>
+                Wybierz sieć:
+                <select ng-model="selectedNetwork" ng-options="x.name for x in networks" ng-change="refresh(); getDates(); getVertex()"></select>
+                @*<button ng-click="addNew()">Dodaj nową sieć</button>*@
+                <br />
+                <div>
+                    Wybierz datę:
+                    <select ng-model="selectedDate" ng-options="date for date in dates" ng-change="refresh()"></select>
+                    Wyświetl otoczenie wierzchołka:
+                    <select ng-model="selectedVertex" ng-options="vertex.name for vertex in vertices" ng-change="refresh()"></select>
+                </div>
+                <br />
+                <br />
+                <input type="text" name="newNetworkName" ng-show="visible" ng-model="networkName" ng-click="clear()" />
+                <button ng-click="addNetwork()" ng-show="visible">Ok</button>
+                <button ng-click="hide()" ng-show="visible">Anuluj</button>
+            </div>
+            <svg style="width:100%;height:100%;"></svg>
+            <div my-graph></div>
+
+        </div>
+        <div id="id2" class="page2" ng-controller="myCtrl">
+            <form name="form1">
+                <h3>Dodaj lub modyfikuj wierzchołek</h3>
+                <p>(Kliknij na wierzchołek, aby go wybrać)</p>
+                Numer wierzchołka: <input type="text" name="index" ng-model="vert.index">
+                <br />
+                @*<button ng-click="nextindex()">Kolejny indeks</button>*@
+                <br />
+                Krawędzie wychodzące: <input type="text" name="edges" ng-model="vert.edges">
+                <br />
+                <br />
+                @*<button ng-click="save()">Dodaj/modyfikuj</button><button ng-click="delete()">Usuń</button>*@
+                <br />
+                <br />
+                <button ng-click="countFactors()">Policz współczynniki dla sieci</button>
+                <br />
+                <br />
+                <div ng-model="factors">{{factors.status}}</div>
+                <div ng-show="showFactors" ng-model="factors">
+                    <ul>
+                        <li>Gęstość sieci: {{factors.density | number:6}}</li>
+                    </ul>
+                    <h5>Średnie współczynniki:</h5>
+                    <ul>
+                        <li>Indegree centrality: {{factors.avInCen | number:6}}</li>
+                        <li>Outdegree centrality: {{factors.avOutCen | number:6}}</li>
+                        <li>Closeness centrality: {{factors.avCloCen | number:6}}</li>
+                        <li>Betweeness centrality: {{factors.avBetCen | number:6}}</li>
+                        <li>Influence Range: {{factors.avInfRan | number:6}}</li>
+                    </ul>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
