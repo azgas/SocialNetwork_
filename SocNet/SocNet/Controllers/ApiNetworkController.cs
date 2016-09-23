@@ -81,6 +81,43 @@ namespace AlgorytmyMVC.Controllers
                     if (vertex_info.LinkDb != null)
                         foreach (var link_containing in vertex_info.LinkDb)
                         {
+                            if (link_containing.date_modified == dateT && link_containing.network_id == searched.id)
+                            {
+                                edges.Add((int)link_containing.target_id);
+                                if (!searched.directed)
+                                {
+                                    edges.Add((int)link_containing.source_id);
+                                }
+                            }
+                        }
+
+                    vertex_temp.edges = edges;
+                    vertices.Add(vertex_temp);
+                }
+                if (vertices.All(v => v.id != link.target))
+                {
+                    var vertex_info = db.VertexDb.ToList().Find(v => v.id == link.target);
+
+                    Vertex vertex_temp = new Vertex
+                    {
+                        id = (int)vertex_info.id,
+                        name = vertex_info.name,
+                        identifier = vertex_info.identifier
+                    };
+                    var vertFactors = db.VertexFactorsDb.ToList().SingleOrDefault(v => (v.vertex_id == vertex_info.id && v.date == dateT && v.up_to_date));
+                    if (vertFactors != null)
+                    {
+                        vertex_temp.betweenessCentralityValue = (float)vertFactors.betweeness_centrality;
+                        vertex_temp.closenessCentralityValue = (float)vertFactors.closeness_centrality;
+                        vertex_temp.indegreeCentralityValue = vertFactors.indegree_centrality;
+                        vertex_temp.outdegreeCentralityValue = vertFactors.outdegree_centrality;
+                        vertex_temp.influenceRangeValue = vertFactors.influence_range;
+                    }
+
+                    List<int> edges = new List<int>();
+                    if (vertex_info.LinkDb != null)
+                        foreach (var link_containing in vertex_info.LinkDb)
+                        {
                             if (link_containing.date_modified == dateT)
                             {
                                 edges.Add((int)link_containing.target_id);
@@ -162,7 +199,7 @@ namespace AlgorytmyMVC.Controllers
                     if (vertex_info.LinkDb != null)
                         foreach (var link_containing in vertex_info.LinkDb)
                         {
-                            if (link_containing.date_modified == dateT)
+                            if (link_containing.date_modified == dateT && link_containing.network_id == searched.id)
                             {
                                 edges.Add((int)link_containing.target_id);
                                 if (!searched.directed)

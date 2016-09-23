@@ -213,10 +213,10 @@ myApp.directive("myGraph",
                                     .attr("r", 7)
                                     .attr("fill",
                                         function (d) {
-                                            if (d.id === $scope.selectedVertex.id)
+/*                                            if (d.id === $scope.selectedVertex.id)
                                                 return "SlateBlue";
                                             else
-                                                return "black";
+                                                */return "black";
                                         }
                                     )
                                     .on("mouseover",
@@ -228,10 +228,10 @@ myApp.directive("myGraph",
                                             d3.select(this)
                                                 .attr("fill",
                                                     function (d) {
-                                                        if (d.id === $scope.selectedVertex.id)
+/*                                                        if (d.id === $scope.selectedVertex.id)
                                                             return "SlateBlue";
                                                         else
-                                                            return "black";
+                                                            */return "black";
                                                     });
                                         })
                                     .on("click",
