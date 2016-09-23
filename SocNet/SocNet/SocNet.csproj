@@ -207,6 +207,7 @@
     <Compile Include="Controllers\ApiNetworkController.cs" />
     <Compile Include="Controllers\ApiFlickrFollowersController.cs" />
     <Compile Include="Controllers\ApiTwitterFollowerController.cs" />
+    <Compile Include="Controllers\ApiTwitterNetworkController.cs" />
     <Compile Include="Controllers\CredentialsController.cs" />
     <Compile Include="Controllers\GetFlickrUserFollowersController.cs" />
     <Compile Include="Controllers\GetFlickrUsersFollowersController.cs" />
@@ -225,7 +226,7 @@
     <Compile Include="Models\AskApiFlickrFollowers.cs" />
     <Compile Include="Models\AskApiFlickrFollower.cs" />
     <Compile Include="Models\AskApiTwitterFollowerFriend.cs" />
-    <Compile Include="Models\AskApiTwitterFollowersFriendsNetworks.cs" />
+    <Compile Include="Models\AskApiTwitterNetwork.cs" />
     <Compile Include="Models\BazaDanych.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
