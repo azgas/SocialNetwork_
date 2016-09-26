@@ -12,6 +12,7 @@ namespace SocNet.Controllers
     public class ApiTwitterNetworkController : ApiController
     {
         private Networkv3Entities1 network = new Networkv3Entities1();
+        //dodawanie nowych wierzchołków do bayz danych
         public void IsUserIdInVertex(long VertexId, int serviceID, string VertexName = null)
         {
             string vertexIdStr = VertexId.ToString();
@@ -108,7 +109,7 @@ namespace SocNet.Controllers
                 {
                     IsUserIdInVertex(follower, serviceObj[0].id);
                 }
-                //pobranie id wiersza b azy z wierzcholkami
+                //pobranie id wiersza bazy z wierzcholkami
                 var followerId = network.VertexDb.Where<VertexDb>(x => x.identifier == follower.ToString() && x.service_id == serviceId).ToList();
                 var link = new LinkDb();
                 link.date_modified = data;
