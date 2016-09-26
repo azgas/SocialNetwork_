@@ -206,9 +206,13 @@
     <Compile Include="Controllers\ApiFlickrFollowerController.cs" />
     <Compile Include="Controllers\ApiNetworkController.cs" />
     <Compile Include="Controllers\ApiFlickrFollowersController.cs" />
+    <Compile Include="Controllers\ApiTwitterFollowerController.cs" />
+    <Compile Include="Controllers\ApiTwitterNetworkController.cs" />
     <Compile Include="Controllers\CredentialsController.cs" />
     <Compile Include="Controllers\GetFlickrUserFollowersController.cs" />
     <Compile Include="Controllers\GetFlickrUsersFollowersController.cs" />
+    <Compile Include="Controllers\GetTwitterSocialNetworkController.cs" />
+    <Compile Include="Controllers\GetTwitterUserFollowersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LinkDbsController.cs" />
     <Compile Include="Controllers\NetworkDbsController.cs" />
@@ -223,7 +227,7 @@
     <Compile Include="Models\AskApiFlickrFollowers.cs" />
     <Compile Include="Models\AskApiFlickrFollower.cs" />
     <Compile Include="Models\AskApiTwitterFollowerFriend.cs" />
-    <Compile Include="Models\AskApiTwitterFollowersFriendsNetworks.cs" />
+    <Compile Include="Models\AskApiTwitterNetwork.cs" />
     <Compile Include="Models\BazaDanych.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -360,6 +364,8 @@
     <Content Include="Views\Visualisation\Index.cshtml" />
     <Content Include="Views\GetFlickrUserFollowers\Index.cshtml" />
     <Content Include="Views\GetFlickrUsersFollowers\Index.cshtml" />
+    <Content Include="Views\GetTwitterUserFollowers\Index.cshtml" />
+    <Content Include="Views\GetTwitterSocialNetwork\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

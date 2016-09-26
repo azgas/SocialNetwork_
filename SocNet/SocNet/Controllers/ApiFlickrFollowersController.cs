@@ -12,10 +12,18 @@ namespace SocNet.Controllers
     public class ApiFlickrFollowersController : ApiController
     {
         private Networkv3Entities1 network = new Networkv3Entities1();
-        public void IsUserIdInVertex(string VertexId, int serviceID)
+        public void IsUserIdInVertex(string VertexId, int serviceID, string VertexName=null)
         {
             var existUser = network.VertexDb.Where<VertexDb>(x => x.identifier == VertexId && x.service_id == serviceID).ToList();
-            if (existUser.Count == 0)
+            if (existUser.Count == 0 && VertexName!=null)
+            {
+                var vertex = new VertexDb();
+                vertex.identifier = VertexId;
+                vertex.service_id = serviceID;
+                vertex.name = VertexName;
+                network.VertexDb.Add(vertex);
+                network.SaveChanges();
+            }else if(existUser.Count == 0 && VertexName == null)
             {
                 var vertex = new VertexDb();
                 vertex.identifier = VertexId;
@@ -53,7 +61,7 @@ namespace SocNet.Controllers
             //zapis pierwszej partii do bazy danych
             foreach (var follower in flickrFollowers)
             {
-                IsUserIdInVertex(follower.UserId, serviceObj[0].id);
+                IsUserIdInVertex(follower.UserId, serviceObj[0].id, follower.UserName);
                 var followerId = network.VertexDb.Where<VertexDb>(x => x.identifier == follower.UserId && x.service_id == serviceId).ToList();
                 var link = new LinkDb();
                 link.date_modified = data;
@@ -69,7 +77,7 @@ namespace SocNet.Controllers
                 flickrFollowers = user.ContactsGetPublicList(form.initialVertex, i, 1000);
                 foreach (var follower in flickrFollowers)
                 {
-                    IsUserIdInVertex(follower.UserId, serviceObj[0].id);
+                    IsUserIdInVertex(follower.UserId, serviceObj[0].id, follower.UserName);
                     var followerId = network.VertexDb.Where<VertexDb>(x => x.identifier == follower.UserId && x.service_id == serviceId).ToList();
                     var link = new LinkDb();
                     link.date_modified = data;
@@ -97,7 +105,7 @@ namespace SocNet.Controllers
                 followersList = followersList.Union(flickrFollowers).Except(usedFollowers).ToList();
                 foreach(var follower in flickrFollowers)
                 {
-                    IsUserIdInVertex(follower.UserId, serviceObj[0].id);
+                    IsUserIdInVertex(follower.UserId, serviceObj[0].id, follower.UserName);
                     var followerId = network.VertexDb.Where<VertexDb>(x => x.identifier == follower.UserId && x.service_id == serviceId).ToList();
                     var link = new LinkDb();
                     link.date_modified = data;
@@ -116,7 +124,7 @@ namespace SocNet.Controllers
                         followersList = followersList.Union(flickrFollowers).Except(usedFollowers).ToList();
                         foreach (var follower in flickrFollowers)
                         {
-                            IsUserIdInVertex(follower.UserId, serviceObj[0].id);
+                            IsUserIdInVertex(follower.UserId, serviceObj[0].id, follower.UserName);
                             var followerId = network.VertexDb.Where<VertexDb>(x => x.identifier == follower.UserId && x.service_id == serviceId).ToList();
                             var link = new LinkDb();
                             link.date_modified = data;

@@ -5,7 +5,7 @@ using System.Web;
 
 namespace SocNet.Models
 {
-    public class AskApiTwitterFollowersFriendsNetworks
+    public class AskApiTwitterNetwork
     {
         public int networkID { get; set; }
         public int initialVertex { get; set; }
