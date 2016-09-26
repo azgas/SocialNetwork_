@@ -45,6 +45,38 @@ namespace SocNet.Controllers
             //akredytacja POPRAWIC
             var credentials = network.Credentials.Where<Credentials>(x => x.ServiceDb.name == "Twitter").ToList();
             Auth.SetApplicationOnlyCredentials(credentials[0].key, credentials[0].secret, true);
+            //okiełznanie limitów twitter
+            RateLimit.RateLimitTrackerMode = RateLimitTrackerMode.TrackOnly;
+            TweetinviEvents.QueryBeforeExecute += (sender, args2) =>
+            {
+                var queryRateLimits = RateLimit.GetQueryRateLimit(args2.QueryURL);
+
+                // Some methods are not RateLimited. Invoking such a method will result in the queryRateLimits to be null
+                if (queryRateLimits != null)
+                {
+                    if (queryRateLimits.Remaining > 0)
+                    {
+                        // We have enough resource to execute the query
+                        return;
+                    }
+                    else
+                    {
+                        while (queryRateLimits.Remaining < 1)
+                        {
+                            foreach (var cred in network.Credentials.Where<Credentials>(x => x.ServiceDb.name == "Twitter").ToList())
+                            {
+                                var credential = Auth.SetApplicationOnlyCredentials(cred.key, cred.secret, true);
+                                queryRateLimits = RateLimit.GetQueryRateLimit(args2.QueryURL, credential);
+                                if (queryRateLimits.Remaining > 0)
+                                {
+                                    args2.TwitterQuery.TwitterCredentials = Auth.SetApplicationOnlyCredentials(cred.key, cred.secret, true);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            };
             //wybor id serwisu
             var serviceObj = network.ServiceDb.Where<ServiceDb>(x => x.name == "Twitter").ToList();
             var serviceId = serviceObj[0].id;
@@ -63,6 +95,11 @@ namespace SocNet.Controllers
             var twitterFollowers = Tweetinvi.User.GetFollowerIds(form.initialVertex, form.queryLimit);
             var twitterFriends = Tweetinvi.User.GetFriendIds(form.initialVertex, form.queryLimit);
             queries++;
+            //test
+            if(twitterFollowers==null || twitterFriends == null)
+            {
+                //
+            }
             //zapis followersow dobazy danych
             foreach (var follower in twitterFollowers)
             {
@@ -133,9 +170,15 @@ namespace SocNet.Controllers
                 {
                     queries++;
                     var newInitialVertexId = twitterFriendsList[0];
+                    userId = network.VertexDb.Where<VertexDb>(x => x.identifier == newInitialVertexId.ToString() && x.service_id == serviceId).ToList();
                     usedUsers.Add(newInitialVertexId);
                     var newUsersFriends = Tweetinvi.User.GetFriendIds(newInitialVertexId,form.queryLimit);
                     var newUsersFollowers = Tweetinvi.User.GetFollowerIds(newInitialVertexId, form.queryLimit);
+                    //test
+                    if (newUsersFriends == null || newUsersFollowers == null)
+                    {
+                        //
+                    }
                     twitterFriendsList = twitterFriendsList.Union(newUsersFriends).Except(usedUsers).ToList();
                     twitterFollowersList = twitterFollowersList.Union(newUsersFollowers).Except(usedUsers).ToList();
                     //zapis followersow dobazy danych
@@ -189,9 +232,15 @@ namespace SocNet.Controllers
                 {
                     queries++;
                     var newInitialVertexId = twitterFollowersList[0];
+                    userId = network.VertexDb.Where<VertexDb>(x => x.identifier == newInitialVertexId.ToString() && x.service_id == serviceId).ToList();
                     usedUsers.Add(newInitialVertexId);
                     var newUsersFriends = Tweetinvi.User.GetFriendIds(newInitialVertexId, form.queryLimit);
                     var newUsersFollowers = Tweetinvi.User.GetFollowerIds(newInitialVertexId, form.queryLimit);
+                    //test
+                    if (newUsersFriends == null || newUsersFollowers == null)
+                    {
+                        //
+                    }
                     twitterFriendsList = twitterFriendsList.Union(newUsersFriends).Except(usedUsers).ToList();
                     twitterFollowersList = twitterFollowersList.Union(newUsersFollowers).Except(usedUsers).ToList();
                     //zapis followersow dobazy danych
