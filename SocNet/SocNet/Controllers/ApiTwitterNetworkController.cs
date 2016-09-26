@@ -118,14 +118,20 @@ namespace SocNet.Controllers
             //rozpoczynamy pobieranie dla kolejnych wierzcholkow
             while(queries<=form.numberOfQueries && (twitterFriends.Any()||twitterFollowers.Any()))
             {
-                queries++;
+                bool bool1=false;
+                bool bool2=false;
                 var rand = new Random();
                 if (twitterFriends.Any())
                 {
-
+                    bool1 = true;
                 }
-                if (rand.Next(100) % 2 == 1)
+                if (twitterFollowers.Any())
                 {
+                    bool2 = true;
+                }
+                if (rand.Next(100) % 2 == 1 && bool1==true)
+                {
+                    queries++;
                     var newInitialVertexId = twitterFriendsList[0];
                     usedUsers.Add(newInitialVertexId);
                     var newUsersFriends = Tweetinvi.User.GetFriendIds(newInitialVertexId,form.queryLimit);
@@ -179,8 +185,9 @@ namespace SocNet.Controllers
                     }
                     network.SaveChanges();
                 }
-                else
+                else if(rand.Next(100) % 2 == 0 && bool2 == true)
                 {
+                    queries++;
                     var newInitialVertexId = twitterFollowersList[0];
                     usedUsers.Add(newInitialVertexId);
                     var newUsersFriends = Tweetinvi.User.GetFriendIds(newInitialVertexId, form.queryLimit);
