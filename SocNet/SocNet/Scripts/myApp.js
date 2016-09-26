@@ -178,7 +178,7 @@ myApp.directive("myGraph",
                             .force("center", d3.forceCenter(fw / 2, fh / 2));
 
 
-                        d3.json("/api/apinetwork/GetNetworkPartial/" + $scope.selectedNetwork.id + "?date=" + $scope.selectedDate + "&vertid=" + $scope.selectedVertex.id,
+                        d3.json(/*"/api/apinetwork/GetNetworkPartial/"*/"/api/apinetwork/GetNetwork/" + $scope.selectedNetwork.id + "?date=" + $scope.selectedDate/* + "&vertid=" + $scope.selectedVertex.id*/,
                             function (error, graph) {
                                 if (error) alert(error);
 
