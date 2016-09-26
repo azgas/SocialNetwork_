@@ -34,7 +34,7 @@ namespace SocNet.Controllers
                 network.SaveChanges();
             }
         }
-        // POST: api/ApiTwitterNetwork/UserTwitterNetowrk
+        // POST: api/ApiTwitterNetwork/UserTwitterNetwork
         [HttpPost]
         public IHttpActionResult UserTwitterNetwork([FromBody]AskApiTwitterNetwork form)
         {
@@ -120,6 +120,10 @@ namespace SocNet.Controllers
             {
                 queries++;
                 var rand = new Random();
+                if (twitterFriends.Any())
+                {
+
+                }
                 if (rand.Next(100) % 2 == 1)
                 {
                     var newInitialVertexId = twitterFriendsList[0];

@@ -25,7 +25,7 @@ namespace SocNet.Controllers
             client.DefaultRequestHeaders.Accept.Clear();
             client.Timeout = new TimeSpan(0, 30, 0);
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            HttpResponseMessage response = client.PostAsJsonAsync("api/ApiTwitterNetwork/UserTwitterNetowrk", form).Result;
+            HttpResponseMessage response = client.PostAsJsonAsync("api/ApiTwitterNetwork/UserTwitterNetwork", form).Result;
             return RedirectToAction("Index", "LinkDbs");
         }
     }
