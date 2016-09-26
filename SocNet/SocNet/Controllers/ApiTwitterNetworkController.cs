@@ -95,11 +95,6 @@ namespace SocNet.Controllers
             var twitterFollowers = Tweetinvi.User.GetFollowerIds(form.initialVertex, form.queryLimit);
             var twitterFriends = Tweetinvi.User.GetFriendIds(form.initialVertex, form.queryLimit);
             queries++;
-            //test
-            if(twitterFollowers==null || twitterFriends == null)
-            {
-                //
-            }
             //zapis followersow dobazy danych
             foreach (var follower in twitterFollowers)
             {
@@ -174,11 +169,6 @@ namespace SocNet.Controllers
                     usedUsers.Add(newInitialVertexId);
                     var newUsersFriends = Tweetinvi.User.GetFriendIds(newInitialVertexId,form.queryLimit);
                     var newUsersFollowers = Tweetinvi.User.GetFollowerIds(newInitialVertexId, form.queryLimit);
-                    //test
-                    if (newUsersFriends == null || newUsersFollowers == null)
-                    {
-                        //
-                    }
                     twitterFriendsList = twitterFriendsList.Union(newUsersFriends).Except(usedUsers).ToList();
                     twitterFollowersList = twitterFollowersList.Union(newUsersFollowers).Except(usedUsers).ToList();
                     //zapis followersow dobazy danych
@@ -236,11 +226,6 @@ namespace SocNet.Controllers
                     usedUsers.Add(newInitialVertexId);
                     var newUsersFriends = Tweetinvi.User.GetFriendIds(newInitialVertexId, form.queryLimit);
                     var newUsersFollowers = Tweetinvi.User.GetFollowerIds(newInitialVertexId, form.queryLimit);
-                    //test
-                    if (newUsersFriends == null || newUsersFollowers == null)
-                    {
-                        //
-                    }
                     twitterFriendsList = twitterFriendsList.Union(newUsersFriends).Except(usedUsers).ToList();
                     twitterFollowersList = twitterFollowersList.Union(newUsersFollowers).Except(usedUsers).ToList();
                     //zapis followersow dobazy danych
