@@ -211,6 +211,7 @@
     <Compile Include="Controllers\CredentialsController.cs" />
     <Compile Include="Controllers\GetFlickrUserFollowersController.cs" />
     <Compile Include="Controllers\GetFlickrUsersFollowersController.cs" />
+    <Compile Include="Controllers\GetTwitterSocialNetworkController.cs" />
     <Compile Include="Controllers\GetTwitterUserFollowersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LinkDbsController.cs" />
@@ -364,6 +365,7 @@
     <Content Include="Views\GetFlickrUserFollowers\Index.cshtml" />
     <Content Include="Views\GetFlickrUsersFollowers\Index.cshtml" />
     <Content Include="Views\GetTwitterUserFollowers\Index.cshtml" />
+    <Content Include="Views\GetTwitterSocialNetwork\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

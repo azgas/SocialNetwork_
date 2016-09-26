@@ -128,6 +128,52 @@ namespace SocNet.Controllers
                     var newUsersFollowers = Tweetinvi.User.GetFollowerIds(newInitialVertexId, form.queryLimit);
                     twitterFriendsList = twitterFriendsList.Union(newUsersFriends).Except(usedUsers).ToList();
                     twitterFollowersList = twitterFollowersList.Union(newUsersFollowers).Except(usedUsers).ToList();
+                    //zapis followersow dobazy danych
+                    foreach (var follower in newUsersFollowers)
+                    {
+                        //dodawnie nowego uzytkownika do wierzcholkow
+                        var followerName = Tweetinvi.User.GetUserFromId(follower);
+                        if (followerName != null)
+                        {
+                            IsUserIdInVertex(follower, serviceObj[0].id, followerName.ScreenName);
+                        }
+                        else
+                        {
+                            IsUserIdInVertex(follower, serviceObj[0].id);
+                        }
+                        //pobranie id wiersza b azy z wierzcholkami
+                        var followerId = network.VertexDb.Where<VertexDb>(x => x.identifier == follower.ToString() && x.service_id == serviceId).ToList();
+                        var link = new LinkDb();
+                        link.date_modified = data;
+                        link.network_id = form.networkID;
+                        link.source_id = followerId[0].id;
+                        link.target_id = userId[0].id;
+                        network.LinkDb.Add(link);
+                    }
+                    network.SaveChanges();
+                    //zapis friendsow do bazy danych
+                    foreach (var friend in newUsersFriends)
+                    {
+                        //dodawnie nowego uzytkownika do wierzcholkow
+                        var followerName = Tweetinvi.User.GetUserFromId(friend);
+                        if (followerName != null)
+                        {
+                            IsUserIdInVertex(friend, serviceObj[0].id, followerName.ScreenName);
+                        }
+                        else
+                        {
+                            IsUserIdInVertex(friend, serviceObj[0].id);
+                        }
+                        //pobranie id wiersza b azy z wierzcholkami
+                        var friendId = network.VertexDb.Where<VertexDb>(x => x.identifier == friend.ToString() && x.service_id == serviceId).ToList();
+                        var link = new LinkDb();
+                        link.date_modified = data;
+                        link.network_id = form.networkID;
+                        link.source_id = userId[0].id;
+                        link.target_id = friendId[0].id;
+                        network.LinkDb.Add(link);
+                    }
+                    network.SaveChanges();
                 }
                 else
                 {
@@ -137,6 +183,52 @@ namespace SocNet.Controllers
                     var newUsersFollowers = Tweetinvi.User.GetFollowerIds(newInitialVertexId, form.queryLimit);
                     twitterFriendsList = twitterFriendsList.Union(newUsersFriends).Except(usedUsers).ToList();
                     twitterFollowersList = twitterFollowersList.Union(newUsersFollowers).Except(usedUsers).ToList();
+                    //zapis followersow dobazy danych
+                    foreach (var follower in newUsersFollowers)
+                    {
+                        //dodawnie nowego uzytkownika do wierzcholkow
+                        var followerName = Tweetinvi.User.GetUserFromId(follower);
+                        if (followerName != null)
+                        {
+                            IsUserIdInVertex(follower, serviceObj[0].id, followerName.ScreenName);
+                        }
+                        else
+                        {
+                            IsUserIdInVertex(follower, serviceObj[0].id);
+                        }
+                        //pobranie id wiersza b azy z wierzcholkami
+                        var followerId = network.VertexDb.Where<VertexDb>(x => x.identifier == follower.ToString() && x.service_id == serviceId).ToList();
+                        var link = new LinkDb();
+                        link.date_modified = data;
+                        link.network_id = form.networkID;
+                        link.source_id = followerId[0].id;
+                        link.target_id = userId[0].id;
+                        network.LinkDb.Add(link);
+                    }
+                    network.SaveChanges();
+                    //zapis friendsow do bazy danych
+                    foreach (var friend in newUsersFriends)
+                    {
+                        //dodawnie nowego uzytkownika do wierzcholkow
+                        var followerName = Tweetinvi.User.GetUserFromId(friend);
+                        if (followerName != null)
+                        {
+                            IsUserIdInVertex(friend, serviceObj[0].id, followerName.ScreenName);
+                        }
+                        else
+                        {
+                            IsUserIdInVertex(friend, serviceObj[0].id);
+                        }
+                        //pobranie id wiersza b azy z wierzcholkami
+                        var friendId = network.VertexDb.Where<VertexDb>(x => x.identifier == friend.ToString() && x.service_id == serviceId).ToList();
+                        var link = new LinkDb();
+                        link.date_modified = data;
+                        link.network_id = form.networkID;
+                        link.source_id = userId[0].id;
+                        link.target_id = friendId[0].id;
+                        network.LinkDb.Add(link);
+                    }
+                    network.SaveChanges();
                 }
             }
             return Ok();
