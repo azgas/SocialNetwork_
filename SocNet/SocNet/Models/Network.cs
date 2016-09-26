@@ -30,7 +30,7 @@ namespace AlgorytmyMVC.Models
             {
                 int index = v.id;
                 v.indegreeCentralityValue = CentralityIn(index);
-                v.betweenessCentralityValue = BetweenessCentrality(index);
+  /*              v.betweenessCentralityValue = BetweenessCentrality(index);*/
                 v.influenceRangeValue = InfluenceRange(index);
                 v.outdegreeCentralityValue = CentralityOut(index);
                 v.closenessCentralityValue = ClosenessCentrality(index);
