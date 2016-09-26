@@ -61,6 +61,9 @@
                     <select ng-model="selectedDate" ng-options="date for date in dates" ng-change="refresh()"></select>
                     Wyświetl otoczenie wierzchołka:
                     <select ng-model="selectedVertex" ng-options="vertex.name for vertex in vertices" ng-change="refresh()"></select>
+                    <br/>
+                    Wyłącz wierzchołek początkowy:
+                    <input type="checkbox" ng-model="checkInclude" ng-true-value="0" ng-false-value="1"/>
                 </div>
                 <br />
                 <br />

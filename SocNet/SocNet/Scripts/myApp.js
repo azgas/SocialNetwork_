@@ -68,7 +68,7 @@ myApp.controller("myCtrl",
 
         //to niżej - do znajdywania kolejnego indeksu (nie wykorzystywane teraz)
         $scope.nextindex = function () {
-            $http.get("api/apinetwork/GetNetwork/" + $scope.selectedNetwork.id + "?date=" + $scope.selectedDate)
+            $http.get("api/apinetwork/GetNetwork/" + $scope.selectedNetwork.id + "?date=" + $scope.selectedDate + "&incl=0")
                 .success(function (data) {
                     var max = Math.max.apply(Math, data.vertices.map(function (o) { return o.id; }));
                     myService.toggle(max + 1, null);
@@ -178,7 +178,7 @@ myApp.directive("myGraph",
                             .force("center", d3.forceCenter(fw / 2, fh / 2));
 
 
-                        d3.json(/*"/api/apinetwork/GetNetworkPartial/"*/"/api/apinetwork/GetNetwork/" + $scope.selectedNetwork.id + "?date=" + $scope.selectedDate/* + "&vertid=" + $scope.selectedVertex.id*/,
+                        d3.json(/*"/api/apinetwork/GetNetworkPartial/"*/"/api/apinetwork/GetNetwork/" + $scope.selectedNetwork.id + "?date=" + $scope.selectedDate/* + "&vertid=" + $scope.selectedVertex.id*/+ "&incl=0",
                             function (error, graph) {
                                 if (error) alert(error);
 

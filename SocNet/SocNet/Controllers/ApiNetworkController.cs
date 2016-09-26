@@ -19,10 +19,24 @@ namespace AlgorytmyMVC.Controllers
     public class ApiNetworkController : ApiController
     {
         private Networkv3Entities1 db = new Networkv3Entities1();
-
-        public Network MakeNetworkFromDb(int id, string date)
+        //popraw
+        public Network MakeNetworkFromDb(int id, string date, int incl)
         {
+            int excluded = new int();
             var searched = db.NetworkDb.ToList().Find(net => net.id == id);
+            if (incl == 0)
+            {
+                
+                List<LinkDb> list = searched.LinkDb.ToList();
+                if (list[0].source_id == list[1].source_id)
+                {
+                    excluded = (int)list[0].source_id;
+                }
+                else if (list[0].target_id == list[1].target_id)
+                {
+                    excluded = (int)list[0].target_id;
+                }
+            }
 
             DateTime dateT = DateTime.Parse(date);
             Network network_temp = new Network //dane o sieci
@@ -33,6 +47,9 @@ namespace AlgorytmyMVC.Controllers
             };
             List<Link> links = new List<Link>(); //tworzenie połączeń
             foreach (var linkdb in db.LinkDb.Where(n => n.network_id == searched.id && n.date_modified == dateT))
+                if (incl == 0 && (linkdb.source_id == excluded || linkdb.target_id == excluded))
+                    continue;
+            else
             {
                 Link link_temp = new Link
                 {
@@ -138,8 +155,8 @@ namespace AlgorytmyMVC.Controllers
             network_temp.datesOfUpdates = distinctDates;
             return network_temp;
         }
-
-        public Network MakeNetworkFromDb(int id, string date, int vertid)
+        //popraw
+        public Network MakeNetworkFromDb(int id, string date, int vertid, int incl)
         {
             var searched = db.NetworkDb.ToList().Find(net => net.id == id);
             DateTime dateT = DateTime.Parse(date);
@@ -258,17 +275,17 @@ namespace AlgorytmyMVC.Controllers
             return network_temp;
         }
         [System.Web.Http.HttpGet]
-        public JsonResult<Network> GetNetwork(int id, string date)
+        public JsonResult<Network> GetNetwork(int id, string date, int incl)
         {
-            Network net = MakeNetworkFromDb(id, date);
+            Network net = MakeNetworkFromDb(id, date, incl);
             return Json(net);
-
+            
         }
 
         [System.Web.Http.HttpGet]
-        public JsonResult<Network> GetNetworkPartial(int id, string date, int vertid)
+        public JsonResult<Network> GetNetworkPartial(int id, string date, int vertid, int incl)
         {
-            Network net = MakeNetworkFromDb(id, date, vertid);
+            Network net = MakeNetworkFromDb(id, date, vertid, incl);
             return Json(net);
 
         }
@@ -329,7 +346,7 @@ namespace AlgorytmyMVC.Controllers
         //nie działa obecnie
         public IHttpActionResult SaveData([FromBody] Vertex vert, int id)
         {
-            Network networkTemp = MakeNetworkFromDb(id, "dd");
+            Network networkTemp = MakeNetworkFromDb(id, "dd", 0);
             if (networkTemp.vertices.Any(vertex => vertex.id == vert.id)) //jeśli istnieje - usuwa
             {
                 var vertexToDelete = networkTemp.vertices.Find(vertex => vertex.id == vert.id);
@@ -430,9 +447,9 @@ namespace AlgorytmyMVC.Controllers
         }
 
         [System.Web.Http.HttpGet]
-        public IHttpActionResult Count(int id, string date)
+        public IHttpActionResult Count(int id, string date, int incl)
         {
-            Network networkTemp = MakeNetworkFromDb(id, date);
+            Network networkTemp = MakeNetworkFromDb(id, date, incl);
             DateTime dateT = DateTime.Parse(date);
             networkTemp.CalculateFactors();
             foreach (Vertex vert in networkTemp.vertices)
