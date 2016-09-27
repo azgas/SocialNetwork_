@@ -43,7 +43,7 @@ namespace SocNet.Controllers
             var data = DateTime.Now;
             //ilosc zapytań
             int queries = 0;
-            //akredytacja POPRAWIC
+            //akredytacja
             var credentials = network.Credentials.Where<Credentials>(x => x.ServiceDb.name == "Twitter").ToList();
             Auth.SetApplicationOnlyCredentials(credentials[0].key, credentials[0].secret, true);
             //okiełznanie limitów twitter
