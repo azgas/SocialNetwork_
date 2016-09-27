@@ -63,7 +63,7 @@
                     <select ng-model="selectedVertex" ng-options="vertex.name for vertex in vertices" ng-change="refresh()"></select>
                     <br/>
                     Wyłącz wierzchołek początkowy:
-                    <input type="checkbox" ng-model="checkInclude" ng-true-value="0" ng-false-value="1"/>
+                    <input type="checkbox" ng-model="checkInclude" ng-true-value="0" ng-false-value="1" ng-click="refresh()"/>
                 </div>
                 <br />
                 <br />

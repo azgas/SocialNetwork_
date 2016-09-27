@@ -275,9 +275,10 @@ namespace AlgorytmyMVC.Controllers
             return network_temp;
         }
         [System.Web.Http.HttpGet]
-        public JsonResult<Network> GetNetwork(int id, string date, int incl)
+        public JsonResult<Network> GetNetwork(int id, string date, int incl, int vertid)
         {
-            Network net = MakeNetworkFromDb(id, date, incl);
+            Network net = new Network();
+            net = vertid == 0 ? MakeNetworkFromDb(id, date, incl) : MakeNetworkFromDb(id, date, vertid, incl);
             return Json(net);
             
         }

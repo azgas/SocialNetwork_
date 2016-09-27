@@ -4,6 +4,7 @@ myApp.controller("refreshCtrl",
 [
     "$location", "$scope", "$http", "myService", function ($location, $scope, $http, myService) {
         $scope.ref = 0; //zmienna, którą obserwuje graf do odświeżania
+        $scope.checkInclude = 1;
         $scope.refresh = function () {
             $scope.ref = myService.toggleval($scope.ref);
         };
@@ -28,7 +29,9 @@ myApp.controller("refreshCtrl",
         };
         $scope.getVertex = function () {
             $scope.vertices = $scope.selectedNetwork.vertices;
-            $scope.selectedVertex = $scope.vertices[0];
+            var all = { "name": "Pokaż całość", "id": 0 };
+            $scope.vertices.unshift(all);
+            $scope.selectedVertex = $scope.vertices[1];
         };
         $scope.addNew = function () {
             $scope.visible = true;
@@ -68,7 +71,7 @@ myApp.controller("myCtrl",
 
         //to niżej - do znajdywania kolejnego indeksu (nie wykorzystywane teraz)
         $scope.nextindex = function () {
-            $http.get("api/apinetwork/GetNetwork/" + $scope.selectedNetwork.id + "?date=" + $scope.selectedDate + "&incl=0")
+            $http.get("api/apinetwork/GetNetwork/" + $scope.selectedNetwork.id + "?date=" + $scope.selectedDate + "&incl=" + $scope.checkInclude)
                 .success(function (data) {
                     var max = Math.max.apply(Math, data.vertices.map(function (o) { return o.id; }));
                     myService.toggle(max + 1, null);
@@ -110,7 +113,7 @@ myApp.controller("myCtrl",
 
         $scope.showFactors = false;
         $scope.countFactors = function () {
-            $http.get("/api/apinetwork/Count/" + $scope.selectedNetwork.id + "?date=" + $scope.selectedDate)
+            $http.get("/api/apinetwork/Count/" + $scope.selectedNetwork.id + "?date=" + $scope.selectedDate + "?incl=" + $scope.checkInclude)
                 .success(function (data) {
                     $scope.refresh();
                 })
@@ -173,12 +176,12 @@ myApp.directive("myGraph",
                         var fw = frame.style("width").replace("px", "");
 
                         var simulation = d3.forceSimulation()
-                            .force("link", d3.forceLink().distance(40).strength(0.35))
-                            .force("charge", d3.forceManyBody())
+                            .force("link", d3.forceLink().distance(70).strength(0.40))
+                            .force("charge", d3.forceManyBody().distanceMax(120))
                             .force("center", d3.forceCenter(fw / 2, fh / 2));
 
 
-                        d3.json(/*"/api/apinetwork/GetNetworkPartial/"*/"/api/apinetwork/GetNetwork/" + $scope.selectedNetwork.id + "?date=" + $scope.selectedDate/* + "&vertid=" + $scope.selectedVertex.id*/+ "&incl=0",
+                        d3.json("/api/apinetwork/GetNetwork/" + $scope.selectedNetwork.id + "?date=" + $scope.selectedDate + "&vertid=" + $scope.selectedVertex.id + "&incl=" + +$scope.checkInclude,
                             function (error, graph) {
                                 if (error) alert(error);
 
