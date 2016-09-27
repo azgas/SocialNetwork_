@@ -84,7 +84,7 @@ namespace AlgorytmyMVC.Controllers
                         name = vertex_info.name,
                         identifier = vertex_info.identifier
                     };
-                    var vertFactors = db.VertexFactorsDb.ToList().SingleOrDefault(v => (v.vertex_id == vertex_info.id && v.date == dateT && v.up_to_date));
+                    var vertFactors = db.VertexFactorsDb.ToList().SingleOrDefault(v => (v.vertex_id == vertex_info.id && v.date == dateT && v.up_to_date && v.network_id == searched.id));
                     if (vertFactors != null)
                     {
                         vertex_temp.betweenessCentralityValue = (float)vertFactors.betweeness_centrality;
@@ -456,6 +456,7 @@ namespace AlgorytmyMVC.Controllers
             networkTemp.CalculateFactors();
             foreach (Vertex vert in networkTemp.vertices)
             {
+                //up to date - aplikacja aktulnie zapisuje nowy wiersz, a stary oznacza jako nieaktualny; docelowo lepiej zmienić na aktualizowanie starego
                 var previous = db.VertexFactorsDb.SingleOrDefault(o => o.vertex_id == vert.id && o.date == dateT && o.up_to_date);
                 if (previous != null)
                 {
@@ -471,7 +472,9 @@ namespace AlgorytmyMVC.Controllers
                     influence_range = vert.influenceRangeValue,
                     outdegree_centrality = vert.outdegreeCentralityValue,
                     date = DateTime.Parse(date),
-                    up_to_date = true
+                    up_to_date = true,
+                    network_id = id
+                    
                 };
                 db.VertexFactorsDb.Add(row);
                 db.SaveChanges();

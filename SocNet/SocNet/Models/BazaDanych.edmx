@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Networkv3Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Networkv3Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Credentials">
           <Key>
             <PropertyRef Name="id" />
@@ -89,6 +89,7 @@
           <Property Name="influence range" Type="int" Nullable="false" />
           <Property Name="outdegree centrality" Type="int" Nullable="false" />
           <Property Name="up to date" Type="bit" Nullable="false" />
+          <Property Name="network id" Type="bigint" Nullable="false" />
         </EntityType>
         <Association Name="FK_Credentials_ServiceDb">
           <End Role="ServiceDb" Type="Self.ServiceDb" Multiplicity="1" />
@@ -228,8 +229,7 @@
             <End Role="VertexDb" EntitySet="VertexDb" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Networkv3Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -333,6 +333,7 @@
           <Property Name="outdegree_centrality" Type="Int32" Nullable="false" />
           <Property Name="up_to_date" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="VertexDb" Relationship="Self.FK_Factors_Vertex" FromRole="VertexFactorsDb" ToRole="VertexDb" />
+          <Property Name="network_id" Type="Int64" Nullable="false" />
         </EntityType>
         <Association Name="FK_Credentials_ServiceDb">
           <End Role="ServiceDb" Type="Self.ServiceDb" Multiplicity="1" />
@@ -559,6 +560,7 @@
           <EntitySetMapping Name="VertexFactorsDb">
             <EntityTypeMapping TypeName="Networkv3Model.VertexFactorsDb">
               <MappingFragment StoreEntitySet="VertexFactorsDb">
+                <ScalarProperty Name="network_id" ColumnName="network id" />
                 <ScalarProperty Name="vertex_id" ColumnName="vertex id" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="date" ColumnName="date" />
