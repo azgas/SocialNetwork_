@@ -92,6 +92,9 @@ namespace SocNet.Controllers
             var followersList = flickrFollowers.ToList();
             //lista uzytych followersow
             List<Contact> usedFollowers = new List<Contact>();
+            Contact initialUser = new Contact();
+            initialUser.UserId = form.initialVertex;
+            usedFollowers.Add(initialUser);
             //usedFollowers.Add(form.initialVertex);
             while (queries<=form.numberOfQueries && followersList.Any())
             {
