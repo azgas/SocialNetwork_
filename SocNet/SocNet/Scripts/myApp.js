@@ -113,7 +113,7 @@ myApp.controller("myCtrl",
 
         $scope.showFactors = false;
         $scope.countFactors = function () {
-            $http.get("/api/apinetwork/Count/" + $scope.selectedNetwork.id + "?date=" + $scope.selectedDate + "?incl=" + $scope.checkInclude)
+            $http.get("/api/apinetwork/Count/" + $scope.selectedNetwork.id + "?date=" + $scope.selectedDate + "&incl=" + $scope.checkInclude)
                 .success(function (data) {
                     $scope.refresh();
                 })
@@ -192,6 +192,12 @@ myApp.directive("myGraph",
                                     bilinks = [];
 
 
+                                var colorScale = d3.scaleLinear()
+                                    .domain([
+                                        0, d3.max(nodes, function(d) { return d.edges.length; }) / 2, d3.max(nodes, function(d) { return d.edges.length; })
+                                    ])
+                                    .range(["#17062d", "#202b8c", "#438ecc"]);
+
                                 links.forEach(function (link) {
                                     var s = link.source = nodeById.get(link.source),
                                         t = link.target = nodeById.get(link.target),
@@ -216,10 +222,9 @@ myApp.directive("myGraph",
                                     .attr("r", 7)
                                     .attr("fill",
                                         function (d) {
-/*                                            if (d.id === $scope.selectedVertex.id)
-                                                return "SlateBlue";
-                                            else
-                                                */return "black";
+                                            var num = d.edges.length;
+                                            return colorScale(num);
+                                            
                                         }
                                     )
                                     .on("mouseover",
@@ -231,10 +236,9 @@ myApp.directive("myGraph",
                                             d3.select(this)
                                                 .attr("fill",
                                                     function (d) {
-/*                                                        if (d.id === $scope.selectedVertex.id)
-                                                            return "SlateBlue";
-                                                        else
-                                                            */return "black";
+                                                        var num = d.edges.length;
+                                                        return colorScale(num);
+
                                                     });
                                         })
                                     .on("click",

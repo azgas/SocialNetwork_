@@ -115,7 +115,10 @@ namespace AlgorytmyMVC.Models
             int result = 0;
             foreach (Vertex v in vertices)
             {
-                int a = CountDistance(index, v.id);
+                int a;
+                if (index == v.id)
+                    a = 0;
+                else a = CountDistance(index, v.id);
                 if (a != 0 && a != Int32.MaxValue)
                     result++;
             }

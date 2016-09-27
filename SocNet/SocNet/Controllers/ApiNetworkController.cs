@@ -19,7 +19,7 @@ namespace AlgorytmyMVC.Controllers
     public class ApiNetworkController : ApiController
     {
         private Networkv3Entities1 db = new Networkv3Entities1();
-        //popraw
+        //OK, POPRAWIONE CHYBA
         public Network MakeNetworkFromDb(int id, string date, int incl)
         {
             int excluded = new int();
@@ -133,7 +133,7 @@ namespace AlgorytmyMVC.Controllers
 
                     List<int> edges = new List<int>();
                     if (vertex_info.LinkDb != null)
-                        foreach (var link_containing in vertex_info.LinkDb)
+                        foreach (var link_containing in vertex_info.LinkDb.Where( linkk => linkk.network_id == searched.id))
                         {
                             if (link_containing.date_modified == dateT)
                             {
@@ -155,7 +155,7 @@ namespace AlgorytmyMVC.Controllers
             network_temp.datesOfUpdates = distinctDates;
             return network_temp;
         }
-        //popraw
+        //popraw - j.w.
         public Network MakeNetworkFromDb(int id, string date, int vertid, int incl)
         {
             var searched = db.NetworkDb.ToList().Find(net => net.id == id);
@@ -284,6 +284,7 @@ namespace AlgorytmyMVC.Controllers
         }
 
         [System.Web.Http.HttpGet]
+        //raczej niepotrzebne i można usunąć
         public JsonResult<Network> GetNetworkPartial(int id, string date, int vertid, int incl)
         {
             Network net = MakeNetworkFromDb(id, date, vertid, incl);
@@ -450,7 +451,7 @@ namespace AlgorytmyMVC.Controllers
         [System.Web.Http.HttpGet]
         public IHttpActionResult Count(int id, string date, int incl)
         {
-            Network networkTemp = MakeNetworkFromDb(id, date, incl);
+            Network networkTemp = MakeNetworkFromDb(id, date, 1); // w tym momencie liczy zawsze z wierzchołkiem początkowym
             DateTime dateT = DateTime.Parse(date);
             networkTemp.CalculateFactors();
             foreach (Vertex vert in networkTemp.vertices)
