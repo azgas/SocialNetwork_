@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\LenroK\Source\Repos\MyFirstProject\SocNet\SocNet\Models\BazaDanych.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\azgas\Source\Repos\SocialNetwork\SocNet\SocNet\Models\BazaDanych.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
