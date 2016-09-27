@@ -100,8 +100,6 @@ namespace SocNet.Controllers
             {
                 queries++;
                 var newInitialVertex = followersList[0];
-                if (newInitialVertex.UserId != form.initialVertex)
-                { 
                 userId = network.VertexDb.Where<VertexDb>(x => x.identifier == newInitialVertex.UserId && x.service_id == serviceId).ToList();
                 flickrFollowers = user.ContactsGetPublicList(newInitialVertex.UserId);
                 usedFollowers.Add(newInitialVertex);
@@ -138,7 +136,7 @@ namespace SocNet.Controllers
                         }
                         network.SaveChanges();
                     }
-                }
+                
             }
             return Ok();
         }
