@@ -30,7 +30,7 @@ namespace AlgorytmyMVC.Models
             {
                 int index = v.id;
                 v.indegreeCentralityValue = CentralityIn(index);
-  /*              v.betweenessCentralityValue = BetweenessCentrality(index);*/
+                v.betweennessCentralityValue = BetweennessCentrality(index);
                 v.influenceRangeValue = InfluenceRange(index);
                 v.outdegreeCentralityValue = CentralityOut(index);
                 v.closenessCentralityValue = ClosenessCentrality(index);
@@ -52,6 +52,8 @@ namespace AlgorytmyMVC.Models
             return allPaths;
         }
 
+        public int allPaths { get; set; }
+
         public bool DoesShortestPathContain(int source, int destination, int target)
         {
             bool result = false;
@@ -72,7 +74,7 @@ namespace AlgorytmyMVC.Models
 
         }
 
-        public float BetweenessCentrality(int index)
+        public float BetweennessCentrality(int index)
         {
             float result = 0;
             int pathsV = 0;
@@ -92,8 +94,9 @@ namespace AlgorytmyMVC.Models
                 }
             }
             float pathsv = (float)pathsV;
-            float allpaths = (float)CountAllPaths();
-            result = pathsv / allpaths;
+            if(allPaths == default(int))
+                allPaths = CountAllPaths();
+            result = pathsv / (float)allPaths;
             return result;
         }
 
