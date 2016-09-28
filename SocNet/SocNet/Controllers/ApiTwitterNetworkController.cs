@@ -151,17 +151,9 @@ namespace SocNet.Controllers
             //rozpoczynamy pobieranie dla kolejnych wierzcholkow
             while(queries<=form.numberOfQueries && (twitterFriends.Any()||twitterFollowers.Any()))
             {
-                bool bool1=false;
-                bool bool2=false;
                 var rand = new Random();
-                if (twitterFriends.Any())
-                {
-                    bool1 = true;
-                }
-                if (twitterFollowers.Any())
-                {
-                    bool2 = true;
-                }
+                bool bool1 = (twitterFriends.Any()) ? true : false;
+                bool bool2 = (twitterFollowers.Any()) ? true : false;
                 if (rand.Next(100) % 2 == 1 && bool1==true)
                 {
                     queries++;
