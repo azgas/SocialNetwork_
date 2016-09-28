@@ -43,7 +43,7 @@
           <Property Name="network id" Type="bigint" Nullable="false" />
           <Property Name="date" Type="date" Nullable="false" />
           <Property Name="density" Type="float" Nullable="false" />
-          <Property Name="av betweeness centrality" Type="float" Nullable="false" />
+          <Property Name="av betweenness centrality" Type="float" Nullable="false" />
           <Property Name="av closeness centrality" Type="float" Nullable="false" />
           <Property Name="av indegree centrality" Type="float" Nullable="false" />
           <Property Name="av influence range" Type="float" Nullable="false" />
@@ -83,7 +83,7 @@
           <Property Name="vertex id" Type="bigint" Nullable="false" />
           <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="date" Type="date" Nullable="false" />
-          <Property Name="betweeness centrality" Type="float" Nullable="false" />
+          <Property Name="betweenness centrality" Type="float" Nullable="false" />
           <Property Name="closeness centrality" Type="float" Nullable="false" />
           <Property Name="indegree centrality" Type="int" Nullable="false" />
           <Property Name="influence range" Type="int" Nullable="false" />
@@ -278,13 +278,13 @@
           <Property Name="network_id" Type="Int64" Nullable="false" />
           <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="density" Type="Double" Nullable="false" />
-          <Property Name="av_betweeness_centrality" Type="Double" Nullable="false" />
           <Property Name="av_closeness_centrality" Type="Double" Nullable="false" />
           <Property Name="av_indegree_centrality" Type="Double" Nullable="false" />
           <Property Name="av_influence_range" Type="Double" Nullable="false" />
           <Property Name="av_outdegree_centrality" Type="Double" Nullable="false" />
           <Property Name="up_to_date" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="NetworkDb" Relationship="Self.FK_Network_factors_Network" FromRole="NetworkFactorsDb" ToRole="NetworkDb" />
+          <Property Name="av_betweenness_centrality" Type="Double" Nullable="false" />
         </EntityType>
         <EntityType Name="ServiceDb">
           <Key>
@@ -326,7 +326,6 @@
           <Property Name="vertex_id" Type="Int64" Nullable="false" />
           <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="betweeness_centrality" Type="Double" Nullable="false" />
           <Property Name="closeness_centrality" Type="Double" Nullable="false" />
           <Property Name="indegree_centrality" Type="Int32" Nullable="false" />
           <Property Name="influence_range" Type="Int32" Nullable="false" />
@@ -334,6 +333,7 @@
           <Property Name="up_to_date" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="VertexDb" Relationship="Self.FK_Factors_Vertex" FromRole="VertexFactorsDb" ToRole="VertexDb" />
           <Property Name="network_id" Type="Int64" Nullable="false" />
+          <Property Name="betweenness_centrality" Type="Double" Nullable="false" />
         </EntityType>
         <Association Name="FK_Credentials_ServiceDb">
           <End Role="ServiceDb" Type="Self.ServiceDb" Multiplicity="1" />
@@ -515,11 +515,11 @@
           <EntitySetMapping Name="NetworkFactorsDb">
             <EntityTypeMapping TypeName="Networkv3Model.NetworkFactorsDb">
               <MappingFragment StoreEntitySet="NetworkFactorsDb">
+                <ScalarProperty Name="av_betweenness_centrality" ColumnName="av betweenness centrality" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="network_id" ColumnName="network id" />
                 <ScalarProperty Name="date" ColumnName="date" />
                 <ScalarProperty Name="density" ColumnName="density" />
-                <ScalarProperty Name="av_betweeness_centrality" ColumnName="av betweeness centrality" />
                 <ScalarProperty Name="av_closeness_centrality" ColumnName="av closeness centrality" />
                 <ScalarProperty Name="av_indegree_centrality" ColumnName="av indegree centrality" />
                 <ScalarProperty Name="av_influence_range" ColumnName="av influence range" />
@@ -560,11 +560,11 @@
           <EntitySetMapping Name="VertexFactorsDb">
             <EntityTypeMapping TypeName="Networkv3Model.VertexFactorsDb">
               <MappingFragment StoreEntitySet="VertexFactorsDb">
+                <ScalarProperty Name="betweenness_centrality" ColumnName="betweenness centrality" />
                 <ScalarProperty Name="network_id" ColumnName="network id" />
                 <ScalarProperty Name="vertex_id" ColumnName="vertex id" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="date" ColumnName="date" />
-                <ScalarProperty Name="betweeness_centrality" ColumnName="betweeness centrality" />
                 <ScalarProperty Name="closeness_centrality" ColumnName="closeness centrality" />
                 <ScalarProperty Name="indegree_centrality" ColumnName="indegree centrality" />
                 <ScalarProperty Name="influence_range" ColumnName="influence range" />

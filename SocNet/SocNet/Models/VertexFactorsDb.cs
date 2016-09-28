@@ -17,13 +17,13 @@ namespace SocNet.Models
         public long vertex_id { get; set; }
         public long id { get; set; }
         public System.DateTime date { get; set; }
-        public double betweeness_centrality { get; set; }
         public double closeness_centrality { get; set; }
         public int indegree_centrality { get; set; }
         public int influence_range { get; set; }
         public int outdegree_centrality { get; set; }
         public bool up_to_date { get; set; }
         public long network_id { get; set; }
+        public double betweenness_centrality { get; set; }
     
         public virtual VertexDb VertexDb { get; set; }
     }

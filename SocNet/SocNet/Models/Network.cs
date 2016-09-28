@@ -261,7 +261,7 @@ namespace AlgorytmyMVC.Models
                         result += v.closenessCentralityValue;
                         break;
                     case 4:
-                        result += v.betweenessCentralityValue;
+                        result += v.betweennessCentralityValue;
                         break;
                     case 5:
                         result += v.influenceRangeValue;
@@ -402,7 +402,7 @@ namespace AlgorytmyMVC.Models
 
         public int indegreeCentralityValue { get; set; }
         public int outdegreeCentralityValue { get; set; }
-        public float betweenessCentralityValue { get; set; }
+        public float betweennessCentralityValue { get; set; }
         public int influenceRangeValue { get; set; }
         public float closenessCentralityValue { get; set; }
 

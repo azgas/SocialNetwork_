@@ -147,9 +147,10 @@ myApp.service("myService",
 
         return service;
 
-        function toggle(indexvalue, edgesvalue) {
+        function toggle(indexvalue, edgesvalue, namevalue) {
             service.index = indexvalue;
             service.edges = edgesvalue;
+            service.name = namevalue;
         }
 
         function toggleval(value) {
@@ -176,9 +177,10 @@ myApp.directive("myGraph",
                         var fw = frame.style("width").replace("px", "");
 
                         var simulation = d3.forceSimulation()
-                            .force("link", d3.forceLink().distance(70).strength(0.40))
-                            .force("charge", d3.forceManyBody().distanceMax(120))
-                            .force("center", d3.forceCenter(fw / 2, fh / 2));
+                            .force("link", d3.forceLink().distance(150).strength(0.45))
+                            .force("charge", d3.forceManyBody().strength(-150).distanceMax(200))
+                            .force("center", d3.forceCenter(fw / 2, fh / 2))
+                            .force("collide", d3.forceCollide(10).strength(0.9));
 
 
                         d3.json("/api/apinetwork/GetNetwork/" + $scope.selectedNetwork.id + "?date=" + $scope.selectedDate + "&vertid=" + $scope.selectedVertex.id + "&incl=" + +$scope.checkInclude,
@@ -194,9 +196,11 @@ myApp.directive("myGraph",
 
                                 var colorScale = d3.scaleLinear()
                                     .domain([
-                                        0, d3.max(nodes, function(d) { return d.edges.length; }) / 2, d3.max(nodes, function(d) { return d.edges.length; })
+                                        0, d3.max(nodes, function(d) { return d.edges.length; }) / 2, d3
+                                        .max(nodes, function(d) { return d.edges.length; })
                                     ])
-                                    .range(["#17062d", "#202b8c", "#438ecc"]);
+                                    .range(["#696969", "#598a98", "#29b1d8"])
+                                    .interpolate(d3.interpolateHcl);
 
                                 links.forEach(function (link) {
                                     var s = link.source = nodeById.get(link.source),
@@ -243,7 +247,7 @@ myApp.directive("myGraph",
                                         })
                                     .on("click",
                                         function (d) {
-                                            $timeout(myService.toggle(d.identifier, d.name));
+                                            $timeout(myService.toggle(d.identifier, d.edges.length, d.name));
                                         })
                                     .call(d3.drag()
                                         .on("start", dragstarted)
@@ -276,8 +280,8 @@ myApp.directive("myGraph",
                                             d.indegreeCentralityValue +
                                             "\ncentrality (outdegree): " +
                                             d.outdegreeCentralityValue +
-                                            "\nbetweeness centrality: " +
-                                            d.betweenessCentralityValue +
+                                            "\nbetweenness centrality: " +
+                                            d.betweennessCentralityValue +
                                             "\ncloseness centrality: " +
                                             d.closenessCentralityValue +
                                             "\ninfluence range: " +
@@ -324,7 +328,7 @@ myApp.directive("myGraph",
                         }
 
                         function dragstarted(d) {
-                            if (!d3.event.active) simulation.alphaTarget(0.3).restart();
+                            if (!d3.event.active) simulation.alphaTarget(0.02).restart();
                             d.fx = d.x, d.fy = d.y;
                         }
 

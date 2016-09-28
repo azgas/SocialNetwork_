@@ -82,8 +82,9 @@
                 <br />
                 @*<button ng-click="nextindex()">Kolejny indeks</button>*@
                 <br />
-                nazwa: <br /><input type="text" name="edges" ng-model="vert.edges">
+                nazwa: <br /><input type="text" name="name" ng-model="vert.name">
                 <br />
+                Krawędzie: <br /> <input type="text" name="edges" ng-model="vert.edges"/>
                 <br />
                 @*<button ng-click="save()">Dodaj/modyfikuj</button><button ng-click="delete()">Usuń</button>*@
                 <br />
@@ -101,7 +102,7 @@
                         <li>Indegree centrality: {{factors.avInCen | number:6}}</li>
                         <li>Outdegree centrality: {{factors.avOutCen | number:6}}</li>
                         <li>Closeness centrality: {{factors.avCloCen | number:6}}</li>
-                        <li>Betweeness centrality: {{factors.avBetCen | number:6}}</li>
+                        <li>Betweenness centrality: {{factors.avBetCen | number:6}}</li>
                         <li>Influence Range: {{factors.avInfRan | number:6}}</li>
                     </ul>
                 </div>
