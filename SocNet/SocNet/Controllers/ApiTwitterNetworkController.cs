@@ -149,11 +149,11 @@ namespace SocNet.Controllers
             List<long> usedUsers = new List<long>();
             usedUsers.Add(form.initialVertex);
             //rozpoczynamy pobieranie dla kolejnych wierzcholkow
-            while(queries<=form.numberOfQueries && (twitterFriends.Any()||twitterFollowers.Any()))
+            while(queries<=form.numberOfQueries && (twitterFriendsList.Any()||twitterFollowersList.Any()))
             {
                 var rand = new Random();
-                bool bool1 = (twitterFriends.Any()) ? true : false;
-                bool bool2 = (twitterFollowers.Any()) ? true : false;
+                bool bool1 = (twitterFriendsList.Any()) ? true : false;
+                bool bool2 = (twitterFollowersList.Any()) ? true : false;
                 if (rand.Next(100) % 2 == 1 && bool1==true)
                 {
                     queries++;
