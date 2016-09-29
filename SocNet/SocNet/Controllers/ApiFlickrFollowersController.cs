@@ -96,7 +96,7 @@ namespace SocNet.Controllers
             initialUser.UserId = form.initialVertex;
             usedFollowers.Add(initialUser);
             //usedFollowers.Add(form.initialVertex);
-            while (queries<=form.numberOfQueries && followersList.Any())
+            while (queries<form.numberOfQueries && followersList.Any())
             {
                 queries++;
                 var newInitialVertex = followersList[0];
