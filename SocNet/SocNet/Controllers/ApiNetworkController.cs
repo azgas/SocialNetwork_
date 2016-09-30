@@ -454,6 +454,7 @@ namespace AlgorytmyMVC.Controllers
             Network networkTemp = MakeNetworkFromDb(id, date, 1); // w tym momencie liczy zawsze z wierzchołkiem początkowym
             DateTime dateT = DateTime.Parse(date);
             networkTemp.CalculateFactors();
+            networkTemp.BetweennessCentrality2();
             foreach (Vertex vert in networkTemp.vertices)
             {
                 //up to date - aplikacja aktulnie zapisuje nowy wiersz, a stary oznacza jako nieaktualny; docelowo lepiej zmienić na aktualizowanie starego

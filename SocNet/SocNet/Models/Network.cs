@@ -30,11 +30,12 @@ namespace AlgorytmyMVC.Models
             {
                 int index = v.id;
                 v.indegreeCentralityValue = CentralityIn(index);
-                v.betweennessCentralityValue = BetweennessCentrality(index);
+                /*v.betweennessCentralityValue = BetweennessCentrality(index);*/
                 v.influenceRangeValue = InfluenceRange(index);
                 v.outdegreeCentralityValue = CentralityOut(index);
                 v.closenessCentralityValue = ClosenessCentrality(index);
             }
+            
         }
 
         public int CountAllPaths()
@@ -100,6 +101,77 @@ namespace AlgorytmyMVC.Models
             return result;
         }
 
+        public void BetweennessCentrality2()
+        {
+            foreach (Vertex v in vertices)
+            {
+                v.betweennessCentralityValue = 0;
+            }
+            foreach (Vertex s in vertices)
+            {
+                Stack<Vertex> S = new Stack<Vertex>();
+                var len = vertices.Count;
+                Dictionary<int, List<Vertex>> P = new Dictionary<int, List<Vertex>>();
+                foreach (Vertex v in vertices)
+                {
+                    List<Vertex> p = new List<Vertex>();
+                    P.Add(v.id, p);
+                }
+                Dictionary<int, float> sigma = new Dictionary<int, float>();
+                Dictionary<int, float> d = new Dictionary<int, float>();
+                foreach (Vertex t in vertices)
+                {
+                    if (t == s)
+                    {
+                        sigma.Add(t.id, 1);
+                        d.Add(t.id, 0);
+                    }
+                    else
+                    {
+                        sigma.Add(t.id, 0);
+                        d.Add(t.id, -1);
+                    }
+                }
+                Queue<Vertex> Q = new Queue<Vertex>();
+                Q.Enqueue(s);
+                while (Q.Count != 0)
+                {
+                    var v = Q.Dequeue();
+                    S.Push(v);
+                    foreach (int w in v.edges)
+                    {
+                        if (d[w] < 0)
+                        {
+                            var ww = vertices.Find(vert => vert.id == w);
+                            Q.Enqueue(ww);
+                            d[w] = d[v.id] + 1;
+                        }
+                        if (d[w] == d[v.id] + 1)
+                        {
+                            sigma[w] += sigma[v.id];
+                            P[w].Add(v);
+                        }
+                    }
+                }
+                Dictionary<int, float> delta = new Dictionary<int, float>();
+                foreach (Vertex v in vertices)
+                    delta.Add(v.id, 0);
+                while (S.Count != 0)
+                {
+                    var w = S.Pop();
+                    foreach (Vertex v in P[w.id])
+                    {
+                        delta[v.id] += (sigma[v.id] / sigma[w.id]) * (1 + delta[w.id]);
+                        if (w != s)
+                            w.betweennessCentralityValue += delta[w.id];
+                    }
+
+                }
+            }
+
+
+        }
+
         public float ClosenessCentrality(int index)
         {
             float result = 0;
@@ -107,9 +179,9 @@ namespace AlgorytmyMVC.Models
             {
                 float a = CountDistance(index, vertices[i].id);
                 if (a != 0 && a != Int32.MaxValue)
-                    result += (1 / a);
+                    result +=  1/a;
             }
-            result /= 10;
+            
             return result;
         }
 
