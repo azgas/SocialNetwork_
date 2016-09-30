@@ -196,10 +196,10 @@ myApp.directive("myGraph",
 
                                 var colorScale = d3.scaleLinear()
                                     .domain([
-                                        0, d3.max(nodes, function(d) { return d.edges.length; }) / 2, d3
-                                        .max(nodes, function(d) { return d.edges.length; })
+                                        0, d3.max(nodes, function (d) { return d.closenessCentralityValue; }) / 2, d3
+                                        .max(nodes, function (d) { return d.closenessCentralityValue; })
                                     ])
-                                    .range(["#696969", "#598a98", "#29b1d8"])
+                                    .range(["#e70000", "#f6da2f", "#73f224"])
                                     .interpolate(d3.interpolateHcl);
 
                                 links.forEach(function (link) {
@@ -226,21 +226,21 @@ myApp.directive("myGraph",
                                     .attr("r", 7)
                                     .attr("fill",
                                         function (d) {
-                                            var num = d.edges.length;
+                                            var num = d.closenessCentralityValue;
                                             return colorScale(num);
                                             
                                         }
                                     )
                                     .on("mouseover",
                                         function () {
-                                            d3.select(this).attr("fill", "lawnGreen");
+                                            d3.select(this).attr("fill", "#494bd2");
                                         })
                                     .on("mouseout",
                                         function () {
                                             d3.select(this)
                                                 .attr("fill",
                                                     function (d) {
-                                                        var num = d.edges.length;
+                                                        var num = d.closenessCentralityValue;
                                                         return colorScale(num);
 
                                                     });

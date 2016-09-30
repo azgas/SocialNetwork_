@@ -168,6 +168,14 @@ namespace AlgorytmyMVC.Models
 
                 }
             }
+            //niżej: normalizacja
+/*            var max = vertices.OrderByDescending(vertex => vertex.betweennessCentralityValue).First().betweennessCentralityValue;
+            var min = vertices.OrderByDescending(vertex => vertex.betweennessCentralityValue).Last().betweennessCentralityValue;
+            foreach (Vertex v in vertices)
+            {
+                v.betweennessCentralityValue -= min;
+                v.betweennessCentralityValue /= max - min;
+            }*/
 
 
         }
@@ -185,6 +193,21 @@ namespace AlgorytmyMVC.Models
             return result;
         }
 
+        public void ClosenessCentrality2()
+        {
+            foreach (Vertex v in vertices)
+            {
+                float result = 0;
+                for (int i = 0; i < vertices.Count; i++)
+                {
+                    float a = CountDistance(v.id, vertices[i].id);
+                    if (a != 0 && a != Int32.MaxValue)
+                        result += 1 / a;
+                }
+                v.closenessCentralityValue = result;
+            }
+        }
+
         public int InfluenceRange(int index)
         {
             int result = 0;
@@ -198,6 +221,24 @@ namespace AlgorytmyMVC.Models
                     result++;
             }
             return result;
+        }
+
+        public void InfluenceRange2()
+        {
+            foreach (Vertex v in vertices)
+            {
+                int result = 0;
+                foreach (Vertex vv in vertices)
+                {
+                    int a;
+                    if (v.id == vv.id)
+                        a = 0;
+                    else a = CountDistance(v.id, vv.id);
+                    if (a != 0 && a != Int32.MaxValue)
+                        result++;
+                }
+                v.influenceRangeValue = result;
+            }
         }
 
         public int CountDistance(int index1, int index2)
@@ -404,12 +445,38 @@ namespace AlgorytmyMVC.Models
             return result;
         }
 
+        public void CentralityIn2()
+        {
+            foreach (Vertex v in vertices)
+            {
+                int result = 0;
+                foreach (Vertex vv in vertices)
+                {
+                    
+                    if (vv.edges.Contains(v.id))
+                    {
+                        result += 1;
+                    }
+                }
+                v.indegreeCentralityValue = result;
+            }
+        }
+
         public int CentralityOut(int index)
         {
             int result = 0;
             Vertex vert1 = vertices.Find(vert => vert.id == index);
             result = vert1.edges.Count;
             return result;
+        }
+
+        public void CentralityOut2()
+        {
+            foreach (Vertex v in vertices)
+            {
+                Vertex vert1 = vertices.Find(vert => vert.id == v.id);
+                v.outdegreeCentralityValue = vert1.edges.Count;
+            }
         }
 
         public double Density()
@@ -422,6 +489,47 @@ namespace AlgorytmyMVC.Models
             double n = vertices.Count;
             result /= (n * (n - 1));
             return result;
+        }
+
+        public void Normalize() //jakieś dziedziczenie napisać? - tylko jak?? 
+        {
+            var maxb = vertices.OrderByDescending(vertex => vertex.betweennessCentralityValue).First().betweennessCentralityValue;
+            var minb = vertices.OrderByDescending(vertex => vertex.betweennessCentralityValue).Last().betweennessCentralityValue;
+            foreach (Vertex v in vertices)
+            {
+                v.betweennessCentralityValue -= minb;
+                v.betweennessCentralityValue /= maxb - minb;
+            }
+            //problem z intami
+
+/*            var maxin = vertices.OrderByDescending(vertex => vertex.indegreeCentralityValue).First().indegreeCentralityValue;
+            var minin = vertices.OrderByDescending(vertex => vertex.indegreeCentralityValue).Last().indegreeCentralityValue;
+            foreach (Vertex v in vertices)
+            {
+                v.indegreeCentralityValue -= minin;
+                v.indegreeCentralityValue /= maxin - minin;
+            }*/
+/*            var maxout = vertices.OrderByDescending(vertex => vertex.outdegreeCentralityValue).First().outdegreeCentralityValue;
+            var minout = vertices.OrderByDescending(vertex => vertex.outdegreeCentralityValue).Last().outdegreeCentralityValue;
+            foreach (Vertex v in vertices)
+            {
+                v.outdegreeCentralityValue -= minout;
+                v.outdegreeCentralityValue /= maxout - minout;
+            }*/
+            var maxclo = vertices.OrderByDescending(vertex => vertex.closenessCentralityValue).First().closenessCentralityValue;
+            var minclo = vertices.OrderByDescending(vertex => vertex.closenessCentralityValue).Last().closenessCentralityValue;
+            foreach (Vertex v in vertices)
+            {
+                v.closenessCentralityValue -= minclo;
+                v.closenessCentralityValue /= maxclo - minclo;
+            }
+/*            var maxrange = vertices.OrderByDescending(vertex => vertex.influenceRangeValue).First().influenceRangeValue;
+            var minrange = vertices.OrderByDescending(vertex => vertex.influenceRangeValue).Last().influenceRangeValue;
+            foreach (Vertex v in vertices)
+            {
+                v.influenceRangeValue -= minrange;
+                v.influenceRangeValue /= maxrange - minrange;
+            }*/
         }
 
         public string WriteToJson()
