@@ -18,6 +18,16 @@ namespace SocNet
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "NetworkDbs", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                "Root",
+                "",
+                new {controller = "Home", action = "Index", id = ""}
+            );
+        }
+        protected void Application_Start()
+        {
+            RegisterRoutes(RouteTable.Routes);
         }
     }
 }
