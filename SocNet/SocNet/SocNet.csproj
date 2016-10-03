@@ -380,6 +380,7 @@
       <DependentUpon>BazaDanych.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\aaa.pubxml" />
+    <None Include="Properties\PublishProfiles\SocNet.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\d3.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
