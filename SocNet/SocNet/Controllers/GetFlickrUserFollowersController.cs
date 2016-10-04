@@ -22,7 +22,8 @@ namespace SocNet.Controllers
         public ActionResult Index(AskApiFlickrFollower form)
         {
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:60701/");
+            //client.BaseAddress = new Uri("http://localhost:60701/");
+            client.BaseAddress = new Uri("http://localhost:666/");
             client.DefaultRequestHeaders.Accept.Clear();
             client.Timeout = new TimeSpan(0, 30, 0);
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
