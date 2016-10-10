@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+
+    <!--Google fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,400italic,700,800&subset=latin-ext' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Raleway:300,200,100' rel='stylesheet' type='text/css'>
+
+    <!--Style specification-->
+    @{Html.RenderPartial("~/TemplateViews/Shared/Styles.cshtml");}
+</head>
+<body>
+    <!--Error page url for scripts-->
+    <span class="hidden" data-error-url="@Url.Action("Error", "Application")"></span>
+
+    <div id="cl-wrapper">
+        <!--Side bar-->
+        <div class="cl-sidebar">
+            @{Html.RenderPartial("~/TemplateViews/Shared/SideBar.cshtml");}
+        </div>
+
+        <!--Page space-->
+        <div class="container-fluid" id="pcont">
+            <!--Top bar-->
+            <div id="head-nav" class="navbar navbar-default topbar">
+                <div class="container-fluid">
+                    @{Html.RenderPartial("~/TemplateViews/Shared/TopBar.cshtml");}
+                </div>
+            </div>
+
+            <!--Main content-->
+            <div class="cl-mcont">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+    <!--Scripts specification-->
+    @{Html.RenderPartial("~/TemplateViews/Shared/Scripts.cshtml");}
+</body>
+</html>

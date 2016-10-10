@@ -1,0 +1,19 @@
+﻿<div class="cl-sidebar">
+    <div class="cl-navblock">
+        <div class="menu-space">
+            <div class="content">
+                <!--Logo-->
+                <div class="sidebar-logo">
+                    <div class="logo">
+                        <a href="@Url.Action("Index","Home")"></a>
+                    </div>
+                </div>
+
+                <!--Menu-->
+                <ul class="cl-vnavigation" data-navigation="true">
+                    @{Html.RenderPartial("~/Views/Shared/SideMenu.cshtml");}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
