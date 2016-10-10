@@ -462,27 +462,38 @@ namespace AlgorytmyMVC.Controllers
             foreach (Vertex vert in networkTemp.vertices)
             {
                 //up to date - aplikacja aktulnie zapisuje nowy wiersz, a stary oznacza jako nieaktualny; docelowo lepiej zmienić na aktualizowanie starego
+                //zmienione - nadpisuje stary wiersz; dodać jakieś ostrzeżenie typu "czy chcesz policzyć dane na nowo"?
                 var previous = db.VertexFactorsDb.SingleOrDefault(o => o.vertex_id == vert.id && o.date == dateT && o.up_to_date);
                 if (previous != null)
                 {
-                    previous.up_to_date = false;
+                    var row_ = from o in db.VertexFactorsDb where o.vertex_id == vert.id && o.date == dateT select o;
+                    foreach (var o in row_)
+                    {
+                        o.betweenness_centrality = vert.betweennessCentralityValue;
+                        o.closeness_centrality = vert.closenessCentralityValue;
+                        o.indegree_centrality = vert.indegreeCentralityValue;
+                        o.influence_range = vert.influenceRangeValue;
+                        o.outdegree_centrality = vert.outdegreeCentralityValue;
+                    }
                 }
-
-                var row = new VertexFactorsDb
+                else
                 {
-                    vertex_id = vert.id,
-                    betweenness_centrality = vert.betweennessCentralityValue,
-                    closeness_centrality = vert.closenessCentralityValue,
-                    indegree_centrality = vert.indegreeCentralityValue,
-                    influence_range = vert.influenceRangeValue,
-                    outdegree_centrality = vert.outdegreeCentralityValue,
-                    date = DateTime.Parse(date),
-                    up_to_date = true,
-                    network_id = id
-                    
-                };
-                db.VertexFactorsDb.Add(row);
-                db.SaveChanges();
+                    var row = new VertexFactorsDb
+                    {
+                        vertex_id = vert.id,
+                        betweenness_centrality = vert.betweennessCentralityValue,
+                        closeness_centrality = vert.closenessCentralityValue,
+                        indegree_centrality = vert.indegreeCentralityValue,
+                        influence_range = vert.influenceRangeValue,
+                        outdegree_centrality = vert.outdegreeCentralityValue,
+                        date = DateTime.Parse(date),
+                        up_to_date = true,
+                        network_id = id
+
+                    };
+                    db.VertexFactorsDb.Add(row);
+                    db.SaveChanges();
+                }
             }
             var previousN = db.NetworkFactorsDb.SingleOrDefault(o => o.network_id == networkTemp.id && o.date == dateT && o.up_to_date);
             if (previousN != null)
