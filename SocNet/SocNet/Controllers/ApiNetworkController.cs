@@ -498,24 +498,37 @@ namespace AlgorytmyMVC.Controllers
             var previousN = db.NetworkFactorsDb.SingleOrDefault(o => o.network_id == networkTemp.id && o.date == dateT && o.up_to_date);
             if (previousN != null)
             {
-                previousN.up_to_date = false;
+                var row_ = from o in db.NetworkFactorsDb
+                    where o.network_id == networkTemp.id && o.date == dateT && o.up_to_date
+                    select o;
+                foreach (var o in row_)
+                {
+                    o.av_indegree_centrality = networkTemp.AverageFactor(1);
+                    o.av_outdegree_centrality = networkTemp.AverageFactor(2);
+                    o.av_closeness_centrality = networkTemp.AverageFactor(3);
+                    o.av_betweenness_centrality = networkTemp.AverageFactor(4);
+                    o.av_influence_range = networkTemp.AverageFactor(5);
+                    o.density = networkTemp.Density();
+                }
+                db.SaveChanges();
             }
-
-            var rowN = new NetworkFactorsDb
+            else
             {
-                network_id = id,
-                av_indegree_centrality = networkTemp.AverageFactor(1),
-                av_outdegree_centrality = networkTemp.AverageFactor(2),
-                av_closeness_centrality = networkTemp.AverageFactor(3),
-                av_betweenness_centrality = networkTemp.AverageFactor(4),
-                av_influence_range = networkTemp.AverageFactor(5),
-                density = networkTemp.Density(),
-                date = DateTime.Parse(date),
-                up_to_date = true
-            };
-            db.NetworkFactorsDb.Add(rowN);
-            db.SaveChanges();
-
+                var rowN = new NetworkFactorsDb
+                {
+                    network_id = id,
+                    av_indegree_centrality = networkTemp.AverageFactor(1),
+                    av_outdegree_centrality = networkTemp.AverageFactor(2),
+                    av_closeness_centrality = networkTemp.AverageFactor(3),
+                    av_betweenness_centrality = networkTemp.AverageFactor(4),
+                    av_influence_range = networkTemp.AverageFactor(5),
+                    density = networkTemp.Density(),
+                    date = DateTime.Parse(date),
+                    up_to_date = true
+                };
+                db.NetworkFactorsDb.Add(rowN);
+                db.SaveChanges();
+            }
 
             return Ok();
         }
