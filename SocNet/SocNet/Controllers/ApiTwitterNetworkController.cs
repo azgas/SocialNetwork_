@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Results;
 using Tweetinvi;
 
 namespace SocNet.Controllers
@@ -37,7 +38,7 @@ namespace SocNet.Controllers
         }
         // POST: api/ApiTwitterNetwork/UserTwitterNetwork
         [HttpPost]
-        public IHttpActionResult UserTwitterNetwork([FromBody]AskApiTwitterNetwork form)
+        public /*IHttpActionResult*/JsonResult<DateTime> UserTwitterNetwork([FromBody]AskApiTwitterNetwork form)
         {
             //data utworzenia krawedzi
             var data = DateTime.Now;
@@ -269,7 +270,8 @@ namespace SocNet.Controllers
                     network.SaveChanges();
                 }
             }
-            return Ok();
+            //return Ok();
+            return Json(data);
         }
     }
 }
