@@ -89,9 +89,9 @@ namespace AlgorytmyMVC.Controllers
                     {
                         vertex_temp.betweennessCentralityValue = (float)vertFactors.betweenness_centrality;
                         vertex_temp.closenessCentralityValue = (float)vertFactors.closeness_centrality;
-                        vertex_temp.indegreeCentralityValue = vertFactors.indegree_centrality;
-                        vertex_temp.outdegreeCentralityValue = vertFactors.outdegree_centrality;
-                        vertex_temp.influenceRangeValue = vertFactors.influence_range;
+                        vertex_temp.indegreeCentralityValue = (float)vertFactors.indegree_centrality;
+                        vertex_temp.outdegreeCentralityValue = (float)vertFactors.outdegree_centrality;
+                        vertex_temp.influenceRangeValue = (float)vertFactors.influence_range;
                     }
 
                     List<int> edges = new List<int>();
@@ -126,9 +126,9 @@ namespace AlgorytmyMVC.Controllers
                     {
                         vertex_temp.betweennessCentralityValue = (float)vertFactors.betweenness_centrality;
                         vertex_temp.closenessCentralityValue = (float)vertFactors.closeness_centrality;
-                        vertex_temp.indegreeCentralityValue = vertFactors.indegree_centrality;
-                        vertex_temp.outdegreeCentralityValue = vertFactors.outdegree_centrality;
-                        vertex_temp.influenceRangeValue = vertFactors.influence_range;
+                        vertex_temp.indegreeCentralityValue = (float)vertFactors.indegree_centrality;
+                        vertex_temp.outdegreeCentralityValue = (float)vertFactors.outdegree_centrality;
+                        vertex_temp.influenceRangeValue = (float)vertFactors.influence_range;
                     }
 
                     List<int> edges = new List<int>();
@@ -207,9 +207,9 @@ namespace AlgorytmyMVC.Controllers
                     {
                         vertex_temp.betweennessCentralityValue = (float)vertFactors.betweenness_centrality;
                         vertex_temp.closenessCentralityValue = (float)vertFactors.closeness_centrality;
-                        vertex_temp.indegreeCentralityValue = vertFactors.indegree_centrality;
-                        vertex_temp.outdegreeCentralityValue = vertFactors.outdegree_centrality;
-                        vertex_temp.influenceRangeValue = vertFactors.influence_range;
+                        vertex_temp.indegreeCentralityValue = (float)vertFactors.indegree_centrality;
+                        vertex_temp.outdegreeCentralityValue = (float)vertFactors.outdegree_centrality;
+                        vertex_temp.influenceRangeValue = (float)vertFactors.influence_range;
                     }
 
                     List<int> edges = new List<int>();
@@ -245,9 +245,9 @@ namespace AlgorytmyMVC.Controllers
                     {
                         vertex_temp.betweennessCentralityValue = (float)vertFactors.betweenness_centrality;
                         vertex_temp.closenessCentralityValue = (float)vertFactors.closeness_centrality;
-                        vertex_temp.indegreeCentralityValue = vertFactors.indegree_centrality;
-                        vertex_temp.outdegreeCentralityValue = vertFactors.outdegree_centrality;
-                        vertex_temp.influenceRangeValue = vertFactors.influence_range;
+                        vertex_temp.indegreeCentralityValue = (float)vertFactors.indegree_centrality;
+                        vertex_temp.outdegreeCentralityValue = (float)vertFactors.outdegree_centrality;
+                        vertex_temp.influenceRangeValue = (float)vertFactors.influence_range;
                     }
 
                     List<int> edges = new List<int>();
@@ -503,11 +503,11 @@ namespace AlgorytmyMVC.Controllers
                     select o;
                 foreach (var o in row_)
                 {
-                    o.av_indegree_centrality = networkTemp.AverageFactor(1);
-                    o.av_outdegree_centrality = networkTemp.AverageFactor(2);
-                    o.av_closeness_centrality = networkTemp.AverageFactor(3);
-                    o.av_betweenness_centrality = networkTemp.AverageFactor(4);
-                    o.av_influence_range = networkTemp.AverageFactor(5);
+                    o.avg_indegree_centrality = networkTemp.AverageFactor(1);
+                    o.avg_outdegree_centrality = networkTemp.AverageFactor(2);
+                    o.avg_closeness_centrality = networkTemp.AverageFactor(3);
+                    o.avg_betweenness_centrality = networkTemp.AverageFactor(4);
+                    o.avg_influence_range = networkTemp.AverageFactor(5);
                     o.density = networkTemp.Density();
                 }
                 db.SaveChanges();
@@ -517,11 +517,11 @@ namespace AlgorytmyMVC.Controllers
                 var rowN = new NetworkFactorsDb
                 {
                     network_id = id,
-                    av_indegree_centrality = networkTemp.AverageFactor(1),
-                    av_outdegree_centrality = networkTemp.AverageFactor(2),
-                    av_closeness_centrality = networkTemp.AverageFactor(3),
-                    av_betweenness_centrality = networkTemp.AverageFactor(4),
-                    av_influence_range = networkTemp.AverageFactor(5),
+                    avg_indegree_centrality = networkTemp.AverageFactor(1),
+                    avg_outdegree_centrality = networkTemp.AverageFactor(2),
+                    avg_closeness_centrality = networkTemp.AverageFactor(3),
+                    avg_betweenness_centrality = networkTemp.AverageFactor(4),
+                    avg_influence_range = networkTemp.AverageFactor(5),
                     density = networkTemp.Density(),
                     date = DateTime.Parse(date),
                     up_to_date = true
@@ -542,22 +542,22 @@ namespace AlgorytmyMVC.Controllers
             {
                 var row = db.NetworkFactorsDb.ToList().Find(v => v.network_id == id && v.date == dateT && v.up_to_date);
                 ans.status = "";
-                ans.avBetCen = (float)row.av_betweenness_centrality;
-                ans.avCloCen = (float)row.av_closeness_centrality;
-                ans.avInCen = (float)row.av_indegree_centrality;
-                ans.avInfRan = (float)row.av_influence_range;
-                ans.avOutCen = (float)row.av_outdegree_centrality;
+                ans.avBetCen = (float)row.avg_betweenness_centrality;
+                ans.avCloCen = (float)row.avg_closeness_centrality;
+                ans.avInCen = (float)row.avg_indegree_centrality;
+                ans.avInfRan = (float)row.avg_influence_range;
+                ans.avOutCen = (float)row.avg_outdegree_centrality;
                 ans.density = (float)row.density;
             }
             else if (db.NetworkFactorsDb.Any(row => row.network_id == id && row.date == dateT && !row.up_to_date))
             {
                 var row = db.NetworkFactorsDb.ToList().Find(v => v.network_id == id && v.date == dateT && !v.up_to_date);  //pewnie nie działa, gdy jest więcej nieaktualnych wyników
                 ans.status = "Dane są nieaktualne";
-                ans.avBetCen = (float)row.av_betweenness_centrality;
-                ans.avCloCen = (float)row.av_closeness_centrality;
-                ans.avInCen = (float)row.av_indegree_centrality;
-                ans.avInfRan = (float)row.av_influence_range;
-                ans.avOutCen = (float)row.av_outdegree_centrality;
+                ans.avBetCen = (float)row.avg_betweenness_centrality;
+                ans.avCloCen = (float)row.avg_closeness_centrality;
+                ans.avInCen = (float)row.avg_indegree_centrality;
+                ans.avInfRan = (float)row.avg_influence_range;
+                ans.avOutCen = (float)row.avg_outdegree_centrality;
                 ans.density = (float)row.density;
             }
             else

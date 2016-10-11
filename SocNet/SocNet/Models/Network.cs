@@ -389,7 +389,7 @@ namespace AlgorytmyMVC.Models
             return result;
         }
 
-        public List<int> MaxCentrality(int whichCase) //przerobić jakoś żeby rozszerzyć na inne wskaźniki
+        /*public List<int> MaxCentrality(int whichCase) //przerobić jakoś żeby rozszerzyć na inne wskaźniki
         {
             int resultCentrality = 0;
             int vertexIndex = 0;
@@ -420,7 +420,7 @@ namespace AlgorytmyMVC.Models
                 }
             }
             return result;
-        }
+        }*/
 
         public List<string> ShowVertices()
         {
@@ -493,43 +493,70 @@ namespace AlgorytmyMVC.Models
 
         public void Normalize() //jakieś dziedziczenie napisać? - tylko jak?? 
         {
-            var maxb = vertices.OrderByDescending(vertex => vertex.betweennessCentralityValue).First().betweennessCentralityValue;
-            var minb = vertices.OrderByDescending(vertex => vertex.betweennessCentralityValue).Last().betweennessCentralityValue;
-            foreach (Vertex v in vertices)
+            var maxb =
+                vertices.OrderByDescending(vertex => vertex.betweennessCentralityValue)
+                    .First()
+                    .betweennessCentralityValue;
+            var minb =
+                vertices.OrderByDescending(vertex => vertex.betweennessCentralityValue)
+                    .Last()
+                    .betweennessCentralityValue;
+            if (maxb - minb != 0)
             {
-                v.betweennessCentralityValue -= minb;
-                v.betweennessCentralityValue /= maxb - minb;
+                foreach (Vertex v in vertices)
+                {
+                    v.betweennessCentralityValue -= minb;
+                    v.betweennessCentralityValue /= maxb - minb;
+                }
             }
             //problem z intami
 
-/*            var maxin = vertices.OrderByDescending(vertex => vertex.indegreeCentralityValue).First().indegreeCentralityValue;
-            var minin = vertices.OrderByDescending(vertex => vertex.indegreeCentralityValue).Last().indegreeCentralityValue;
-            foreach (Vertex v in vertices)
+            var maxin =
+                vertices.OrderByDescending(vertex => vertex.indegreeCentralityValue).First().indegreeCentralityValue;
+            var minin =
+                vertices.OrderByDescending(vertex => vertex.indegreeCentralityValue).Last().indegreeCentralityValue;
+            if (maxin - minin != 0)
             {
-                v.indegreeCentralityValue -= minin;
-                v.indegreeCentralityValue /= maxin - minin;
-            }*/
-/*            var maxout = vertices.OrderByDescending(vertex => vertex.outdegreeCentralityValue).First().outdegreeCentralityValue;
-            var minout = vertices.OrderByDescending(vertex => vertex.outdegreeCentralityValue).Last().outdegreeCentralityValue;
-            foreach (Vertex v in vertices)
-            {
-                v.outdegreeCentralityValue -= minout;
-                v.outdegreeCentralityValue /= maxout - minout;
-            }*/
-            var maxclo = vertices.OrderByDescending(vertex => vertex.closenessCentralityValue).First().closenessCentralityValue;
-            var minclo = vertices.OrderByDescending(vertex => vertex.closenessCentralityValue).Last().closenessCentralityValue;
-            foreach (Vertex v in vertices)
-            {
-                v.closenessCentralityValue -= minclo;
-                v.closenessCentralityValue /= maxclo - minclo;
+                foreach (Vertex v in vertices)
+                {
+                    v.indegreeCentralityValue -= minin;
+                    v.indegreeCentralityValue /= maxin - minin;
+                }
             }
-/*            var maxrange = vertices.OrderByDescending(vertex => vertex.influenceRangeValue).First().influenceRangeValue;
-            var minrange = vertices.OrderByDescending(vertex => vertex.influenceRangeValue).Last().influenceRangeValue;
-            foreach (Vertex v in vertices)
+            var maxout =
+                vertices.OrderByDescending(vertex => vertex.outdegreeCentralityValue).First().outdegreeCentralityValue;
+            var minout =
+                vertices.OrderByDescending(vertex => vertex.outdegreeCentralityValue).Last().outdegreeCentralityValue;
+            if (maxout - minout != 0)
             {
-                v.influenceRangeValue -= minrange;
-                v.influenceRangeValue /= maxrange - minrange;
-            }*/
+                foreach (Vertex v in vertices)
+                {
+                    v.outdegreeCentralityValue -= minout;
+                    v.outdegreeCentralityValue /= maxout - minout;
+                }
+            }
+            var maxclo =
+                vertices.OrderByDescending(vertex => vertex.closenessCentralityValue).First().closenessCentralityValue;
+            var minclo =
+                vertices.OrderByDescending(vertex => vertex.closenessCentralityValue).Last().closenessCentralityValue;
+            if (maxclo - minclo != 0)
+            {
+                foreach (Vertex v in vertices)
+                {
+                    v.closenessCentralityValue -= minclo;
+                    v.closenessCentralityValue /= maxclo - minclo;
+                }
+            }
+            var maxrange = vertices.OrderByDescending(vertex => vertex.influenceRangeValue).First().influenceRangeValue;
+            var minrange = vertices.OrderByDescending(vertex => vertex.influenceRangeValue).Last().influenceRangeValue;
+            if (maxrange - minrange != 0)
+            {
+                foreach (Vertex v in vertices)
+                {
+                    v.influenceRangeValue -= minrange;
+                    v.influenceRangeValue /= maxrange - minrange;
+                }
+            }
         }
 
         public string WriteToJson()
@@ -583,10 +610,10 @@ namespace AlgorytmyMVC.Models
 
         public string name { get; set; }
 
-        public int indegreeCentralityValue { get; set; }
-        public int outdegreeCentralityValue { get; set; }
+        public float indegreeCentralityValue { get; set; }
+        public float outdegreeCentralityValue { get; set; }
         public float betweennessCentralityValue { get; set; }
-        public int influenceRangeValue { get; set; }
+        public float influenceRangeValue { get; set; }
         public float closenessCentralityValue { get; set; }
 
     }

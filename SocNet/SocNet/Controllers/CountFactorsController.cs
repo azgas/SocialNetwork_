@@ -83,9 +83,9 @@ namespace SocNet.Controllers
                     {
                         vertex_temp.betweennessCentralityValue = (float)vertFactors.betweenness_centrality;
                         vertex_temp.closenessCentralityValue = (float)vertFactors.closeness_centrality;
-                        vertex_temp.indegreeCentralityValue = vertFactors.indegree_centrality;
-                        vertex_temp.outdegreeCentralityValue = vertFactors.outdegree_centrality;
-                        vertex_temp.influenceRangeValue = vertFactors.influence_range;
+                        vertex_temp.indegreeCentralityValue = (float)vertFactors.indegree_centrality;
+                        vertex_temp.outdegreeCentralityValue = (float)vertFactors.outdegree_centrality;
+                        vertex_temp.influenceRangeValue = (float)vertFactors.influence_range;
                     }
 
                     List<int> edges = new List<int>();
@@ -120,9 +120,9 @@ namespace SocNet.Controllers
                     {
                         vertex_temp.betweennessCentralityValue = (float)vertFactors.betweenness_centrality;
                         vertex_temp.closenessCentralityValue = (float)vertFactors.closeness_centrality;
-                        vertex_temp.indegreeCentralityValue = vertFactors.indegree_centrality;
-                        vertex_temp.outdegreeCentralityValue = vertFactors.outdegree_centrality;
-                        vertex_temp.influenceRangeValue = vertFactors.influence_range;
+                        vertex_temp.indegreeCentralityValue = (float)vertFactors.indegree_centrality;
+                        vertex_temp.outdegreeCentralityValue = (float)vertFactors.outdegree_centrality;
+                        vertex_temp.influenceRangeValue = (float)vertFactors.influence_range;
                     }
 
                     List<int> edges = new List<int>();
@@ -192,7 +192,7 @@ namespace SocNet.Controllers
                            select o;
                 foreach (var o in row_)
                 {
-                    o.av_betweenness_centrality = betweenness;
+                    o.avg_betweenness_centrality = betweenness;
                 }
                 db.SaveChanges();
             }
@@ -201,7 +201,7 @@ namespace SocNet.Controllers
                 var rowN = new NetworkFactorsDb
                 {
                     network_id = id,
-                    av_betweenness_centrality = betweenness,
+                    avg_betweenness_centrality = betweenness,
                     date = DateTime.Parse(date),
                     up_to_date = true
                 };
@@ -253,7 +253,7 @@ namespace SocNet.Controllers
                            select o;
                 foreach (var o in row_)
                 {
-                    o.av_closeness_centrality = closeness;
+                    o.avg_closeness_centrality = closeness;
                 }
                 db.SaveChanges();
             }
@@ -262,7 +262,7 @@ namespace SocNet.Controllers
                 var rowN = new NetworkFactorsDb
                 {
                     network_id = id,
-                    av_closeness_centrality = closeness,
+                    avg_closeness_centrality = closeness,
                     date = DateTime.Parse(date),
                     up_to_date = true
                 };
@@ -314,7 +314,7 @@ namespace SocNet.Controllers
                            select o;
                 foreach (var o in row_)
                 {
-                    o.av_indegree_centrality = indegree;
+                    o.avg_indegree_centrality = indegree;
                 }
                 db.SaveChanges();
             }
@@ -323,7 +323,7 @@ namespace SocNet.Controllers
                 var rowN = new NetworkFactorsDb
                 {
                     network_id = id,
-                    av_indegree_centrality = indegree,
+                    avg_indegree_centrality = indegree,
                     date = DateTime.Parse(date),
                     up_to_date = true
                 };
@@ -375,7 +375,7 @@ namespace SocNet.Controllers
                            select o;
                 foreach (var o in row_)
                 {
-                    o.av_influence_range = influence;
+                    o.avg_influence_range = influence;
                 }
                 db.SaveChanges();
             }
@@ -384,7 +384,7 @@ namespace SocNet.Controllers
                 var rowN = new NetworkFactorsDb
                 {
                     network_id = id,
-                    av_influence_range = influence,
+                    avg_influence_range = influence,
                     date = DateTime.Parse(date),
                     up_to_date = true
                 };
@@ -436,7 +436,7 @@ namespace SocNet.Controllers
                            select o;
                 foreach (var o in row_)
                 {
-                    o.av_outdegree_centrality = outdegree;
+                    o.avg_outdegree_centrality = outdegree;
                 }
                 db.SaveChanges();
             }
@@ -445,7 +445,7 @@ namespace SocNet.Controllers
                 var rowN = new NetworkFactorsDb
                 {
                     network_id = id,
-                    av_outdegree_centrality = outdegree,
+                    avg_outdegree_centrality = outdegree,
                     date = DateTime.Parse(date),
                     up_to_date = true
                 };
