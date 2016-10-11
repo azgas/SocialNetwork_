@@ -6,6 +6,9 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Results;
+//using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 namespace SocNet.Controllers
 {
@@ -35,7 +38,7 @@ namespace SocNet.Controllers
         // POST: api/ApiFlickrFollowers/UsersFlickrFollowers
         //pobieranie wszystkich followersów odpowiedniej liczby uzytkownikow flickr
         [HttpPost]
-        public IHttpActionResult UsersFlickrFollowers([FromBody]AskApiFlickrFollowers form)
+        public /*IHttpActionResult*//*JsonResult*//*ActionResult*/JsonResult<DateTime> UsersFlickrFollowers([FromBody]AskApiFlickrFollowers form)
         {
             //data rozpoczęcia pobierania
             var data = DateTime.Now;
@@ -138,7 +141,9 @@ namespace SocNet.Controllers
                     }
                 
             }
-            return Ok();
+            //return Ok();
+            return Json(data);
         }
+            
     }
 }
