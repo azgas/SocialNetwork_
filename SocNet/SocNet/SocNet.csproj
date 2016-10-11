@@ -332,6 +332,7 @@
     <Compile Include="Controllers\ApiFlickrFollowersController.cs" />
     <Compile Include="Controllers\ApiTwitterFollowerController.cs" />
     <Compile Include="Controllers\ApiTwitterNetworkController.cs" />
+    <Compile Include="Controllers\CountFactorsController.cs" />
     <Compile Include="Controllers\CredentialsController.cs" />
     <Compile Include="Controllers\GetFlickrUserFollowersController.cs" />
     <Compile Include="Controllers\GetFlickrUsersFollowersController.cs" />
