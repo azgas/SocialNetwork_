@@ -18,12 +18,12 @@ namespace SocNet.Models
         public long network_id { get; set; }
         public System.DateTime date { get; set; }
         public double density { get; set; }
-        public double av_closeness_centrality { get; set; }
-        public double av_indegree_centrality { get; set; }
-        public double av_influence_range { get; set; }
-        public double av_outdegree_centrality { get; set; }
         public bool up_to_date { get; set; }
-        public double av_betweenness_centrality { get; set; }
+        public double avg_betweenness_centrality { get; set; }
+        public double avg_closeness_centrality { get; set; }
+        public double avg_indegree_centrality { get; set; }
+        public double avg_influence_range { get; set; }
+        public double avg_outdegree_centrality { get; set; }
     
         public virtual NetworkDb NetworkDb { get; set; }
     }

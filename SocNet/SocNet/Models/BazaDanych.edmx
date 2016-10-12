@@ -43,11 +43,11 @@
           <Property Name="network id" Type="bigint" Nullable="false" />
           <Property Name="date" Type="date" Nullable="false" />
           <Property Name="density" Type="float" Nullable="false" />
-          <Property Name="av betweenness centrality" Type="float" Nullable="false" />
-          <Property Name="av closeness centrality" Type="float" Nullable="false" />
-          <Property Name="av indegree centrality" Type="float" Nullable="false" />
-          <Property Name="av influence range" Type="float" Nullable="false" />
-          <Property Name="av outdegree centrality" Type="float" Nullable="false" />
+          <Property Name="avg betweenness centrality" Type="float" Nullable="false" />
+          <Property Name="avg closeness centrality" Type="float" Nullable="false" />
+          <Property Name="avg indegree centrality" Type="float" Nullable="false" />
+          <Property Name="avg influence range" Type="float" Nullable="false" />
+          <Property Name="avg outdegree centrality" Type="float" Nullable="false" />
           <Property Name="up to date" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="ServiceDb">
@@ -85,9 +85,9 @@
           <Property Name="date" Type="date" Nullable="false" />
           <Property Name="betweenness centrality" Type="float" Nullable="false" />
           <Property Name="closeness centrality" Type="float" Nullable="false" />
-          <Property Name="indegree centrality" Type="int" Nullable="false" />
-          <Property Name="influence range" Type="int" Nullable="false" />
-          <Property Name="outdegree centrality" Type="int" Nullable="false" />
+          <Property Name="indegree centrality" Type="float" Nullable="false" />
+          <Property Name="influence range" Type="float" Nullable="false" />
+          <Property Name="outdegree centrality" Type="float" Nullable="false" />
           <Property Name="up to date" Type="bit" Nullable="false" />
           <Property Name="network id" Type="bigint" Nullable="false" />
         </EntityType>
@@ -278,13 +278,13 @@
           <Property Name="network_id" Type="Int64" Nullable="false" />
           <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="density" Type="Double" Nullable="false" />
-          <Property Name="av_closeness_centrality" Type="Double" Nullable="false" />
-          <Property Name="av_indegree_centrality" Type="Double" Nullable="false" />
-          <Property Name="av_influence_range" Type="Double" Nullable="false" />
-          <Property Name="av_outdegree_centrality" Type="Double" Nullable="false" />
           <Property Name="up_to_date" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="NetworkDb" Relationship="Self.FK_Network_factors_Network" FromRole="NetworkFactorsDb" ToRole="NetworkDb" />
-          <Property Name="av_betweenness_centrality" Type="Double" Nullable="false" />
+          <Property Name="avg_betweenness_centrality" Type="Double" Nullable="false" />
+          <Property Name="avg_closeness_centrality" Type="Double" Nullable="false" />
+          <Property Name="avg_indegree_centrality" Type="Double" Nullable="false" />
+          <Property Name="avg_influence_range" Type="Double" Nullable="false" />
+          <Property Name="avg_outdegree_centrality" Type="Double" Nullable="false" />
         </EntityType>
         <EntityType Name="ServiceDb">
           <Key>
@@ -327,9 +327,9 @@
           <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="closeness_centrality" Type="Double" Nullable="false" />
-          <Property Name="indegree_centrality" Type="Int32" Nullable="false" />
-          <Property Name="influence_range" Type="Int32" Nullable="false" />
-          <Property Name="outdegree_centrality" Type="Int32" Nullable="false" />
+          <Property Name="indegree_centrality" Type="Double" Nullable="false" />
+          <Property Name="influence_range" Type="Double" Nullable="false" />
+          <Property Name="outdegree_centrality" Type="Double" Nullable="false" />
           <Property Name="up_to_date" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="VertexDb" Relationship="Self.FK_Factors_Vertex" FromRole="VertexFactorsDb" ToRole="VertexDb" />
           <Property Name="network_id" Type="Int64" Nullable="false" />
@@ -515,15 +515,15 @@
           <EntitySetMapping Name="NetworkFactorsDb">
             <EntityTypeMapping TypeName="Networkv3Model.NetworkFactorsDb">
               <MappingFragment StoreEntitySet="NetworkFactorsDb">
-                <ScalarProperty Name="av_betweenness_centrality" ColumnName="av betweenness centrality" />
+                <ScalarProperty Name="avg_outdegree_centrality" ColumnName="avg outdegree centrality" />
+                <ScalarProperty Name="avg_influence_range" ColumnName="avg influence range" />
+                <ScalarProperty Name="avg_indegree_centrality" ColumnName="avg indegree centrality" />
+                <ScalarProperty Name="avg_closeness_centrality" ColumnName="avg closeness centrality" />
+                <ScalarProperty Name="avg_betweenness_centrality" ColumnName="avg betweenness centrality" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="network_id" ColumnName="network id" />
                 <ScalarProperty Name="date" ColumnName="date" />
                 <ScalarProperty Name="density" ColumnName="density" />
-                <ScalarProperty Name="av_closeness_centrality" ColumnName="av closeness centrality" />
-                <ScalarProperty Name="av_indegree_centrality" ColumnName="av indegree centrality" />
-                <ScalarProperty Name="av_influence_range" ColumnName="av influence range" />
-                <ScalarProperty Name="av_outdegree_centrality" ColumnName="av outdegree centrality" />
                 <ScalarProperty Name="up_to_date" ColumnName="up to date" />
               </MappingFragment>
             </EntityTypeMapping>

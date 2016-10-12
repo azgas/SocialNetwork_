@@ -18,9 +18,9 @@ namespace SocNet.Models
         public long id { get; set; }
         public System.DateTime date { get; set; }
         public double closeness_centrality { get; set; }
-        public int indegree_centrality { get; set; }
-        public int influence_range { get; set; }
-        public int outdegree_centrality { get; set; }
+        public double indegree_centrality { get; set; }
+        public double influence_range { get; set; }
+        public double outdegree_centrality { get; set; }
         public bool up_to_date { get; set; }
         public long network_id { get; set; }
         public double betweenness_centrality { get; set; }
