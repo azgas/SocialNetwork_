@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocNet", "SocNet\SocNet.csproj", "{ADABCDF1-B8A4-4608-A4BA-93EADAC8E305}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocNetEPX", "SocNetEPX\SocNetEPX.csproj", "{18751E8B-EF4A-4176-BA66-DD87BCB17DA2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocNet_EPX", "SocNet_EPX\SocNet_EPX.csproj", "{B3B2A2D6-E6EC-4DCA-B3B0-4A35ECEF1EFF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{ADABCDF1-B8A4-4608-A4BA-93EADAC8E305}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADABCDF1-B8A4-4608-A4BA-93EADAC8E305}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ADABCDF1-B8A4-4608-A4BA-93EADAC8E305}.Release|Any CPU.Build.0 = Release|Any CPU
-		{18751E8B-EF4A-4176-BA66-DD87BCB17DA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{18751E8B-EF4A-4176-BA66-DD87BCB17DA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{18751E8B-EF4A-4176-BA66-DD87BCB17DA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{18751E8B-EF4A-4176-BA66-DD87BCB17DA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3B2A2D6-E6EC-4DCA-B3B0-4A35ECEF1EFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3B2A2D6-E6EC-4DCA-B3B0-4A35ECEF1EFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3B2A2D6-E6EC-4DCA-B3B0-4A35ECEF1EFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3B2A2D6-E6EC-4DCA-B3B0-4A35ECEF1EFF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

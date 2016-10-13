@@ -1,0 +1,68 @@
+﻿<!--Application name-->
+<ul class="nav navbar-nav horizontal">
+    <li><a href="#">@Html.Action("GetApplicationName", "Application")</a></li>
+</ul>
+
+<!--Project selection-->
+<ul class="nav navbar-nav">
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            @Html.Action("GetUserSelectedProject", "Project")<b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu" style="padding: 0; left: -30px; min-width: 260px; max-width: 280px; word-break: break-all;">
+            <li>
+                <div class="nano nscroller" style="width: 100%; height: 200px;">
+                    <div class="nano-content">
+                        <ul class="no-padding">
+                            <li data-projects-url="@Url.Action("GetUserAllowedProjects", "Project")">
+                                <a href="">@SocNet_EPX.TemplateResources.Shared.TopBar.Loading</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </li>
+</ul>
+
+<!--User menu-->
+<ul class="nav navbar-nav navbar-right user-nav">
+    <li class="dropdown profile_menu">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="padding: 22px;">
+            <span>@Html.Action("GetRepresentation", "User")</span>
+            <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+                @Ajax.ModalActionLink(SocNet_EPX.TemplateResources.Shared.TopBar.UserAccountManagement, "manage-account-modal", SocNet_EPX.TemplateResources.Shared.TopBar.UserAccountManagement,
+                    Url.Content("~/TemplateAssets/site/ajaxloader.gif"), null, "ManageAccount", "User")
+            </li>
+            <li class="divider"></li>
+            <li>
+                @Html.ActionLink(SocNet_EPX.TemplateResources.Shared.TopBar.Logout, "Logout", "User")
+            </li>
+        </ul>
+    </li>
+</ul>
+
+<!--Application selection-->
+<ul class="nav navbar-nav navbar-right user-nav">
+    <li class="button dropdown">
+        <a href="" class="dropdown-toggle" data-toggle="dropdown">
+            <i class="fa fa-th-large"></i>
+        </a>
+        <ul class="dropdown-menu" style="padding: 0; left: -100px; min-width: 260px; max-width: 280px; word-break: break-all;">
+            <li>
+                <div class="nano nscroller" style="width: 100%; height: 200px;">
+                    <div class="nano-content">
+                        <ul class="no-padding">
+                            <li data-appliactions-url="@Url.Action("GetPlatformApplications","Application")">
+                                <a href="">@SocNet_EPX.TemplateResources.Shared.TopBar.Loading</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </li>
+</ul>
