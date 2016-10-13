@@ -35,7 +35,7 @@ namespace SocNetEPX
 
             AppConfig applicationAuthConfiguration = AppConfig.GetAppConfig;
 
-            applicationAuthConfiguration.ClientId = "SocNet2";
+            applicationAuthConfiguration.ClientId = "SocNet3";
             applicationAuthConfiguration.ResponseType = "id_token token";
             applicationAuthConfiguration.Scope = "openid profile epx_resources";
 
