@@ -19,7 +19,6 @@ namespace AlgorytmyMVC.Controllers
     public class ApiNetworkController : ApiController
     {
         private Networkv3Entities1 db = new Networkv3Entities1();
-        //OK, POPRAWIONE CHYBA
         public Network MakeNetworkFromDb(int id, string date, int incl)
         {
             int excluded = new int();
@@ -155,7 +154,6 @@ namespace AlgorytmyMVC.Controllers
             network_temp.datesOfUpdates = distinctDates;
             return network_temp;
         }
-        //popraw - j.w.
         public Network MakeNetworkFromDb(int id, string date, int vertid, int incl)
         {
             var searched = db.NetworkDb.ToList().Find(net => net.id == id);
@@ -283,14 +281,6 @@ namespace AlgorytmyMVC.Controllers
             
         }
 
-        [System.Web.Http.HttpGet]
-        //raczej niepotrzebne i można usunąć
-        public JsonResult<Network> GetNetworkPartial(int id, string date, int vertid, int incl)
-        {
-            Network net = MakeNetworkFromDb(id, date, vertid, incl);
-            return Json(net);
-
-        }
 
         public class NetworkList
         {
@@ -344,114 +334,10 @@ namespace AlgorytmyMVC.Controllers
             return Json(networks);
         }
 
-        [System.Web.Http.HttpPost]
-        //nie działa obecnie
-        public IHttpActionResult SaveData([FromBody] Vertex vert, int id)
-        {
-            Network networkTemp = MakeNetworkFromDb(id, "dd", 0);
-            if (networkTemp.vertices.Any(vertex => vertex.id == vert.id)) //jeśli istnieje - usuwa
-            {
-                var vertexToDelete = networkTemp.vertices.Find(vertex => vertex.id == vert.id);
-                networkTemp.vertices.Remove(vertexToDelete);
-                networkTemp.links.RemoveAll(link => (link.source == vert.id));
-
-            }
-
-            bool flag = true;
-            foreach (int e in vert.edges)
-                if (networkTemp.vertices.All(vertex => vertex.id != e))
-                    flag = false;
-            if (flag)
-            {
-                networkTemp.vertices.Add(vert);
-                foreach (int e in vert.edges)
-                {
-                    Link a = new Link() { source = vert.id, target = e };
-                    networkTemp.links.Add(a);
-                }
-                return Ok();
-            }
-            return BadRequest("Nie istnieją wierzchołki, do których chcesz stworzyć krawędzie");
-        }
-
-        [System.Web.Http.HttpPost]
-        //nie działa obecnie
-        public IHttpActionResult Delete([FromBody] string index, int id)
-        {
-            string path = HostingEnvironment.MapPath("~/Graphs/" + id + ".json");
-            Network networkTemp = JsonConvert.DeserializeObject<Network>(File.ReadAllText(path));
-            string message;
-            try
-            {
-                int indexInt = Int32.Parse(index);
-                Vertex searchVertex = networkTemp.vertices.Find(vert => vert.id == indexInt);
-                if (networkTemp.vertices.Remove(searchVertex))
-                {
-
-                    networkTemp.links.RemoveAll(link => (link.source == indexInt || link.target == indexInt));
-
-                    foreach (Vertex v in networkTemp.vertices)
-                    {
-                        v.edges.RemoveAll(edge => edge == indexInt);
-                    }
-                    File.WriteAllText(path, JsonConvert.SerializeObject(networkTemp, Formatting.Indented));
-                    return Ok();
-                }
-                else
-                {
-                    message = "podany wierzchołek nie istnieje w sieci";
-                    return BadRequest(message);
-                }
-            }
-            catch (ArgumentNullException)
-            {
-                message = "błędny format liczbowy";
-                return BadRequest(message);
-            }
-            catch (OverflowException)
-            {
-                message = "za duża liczba";
-                return BadRequest(message);
-            }
-        }
-
-        [System.Web.Http.HttpPost]
-        //nie działa obecnie
-        public IHttpActionResult CreateNew([FromBody] string name)
-        {
-            string[] jsonFiles = Directory.GetFiles((HttpContext.Current.Server.MapPath("~/Graphs/")), "*.json")
-                         .Select(Path.GetFileNameWithoutExtension)
-                         .ToArray();
-            foreach (string s in jsonFiles)
-            {
-                int n;
-                if (Int32.TryParse(s, out n)) ;
-
-
-            }
-
-            int[] b = new int[jsonFiles.Length];
-
-            for (int i = 0; i < jsonFiles.Length; i++)
-            {
-                int c;
-                if (Int32.TryParse(jsonFiles[i], out c))
-                    b[i] = c;
-            }
-            int nextId = b.Max() + 1;
-            Network newNet = new Network { name = name, id = nextId, links = new List<Link>(), vertices = new List<Vertex>() };
-            Vertex initVer = new Vertex { id = 1, edges = new List<int>() };
-            newNet.vertices.Add(initVer);
-            string path = HostingEnvironment.MapPath("~/Graphs/" + nextId + ".json");
-            File.WriteAllText(path, JsonConvert.SerializeObject(newNet, Formatting.Indented));
-
-            return Ok();
-        }
-
         [System.Web.Http.HttpGet]
         public IHttpActionResult Count(int id, string date, int incl)
         {
-            Network networkTemp = MakeNetworkFromDb(id, date, 1); // w tym momencie liczy zawsze z wierzchołkiem początkowym
+            Network networkTemp = MakeNetworkFromDb(id, date, 1); //liczy zawsze z wierzchołkiem początkowym
             DateTime dateT = DateTime.Parse(date);
             networkTemp.ClosenessCentrality2();
             networkTemp.InfluenceRange2();
@@ -461,7 +347,6 @@ namespace AlgorytmyMVC.Controllers
             networkTemp.Normalize();
             foreach (Vertex vert in networkTemp.vertices)
             {
-                //up to date - aplikacja aktulnie zapisuje nowy wiersz, a stary oznacza jako nieaktualny; docelowo lepiej zmienić na aktualizowanie starego
                 //zmienione - nadpisuje stary wiersz; dodać jakieś ostrzeżenie typu "czy chcesz policzyć dane na nowo"?
                 var previous = db.VertexFactorsDb.SingleOrDefault(o => o.vertex_id == vert.id && o.date == dateT && o.up_to_date);
                 if (previous != null)
