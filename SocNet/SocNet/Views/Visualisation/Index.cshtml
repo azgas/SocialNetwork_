@@ -77,19 +77,16 @@
         </div>
         <div id="id2" class="page2" ng-controller="myCtrl">
             <form name="form1">
-                <h4>(Kliknij na wierzchołek, aby go wybrać)</h4>
+                @*<h5>(Kliknij na wierzchołek, aby go wybrać)</h5>
                 Id wierzchołka: <br /><input type="text" name="index" ng-model="vert.index">
                 <br />
-                @*<button ng-click="nextindex()">Kolejny indeks</button>*@
+                Nazwa: <br /><input type="text" name="name" ng-model="vert.name">
                 <br />
-                nazwa: <br /><input type="text" name="name" ng-model="vert.name">
-                <br />
-                Krawędzie: <br /> <input type="text" name="edges" ng-model="vert.edges"/>
-                <br />
-                @*<button ng-click="save()">Dodaj/modyfikuj</button><button ng-click="delete()">Usuń</button>*@
+                Krawędzie wychodzące: <br /> <input type="text" name="edges" ng-model="vert.edges"/>*@
                 <br />
                 <br />
-                <button ng-click="countFactors()">Policz współczynniki dla sieci</button>
+                <br />
+                <button ng-click="countFactors()">Oblicz</button>
                 <br />
                 <br />
                 <div ng-model="factors">{{factors.status}}</div>

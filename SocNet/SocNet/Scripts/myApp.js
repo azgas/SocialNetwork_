@@ -79,22 +79,6 @@ myApp.controller("myCtrl",
                 .error(function (data) { alert(data) });
         };
 
-        // zapisywanie zmian - nie działa teraz
-        $scope.save = function () {
-            var index = myService.index;
-            var edgesTemp = myService.edges;
-            var edges = JSON.parse("[" + edgesTemp + "]");
-
-            var vertex = { id: index, edges: edges };
-            $http.post("/api/apinetwork/SaveData/" + $scope.selectedNetwork.id, vertex)
-                .success(function () {
-                    $scope.refresh();
-                    myService.toggle(null, null);
-                })
-                .error(function (err) {
-                    alert(err.Message);
-                });
-        };
         $scope.$watch("ref",
             function () {
                 $http.get("/api/apinetwork/GetFactors/" + $scope.selectedNetwork.id + "?date=" + $scope.selectedDate)
@@ -119,18 +103,6 @@ myApp.controller("myCtrl",
                 })
                 .error(function () { alert("błąd") });
 
-        };
-        //usuwanie - nie działa teraz
-        $scope.delete = function () {
-            var index = myService.index;
-            $http.post("/api/apinetwork/Delete/" + $scope.selectedNetwork.id, index)
-                .success(function () {
-                    $scope.refresh();
-                    myService.toggle(null, null);
-                })
-                .error(function (err) {
-                    alert(err.Message);
-                });
         };
     }
 ]);
