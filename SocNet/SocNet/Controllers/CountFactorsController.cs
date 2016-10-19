@@ -212,23 +212,6 @@ namespace SocNet.Controllers
         }
 
         [HttpGet]
-        public JsonResult<int> Test()
-        {
-            Random rnd = new Random();
-            int result = rnd.Next(1, 100);
-            return Json(result);
-        }
-
-
-        [HttpGet]
-        public JsonResult<string> Test2(int id)
-        {
-            Random rnd = new Random();
-            int result = rnd.Next(1, 100);
-            string a = "id = " + id.ToString() + result.ToString();
-            return Json(a);
-        }
-        [HttpGet]
         public JsonResult<float> ClosenessCentrality(int id, string date)
         {
             Network net = MakeNetworkFromDb(id, date, 1);

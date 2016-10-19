@@ -395,7 +395,6 @@
     <Compile Include="Controllers\NetworkDbsController.cs" />
     <Compile Include="Controllers\NetworkFactorsDbsController.cs" />
     <Compile Include="Controllers\ServiceDbsController.cs" />
-    <Compile Include="Controllers\TestRepoController.cs" />
     <Compile Include="Controllers\VertexDbsController.cs" />
     <Compile Include="Controllers\VertexFactorsDbsController.cs" />
     <Compile Include="Controllers\VisualisationController.cs" />
