@@ -427,23 +427,12 @@ namespace AlgorytmyMVC.Controllers
             {
                 var row = db.NetworkFactorsDb.ToList().Find(v => v.network_id == id && v.date == dateT && v.up_to_date);
                 ans.status = "";
-                ans.avBetCen = (float)row.avg_betweenness_centrality;
-                ans.avCloCen = (float)row.avg_closeness_centrality;
-                ans.avInCen = (float)row.avg_indegree_centrality;
-                ans.avInfRan = (float)row.avg_influence_range;
-                ans.avOutCen = (float)row.avg_outdegree_centrality;
-                ans.density = (float)row.density;
-            }
-            else if (db.NetworkFactorsDb.Any(row => row.network_id == id && row.date == dateT && !row.up_to_date))
-            {
-                var row = db.NetworkFactorsDb.ToList().Find(v => v.network_id == id && v.date == dateT && !v.up_to_date);  //pewnie nie działa, gdy jest więcej nieaktualnych wyników
-                ans.status = "Dane są nieaktualne";
-                ans.avBetCen = (float)row.avg_betweenness_centrality;
-                ans.avCloCen = (float)row.avg_closeness_centrality;
-                ans.avInCen = (float)row.avg_indegree_centrality;
-                ans.avInfRan = (float)row.avg_influence_range;
-                ans.avOutCen = (float)row.avg_outdegree_centrality;
-                ans.density = (float)row.density;
+                ans.avBetCen = row.avg_betweenness_centrality.ToString();
+                ans.avCloCen = row.avg_closeness_centrality.ToString();
+                ans.avInCen = row.avg_indegree_centrality.ToString();
+                ans.avInfRan = row.avg_influence_range.ToString();
+                ans.avOutCen = row.avg_outdegree_centrality.ToString();
+                ans.density = row.density.ToString();
             }
             else
             {

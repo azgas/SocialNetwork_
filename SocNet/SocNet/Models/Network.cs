@@ -534,11 +534,11 @@ namespace AlgorytmyMVC.Models
     public class NetworkFactors
     {
         public string status { get; set; }
-        public float avInCen { get; set; }
-        public float avOutCen { get; set; }
-        public float avInfRan { get; set; }
-        public float avBetCen { get; set; }
-        public float avCloCen { get; set; }
-        public double density { get; set; }
+        public string avInCen { get; set; }
+        public string avOutCen { get; set; }
+        public string avInfRan { get; set; }
+        public string avBetCen { get; set; }
+        public string avCloCen { get; set; }
+        public string density { get; set; }
     }
 }

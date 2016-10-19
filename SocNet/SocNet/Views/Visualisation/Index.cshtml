@@ -62,7 +62,7 @@
                     Wyświetl otoczenie wierzchołka:
                     <select ng-model="selectedVertex" ng-options="vertex.name for vertex in vertices" ng-change="refresh()"></select>
                     <br/>
-                    Wyłącz wierzchołek początkowy:
+                    Wyłącz z widoku grafu wierzchołek początkowy:
                     <input type="checkbox" ng-model="checkInclude" ng-true-value="0" ng-false-value="1" ng-click="refresh()"/>
                 </div>
                 <br />
@@ -92,15 +92,15 @@
                 <div ng-model="factors">{{factors.status}}</div>
                 <div ng-show="showFactors" ng-model="factors">
                     <ul>
-                        <li>Gęstość sieci: {{factors.density | number:6}}</li>
+                        <li>Gęstość sieci: {{factors.density | limitTo: 8}}</li>
                     </ul>
                     <h5>Średnie współczynniki:</h5>
                     <ul>
-                        <li>Indegree centrality: {{factors.avInCen | number:6}}</li>
-                        <li>Outdegree centrality: {{factors.avOutCen | number:6}}</li>
-                        <li>Closeness centrality: {{factors.avCloCen | number:6}}</li>
-                        <li>Betweenness centrality: {{factors.avBetCen | number:6}}</li>
-                        <li>Influence Range: {{factors.avInfRan | number:6}}</li>
+                        <li>Indegree centrality: {{factors.avInCen | limitTo: 8}}</li>
+                        <li>Outdegree centrality: {{factors.avOutCen | limitTo: 8}}</li>
+                        <li>Closeness centrality: {{factors.avCloCen | limitTo: 8}}</li>
+                        <li>Betweenness centrality: {{factors.avBetCen | limitTo: 8}}</li>
+                        <li>Influence range: {{factors.avInfRan | limitTo: 8}}</li>
                     </ul>
                 </div>
 
