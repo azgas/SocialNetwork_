@@ -168,16 +168,6 @@ namespace AlgorytmyMVC.Models
 
                 }
             }
-            //niżej: normalizacja
-/*            var max = vertices.OrderByDescending(vertex => vertex.betweennessCentralityValue).First().betweennessCentralityValue;
-            var min = vertices.OrderByDescending(vertex => vertex.betweennessCentralityValue).Last().betweennessCentralityValue;
-            foreach (Vertex v in vertices)
-            {
-                v.betweennessCentralityValue -= min;
-                v.betweennessCentralityValue /= max - min;
-            }*/
-
-
         }
 
         public float ClosenessCentrality(int index)
@@ -272,26 +262,6 @@ namespace AlgorytmyMVC.Models
 
             return result;
         }
-
-        //public void DFS(int source, int destination, int target) // do znajdywania ścieżek z danym wierzchołkiem
-        //{
-        //    Vertex vertex = vertices.Find(vert => vert.index == source);
-        //    vertex.visited = true;
-        //    List<int> edges2 = vertex.Edges;
-        //    if (edges2.Contains(target))
-        //    {
-
-        //    }
-
-        //    foreach (int i in vertex.Edges)
-        //    {
-        //        Vertex neighb = vertices.Find(vert => vert.index == i);
-        //        if (neighb.visited == false)
-        //        {
-        //            DFS(neighb.index, target);
-        //        }
-        //    }
-        //}
 
         public int CountShortestPathsContaining(int sourc, int dest, int cont)
         {
@@ -389,38 +359,6 @@ namespace AlgorytmyMVC.Models
             return result;
         }
 
-        /*public List<int> MaxCentrality(int whichCase) //przerobić jakoś żeby rozszerzyć na inne wskaźniki
-        {
-            int resultCentrality = 0;
-            int vertexIndex = 0;
-            List<int> result = new List<int>();
-            bool flag = false;
-
-            foreach (Vertex v in vertices)
-            {
-                if (v.indegreeCentralityValue > resultCentrality)
-                {
-                    flag = true;
-                    resultCentrality = v.indegreeCentralityValue;
-                    vertexIndex = v.id;
-                }
-
-            }
-            if (flag)
-            {
-                result.Add(vertexIndex);
-                result.Add(resultCentrality);
-            }
-            foreach (Vertex v in vertices)
-            {
-                if (v.indegreeCentralityValue == resultCentrality && v.id != vertexIndex)
-                {
-                    result.Add(v.id);
-                    result.Add(v.indegreeCentralityValue);
-                }
-            }
-            return result;
-        }*/
 
         public List<string> ShowVertices()
         {
@@ -491,7 +429,7 @@ namespace AlgorytmyMVC.Models
             return result;
         }
 
-        public void Normalize() //jakieś dziedziczenie napisać? - tylko jak?? 
+        public void Normalize() 
         {
             var maxb =
                 vertices.OrderByDescending(vertex => vertex.betweennessCentralityValue)
@@ -509,7 +447,6 @@ namespace AlgorytmyMVC.Models
                     v.betweennessCentralityValue /= maxb - minb;
                 }
             }
-            //problem z intami
 
             var maxin =
                 vertices.OrderByDescending(vertex => vertex.indegreeCentralityValue).First().indegreeCentralityValue;
@@ -559,36 +496,6 @@ namespace AlgorytmyMVC.Models
             }
         }
 
-        public string WriteToJson()
-        {
-            List<Link> links = new List<Link>();
-            foreach (Vertex v in vertices)
-            {
-                foreach (int e in v.edges)
-                {
-                    Link link = new Link();
-                    link.source = v.id;
-                    link.target = e;
-                    links.Add(link);
-                }
-
-            }
-            NetworkFactors factors = new NetworkFactors();
-            factors.density = Density();
-            factors.avInCen = AverageFactor(1);
-            factors.avOutCen = AverageFactor(2);
-            factors.avCloCen = AverageFactor(3);
-            factors.avBetCen = AverageFactor(4);
-            factors.avInfRan = AverageFactor(5);
-            var json = JsonConvert.SerializeObject(new
-            {
-                vertices = vertices,
-                links = links,
-                factors = factors
-            });
-            return json;
-
-        }
     }
 
     public class Vertex
