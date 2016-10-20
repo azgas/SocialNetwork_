@@ -97,11 +97,69 @@ myApp.controller("myCtrl",
 
         $scope.showFactors = false;
         $scope.countFactors = function () {
-            $http.get("/api/apinetwork/Count/" + $scope.selectedNetwork.id + "?date=" + $scope.selectedDate + "&incl=" + $scope.checkInclude)
-                .success(function (data) {
-                    $scope.refresh();
-                })
-                .error(function () { alert("błąd") });
+            if ($scope.checkIndegree)
+                $http.get("/api/CountFactors/IndegreeCentrality/" +
+                        $scope.selectedNetwork.id +
+                        "?date=" +
+                        $scope.selectedDate +
+                        "&incl=" +
+                        $scope.checkInclude)
+                    .success(function(data) {
+                        $scope.refresh();
+                    });
+            if ($scope.checkOutdegree)
+                $http.get("/api/CountFactors/OutdegreeCentrality/" +
+                        $scope.selectedNetwork.id +
+                        "?date=" +
+                        $scope.selectedDate +
+                        "&incl=" +
+                        $scope.checkInclude)
+                    .success(function (data) {
+                        $scope.refresh();
+                    });
+            if ($scope.checkBetweenness)
+                $http.get("/api/CountFactors/BetweennessCentrality/" +
+                        $scope.selectedNetwork.id +
+                        "?date=" +
+                        $scope.selectedDate +
+                        "&incl=" +
+                        $scope.checkInclude)
+                    .success(function (data) {
+                        $scope.refresh();
+                    });
+            if ($scope.checkCloseness)
+                $http.get("/api/CountFactors/ClosenessCentrality/" +
+                        $scope.selectedNetwork.id +
+                        "?date=" +
+                        $scope.selectedDate +
+                        "&incl=" +
+                        $scope.checkInclude)
+                    .success(function (data) {
+                        $scope.refresh();
+                    });
+            if ($scope.checkInfluence)
+                $http.get("/api/CountFactors/InfluenceRange/" +
+                        $scope.selectedNetwork.id +
+                        "?date=" +
+                        $scope.selectedDate +
+                        "&incl=" +
+                        $scope.checkInclude)
+                    .success(function (data) {
+                        $scope.refresh();
+                    });
+            if ($scope.checkDensity)
+                $http.get("/api/CountFactors/Density/" +
+                        $scope.selectedNetwork.id +
+                        "?date=" +
+                        $scope.selectedDate +
+                        "&incl=" +
+                        $scope.checkInclude)
+                    .success(function (data) {
+                        $scope.refresh();
+                    });
+            if (!$scope.checkIndegree && !$scope.checkOutdegree && !$scope.checkBetweenness && !$scope.checkCloseness && !$scope.checkInfluence && !$scope.checkDensity) {
+                alert("Nic nie zaznaczono!");
+            }
 
         };
     }

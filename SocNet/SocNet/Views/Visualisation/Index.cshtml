@@ -83,10 +83,22 @@
                 Nazwa: <br /><input type="text" name="name" ng-model="vert.name">
                 <br />
                 Krawędzie wychodzące: <br /> <input type="text" name="edges" ng-model="vert.edges"/>*@
+                <h4>Współczynniki sieci (zaznacz, które chcesz obliczyć:)</h4>
+                <br />
+                <label>Indegree centrality<input type="checkbox" ng-model="checkIndegree" /></label>
+                <br/>
+                <label>Outdegree centrality<input type="checkbox" ng-model="checkOutdegree" /></label>
+                <br/>
+                <label>Betweenness centrality<input type="checkbox" ng-model="checkBetweenness" /></label>
+                <br/>
+                <label>Closeness centrality<input type="checkbox" ng-model="checkCloseness" /></label>
+                <br/>
+                <label>Influence range<input type="checkbox" ng-model="checkInfluence" /></label>
+                <br/>
+                <label>Density<input type="checkbox" ng-model="checkDensity" /></label>
                 <br />
                 <br />
-                <br />
-                <button ng-click="countFactors()">Oblicz</button>
+                <button ng-click="countFactors()" style="display: block; margin: 0 auto;">Oblicz</button>
                 <br />
                 <br />
                 <div ng-model="factors">{{factors.status}}</div>
