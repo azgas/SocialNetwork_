@@ -402,6 +402,8 @@
     <Compile Include="Models\Credentials.cs">
       <DependentUpon>BazaDanych.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\FormFlickrFollowers.cs" />
+    <Compile Include="Models\FormTwitterNetwork.cs" />
     <Compile Include="Models\LinkDb.cs">
       <DependentUpon>BazaDanych.tt</DependentUpon>
     </Compile>

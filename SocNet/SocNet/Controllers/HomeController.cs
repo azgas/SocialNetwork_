@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using SocNet.Models;
 
 namespace SocNet.Controllers
 {
