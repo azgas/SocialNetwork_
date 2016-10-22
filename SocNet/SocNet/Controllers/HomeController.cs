@@ -38,7 +38,7 @@ namespace SocNet.Controllers
             {
                 HttpResponseMessage response = client.PostAsJsonAsync("api/FlickrFollowersAPI/FlickrNetwork", form).Result;
             }
-            return RedirectToAction("Index", "Links");
+            return RedirectToAction("Index", "VisualisationController");
         }
         //GET: /Home/TwitterFollowers
         [HttpGet]
@@ -83,7 +83,7 @@ namespace SocNet.Controllers
             {//pobieramy 1xFollowers
                 HttpResponseMessage response = client.PostAsJsonAsync("api/TwitterNetworkAPI/TwitterFollowers", form).Result;
             }
-            return RedirectToAction("Index", "Links");
+            return RedirectToAction("Index", "VisualisationController");
         }
     }
 }
