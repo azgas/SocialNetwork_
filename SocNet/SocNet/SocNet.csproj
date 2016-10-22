@@ -526,6 +526,8 @@
     <Content Include="Views\VertexFactorsDbs\Edit.cshtml" />
     <Content Include="Views\VertexFactorsDbs\Index.cshtml" />
     <Content Include="Views\Visualisation\Index.cshtml" />
+    <Content Include="Views\Home\FlickrFollowers.cshtml" />
+    <Content Include="Views\Home\TwitterNetwork.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

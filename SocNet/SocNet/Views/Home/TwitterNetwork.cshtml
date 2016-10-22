@@ -1,0 +1,43 @@
+﻿@model SocNet.Models.FormTwitterNetwork
+
+@{
+    ViewBag.Title = "TwitterNetwork";
+}
+
+<h2>Formularz pobierania danych z serwisu Twitter</h2>
+@using (Html.BeginForm())
+{
+    <div>
+        @Html.LabelFor(model => model.InitialVertex)
+        @Html.TextBoxFor(model => model.InitialVertex)
+    </div>
+    <div>
+        @Html.LabelFor(model => model.QueryLimit)
+        @Html.TextBoxFor(model => model.QueryLimit)
+    </div>
+    <div>
+        @Html.LabelFor(model => model.DonwloadID)
+        @Html.TextBoxFor(model => model.DonwloadID)
+    </div>
+    <div>
+        <p>Zaznać poniżej co chcesz pobrać</p>
+        @Html.LabelFor(model => model.DownloadFriends)
+        @Html.CheckBoxFor(model => model.DownloadFriends)
+    </div>
+    <div>
+        @Html.LabelFor(model => model.DownloadFollowers)
+        @Html.CheckBoxFor(model => model.DownloadFollowers)
+    </div>
+    <div>
+        @Html.LabelFor(model => model.DownloadNetwork)
+        @Html.CheckBoxFor(model => model.DownloadNetwork)
+    </div>
+    <div>
+        <p>Uzupełnij opcje poniżej jeżeli pobierasz sieć</p>
+        @Html.LabelFor(model => model.NumberQueries)
+        @Html.TextBoxFor(model => model.NumberQueries)
+    </div>
+
+    <input type="submit" value="Zbierz Dane" />
+}
+
