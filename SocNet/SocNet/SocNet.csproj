@@ -371,17 +371,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\ApiFlickrFollowerController.cs" />
-    <Compile Include="Controllers\ApiNetworkController.cs" />
-    <Compile Include="Controllers\ApiFlickrFollowersController.cs" />
-    <Compile Include="Controllers\ApiTwitterFollowerController.cs" />
-    <Compile Include="Controllers\ApiTwitterNetworkController.cs" />
     <Compile Include="Controllers\CountFactorsController.cs" />
     <Compile Include="Controllers\CredentialsController.cs" />
-    <Compile Include="Controllers\GetFlickrUserFollowersController.cs" />
-    <Compile Include="Controllers\GetFlickrUsersFollowersController.cs" />
-    <Compile Include="Controllers\GetTwitterSocialNetworkController.cs" />
-    <Compile Include="Controllers\GetTwitterUserFollowersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LinkDbsController.cs" />
     <Compile Include="Controllers\NetworkDbsController.cs" />
