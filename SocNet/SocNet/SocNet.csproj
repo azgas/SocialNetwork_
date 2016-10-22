@@ -524,10 +524,6 @@
     <Content Include="Views\VertexFactorsDbs\Edit.cshtml" />
     <Content Include="Views\VertexFactorsDbs\Index.cshtml" />
     <Content Include="Views\Visualisation\Index.cshtml" />
-    <Content Include="Views\GetFlickrUserFollowers\Index.cshtml" />
-    <Content Include="Views\GetFlickrUsersFollowers\Index.cshtml" />
-    <Content Include="Views\GetTwitterUserFollowers\Index.cshtml" />
-    <Content Include="Views\GetTwitterSocialNetwork\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
