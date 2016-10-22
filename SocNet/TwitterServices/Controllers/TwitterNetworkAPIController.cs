@@ -105,19 +105,19 @@ namespace TwitterServices.Controllers
             var serviceObj = network.ServiceDb.Where<ServiceDb>(x => x.name == "Twitter").ToList();
             var serviceId = serviceObj[0].id;
             //utworzenie uzytkownika poczatkowego twittera
-            var userName = Tweetinvi.User.GetUserFromId(form.initialVertex);
+            var userName = Tweetinvi.User.GetUserFromId(form.InitialVertex);
             if (userName != null)
             {
-                IsUserIdInVertex(form.initialVertex, serviceObj[0].id, userName.ScreenName);
+                IsUserIdInVertex(form.InitialVertex, serviceObj[0].id, userName.ScreenName);
             }
             else
             {
-                IsUserIdInVertex(form.initialVertex, serviceObj[0].id);
+                IsUserIdInVertex(form.InitialVertex, serviceObj[0].id);
             }
-            var userId = network.VertexDb.Where<VertexDb>(x => x.identifier == form.initialVertex.ToString() && x.service_id == serviceId).ToList();
+            var userId = network.VertexDb.Where<VertexDb>(x => x.identifier == form.InitialVertex.ToString() && x.service_id == serviceId).ToList();
             //tworzenie listy followersow i friendsow wierzcholka poczatkowego
-            var twitterFollowers = Tweetinvi.User.GetFollowerIds(form.initialVertex, form.queryLimit);
-            var twitterFriends = Tweetinvi.User.GetFriendIds(form.initialVertex, form.queryLimit);
+            var twitterFollowers = Tweetinvi.User.GetFollowerIds(form.InitialVertex, form.QueryLimit);
+            var twitterFriends = Tweetinvi.User.GetFriendIds(form.InitialVertex, form.QueryLimit);
             queries++;
             //zapis followersow dobazy danych
             foreach (var follower in twitterFollowers)
@@ -136,7 +136,7 @@ namespace TwitterServices.Controllers
                 var followerId = network.VertexDb.Where<VertexDb>(x => x.identifier == follower.ToString() && x.service_id == serviceId).ToList();
                 var link = new LinkDb();
                 link.date_modified = data;
-                link.network_id = form.networkID;
+                link.network_id = form.NetowrkID;
                 link.source_id = followerId[0].id;
                 link.target_id = userId[0].id;
                 network.LinkDb.Add(link);
@@ -159,7 +159,7 @@ namespace TwitterServices.Controllers
                 var friendId = network.VertexDb.Where<VertexDb>(x => x.identifier == friend.ToString() && x.service_id == serviceId).ToList();
                 var link = new LinkDb();
                 link.date_modified = data;
-                link.network_id = form.networkID;
+                link.network_id = form.NetowrkID;
                 link.source_id = userId[0].id;
                 link.target_id = friendId[0].id;
                 network.LinkDb.Add(link);
@@ -170,9 +170,9 @@ namespace TwitterServices.Controllers
             List<long> twitterFollowersList = twitterFollowers.ToList();
             List<long> twitterFriendsList = twitterFriends.ToList();
             List<long> usedUsers = new List<long>();
-            usedUsers.Add(form.initialVertex);
+            usedUsers.Add(form.InitialVertex);
             //rozpoczynamy pobieranie dla kolejnych wierzcholkow
-            while (queries < form.numberOfQueries && (twitterFriendsList.Any() || twitterFollowersList.Any()))
+            while (queries < form.NumberQueries && (twitterFriendsList.Any() || twitterFollowersList.Any()))
             {
                 var rand = new Random();
                 bool bool1 = (twitterFriendsList.Any()) ? true : false;
@@ -183,8 +183,8 @@ namespace TwitterServices.Controllers
                     var newInitialVertexId = twitterFriendsList[0];
                     userId = network.VertexDb.Where<VertexDb>(x => x.identifier == newInitialVertexId.ToString() && x.service_id == serviceId).ToList();
                     usedUsers.Add(newInitialVertexId);
-                    var newUsersFriends = Tweetinvi.User.GetFriendIds(newInitialVertexId, form.queryLimit);
-                    var newUsersFollowers = Tweetinvi.User.GetFollowerIds(newInitialVertexId, form.queryLimit);
+                    var newUsersFriends = Tweetinvi.User.GetFriendIds(newInitialVertexId, form.QueryLimit);
+                    var newUsersFollowers = Tweetinvi.User.GetFollowerIds(newInitialVertexId, form.QueryLimit);
                     twitterFriendsList = twitterFriendsList.Union(newUsersFriends).Except(usedUsers).ToList();
                     twitterFollowersList = twitterFollowersList.Union(newUsersFollowers).Except(usedUsers).ToList();
                     //zapis followersow dobazy danych
@@ -204,7 +204,7 @@ namespace TwitterServices.Controllers
                         var followerId = network.VertexDb.Where<VertexDb>(x => x.identifier == follower.ToString() && x.service_id == serviceId).ToList();
                         var link = new LinkDb();
                         link.date_modified = data;
-                        link.network_id = form.networkID;
+                        link.network_id = form.NetowrkID;
                         link.source_id = followerId[0].id;
                         link.target_id = userId[0].id;
                         network.LinkDb.Add(link);
@@ -227,7 +227,7 @@ namespace TwitterServices.Controllers
                         var friendId = network.VertexDb.Where<VertexDb>(x => x.identifier == friend.ToString() && x.service_id == serviceId).ToList();
                         var link = new LinkDb();
                         link.date_modified = data;
-                        link.network_id = form.networkID;
+                        link.network_id = form.NetowrkID;
                         link.source_id = userId[0].id;
                         link.target_id = friendId[0].id;
                         network.LinkDb.Add(link);
@@ -240,8 +240,8 @@ namespace TwitterServices.Controllers
                     var newInitialVertexId = twitterFollowersList[0];
                     userId = network.VertexDb.Where<VertexDb>(x => x.identifier == newInitialVertexId.ToString() && x.service_id == serviceId).ToList();
                     usedUsers.Add(newInitialVertexId);
-                    var newUsersFriends = Tweetinvi.User.GetFriendIds(newInitialVertexId, form.queryLimit);
-                    var newUsersFollowers = Tweetinvi.User.GetFollowerIds(newInitialVertexId, form.queryLimit);
+                    var newUsersFriends = Tweetinvi.User.GetFriendIds(newInitialVertexId, form.QueryLimit);
+                    var newUsersFollowers = Tweetinvi.User.GetFollowerIds(newInitialVertexId, form.QueryLimit);
                     twitterFriendsList = twitterFriendsList.Union(newUsersFriends).Except(usedUsers).ToList();
                     twitterFollowersList = twitterFollowersList.Union(newUsersFollowers).Except(usedUsers).ToList();
                     //zapis followersow dobazy danych
@@ -261,7 +261,7 @@ namespace TwitterServices.Controllers
                         var followerId = network.VertexDb.Where<VertexDb>(x => x.identifier == follower.ToString() && x.service_id == serviceId).ToList();
                         var link = new LinkDb();
                         link.date_modified = data;
-                        link.network_id = form.networkID;
+                        link.network_id = form.NetowrkID;
                         link.source_id = followerId[0].id;
                         link.target_id = userId[0].id;
                         network.LinkDb.Add(link);
@@ -284,7 +284,7 @@ namespace TwitterServices.Controllers
                         var friendId = network.VertexDb.Where<VertexDb>(x => x.identifier == friend.ToString() && x.service_id == serviceId).ToList();
                         var link = new LinkDb();
                         link.date_modified = data;
-                        link.network_id = form.networkID;
+                        link.network_id = form.NetowrkID;
                         link.source_id = userId[0].id;
                         link.target_id = friendId[0].id;
                         network.LinkDb.Add(link);

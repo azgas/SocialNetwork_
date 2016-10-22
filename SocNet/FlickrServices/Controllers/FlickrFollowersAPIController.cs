@@ -48,11 +48,11 @@ namespace FlickrServices.Controllers
             user.ApiKey = credentials[0].key;
             user.ApiSecret = credentials[0].secret;
             //pobieranie followersow uzytkownika z formularza
-            var flickrFollowers = user.ContactsGetPublicList(form.initialVertex);
+            var flickrFollowers = user.ContactsGetPublicList(form.InitialVertex);
             //dodanie uzytkownika poczatkowego do tabeli vertex
-            IsUserIdInVertex(form.initialVertex, serviceObj[0].id);
+            IsUserIdInVertex(form.InitialVertex, serviceObj[0].id);
             //pobranie id uzytkonika poczatkowego w tabeli vertex
-            var userId = network.VertexDb.Where<VertexDb>(x => x.identifier == form.initialVertex && x.service_id == serviceId).ToList();
+            var userId = network.VertexDb.Where<VertexDb>(x => x.identifier == form.InitialVertex && x.service_id == serviceId).ToList();
             int numberOfPages = flickrFollowers.Pages;
             //zapis pierwszej partii do bazy danych
             foreach (var follower in flickrFollowers)
@@ -61,7 +61,7 @@ namespace FlickrServices.Controllers
                 var followerId = network.VertexDb.Where<VertexDb>(x => x.identifier == follower.UserId && x.service_id == serviceId).ToList();
                 var link = new LinkDb();
                 link.date_modified = data;
-                link.network_id = form.networkID;
+                link.network_id = form.NetworkID;
                 link.source_id = followerId[0].id;
                 link.target_id = userId[0].id;
                 network.LinkDb.Add(link);
@@ -70,14 +70,14 @@ namespace FlickrServices.Controllers
             //zapis reszty danych
             for (int i = 2; i <= numberOfPages; i++)
             {
-                flickrFollowers = user.ContactsGetPublicList(form.initialVertex, i, 1000);
+                flickrFollowers = user.ContactsGetPublicList(form.InitialVertex, i, 1000);
                 foreach (var follower in flickrFollowers)
                 {
                     IsUserIdInVertex(follower.UserId, serviceObj[0].id);
                     var followerId = network.VertexDb.Where<VertexDb>(x => x.identifier == follower.UserId && x.service_id == serviceId).ToList();
                     var link = new LinkDb();
                     link.date_modified = data;
-                    link.network_id = form.networkID;
+                    link.network_id = form.NetworkID;
                     link.source_id = followerId[0].id;
                     link.target_id = userId[0].id;
                     network.LinkDb.Add(link);
@@ -104,13 +104,13 @@ namespace FlickrServices.Controllers
             user.ApiKey = credentials[0].key;
             user.ApiSecret = credentials[0].secret;
             //pobieranie followersow uzytkownika z formularza
-            var flickrFollowers = user.ContactsGetPublicList(form.initialVertex);
+            var flickrFollowers = user.ContactsGetPublicList(form.InitialVertex);
             int numberOfPages = flickrFollowers.Pages;
             queries++;
             //dodanie uzytkownika poczatkowego do tabeli vertex
-            IsUserIdInVertex(form.initialVertex, serviceObj[0].id);
+            IsUserIdInVertex(form.InitialVertex, serviceObj[0].id);
             //pobranie id uzytkonika poczatkowego w tabeli vertex
-            var userId = network.VertexDb.Where<VertexDb>(x => x.identifier == form.initialVertex && x.service_id == serviceId).ToList();
+            var userId = network.VertexDb.Where<VertexDb>(x => x.identifier == form.InitialVertex && x.service_id == serviceId).ToList();
             //zapis pierwszej partii do bazy danych
             foreach (var follower in flickrFollowers)
             {
@@ -118,7 +118,7 @@ namespace FlickrServices.Controllers
                 var followerId = network.VertexDb.Where<VertexDb>(x => x.identifier == follower.UserId && x.service_id == serviceId).ToList();
                 var link = new LinkDb();
                 link.date_modified = data;
-                link.network_id = form.networkID;
+                link.network_id = form.NetworkID;
                 link.source_id = followerId[0].id;
                 link.target_id = userId[0].id;
                 network.LinkDb.Add(link);
@@ -127,14 +127,14 @@ namespace FlickrServices.Controllers
             //zapis reszty danych
             for (int i = 2; i <= numberOfPages; i++)
             {
-                flickrFollowers = user.ContactsGetPublicList(form.initialVertex, i, 1000);
+                flickrFollowers = user.ContactsGetPublicList(form.InitialVertex, i, 1000);
                 foreach (var follower in flickrFollowers)
                 {
                     IsUserIdInVertex(follower.UserId, serviceObj[0].id, follower.UserName);
                     var followerId = network.VertexDb.Where<VertexDb>(x => x.identifier == follower.UserId && x.service_id == serviceId).ToList();
                     var link = new LinkDb();
                     link.date_modified = data;
-                    link.network_id = form.networkID;
+                    link.network_id = form.NetworkID;
                     link.source_id = followerId[0].id;
                     link.target_id = userId[0].id;
                     network.LinkDb.Add(link);
@@ -146,10 +146,10 @@ namespace FlickrServices.Controllers
             //lista uzytych followersow
             List<Contact> usedFollowers = new List<Contact>();
             Contact initialUser = new Contact();
-            initialUser.UserId = form.initialVertex;
+            initialUser.UserId = form.InitialVertex;
             usedFollowers.Add(initialUser);
             //usedFollowers.Add(form.initialVertex);
-            while (queries < form.numberOfQueries && followersList.Any())
+            while (queries < form.NumberQueries && followersList.Any())
             {
                 queries++;
                 var newInitialVertex = followersList[0];
@@ -163,7 +163,7 @@ namespace FlickrServices.Controllers
                     var followerId = network.VertexDb.Where<VertexDb>(x => x.identifier == follower.UserId && x.service_id == serviceId).ToList();
                     var link = new LinkDb();
                     link.date_modified = data;
-                    link.network_id = form.networkID;
+                    link.network_id = form.NetworkID;
                     link.source_id = followerId[0].id;
                     link.target_id = userId[0].id;
                     network.LinkDb.Add(link);
@@ -182,7 +182,7 @@ namespace FlickrServices.Controllers
                         var followerId = network.VertexDb.Where<VertexDb>(x => x.identifier == follower.UserId && x.service_id == serviceId).ToList();
                         var link = new LinkDb();
                         link.date_modified = data;
-                        link.network_id = form.networkID;
+                        link.network_id = form.NetworkID;
                         link.source_id = followerId[0].id;
                         link.target_id = userId[0].id;
                         network.LinkDb.Add(link);
