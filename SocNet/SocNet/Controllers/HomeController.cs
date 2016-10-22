@@ -27,7 +27,7 @@ namespace SocNet.Controllers
         public ActionResult FlickrFollowers(FormFlickrFollowers form)
         {
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:64966/");
+            client.BaseAddress = new Uri("http://localhost:56662/");
             client.DefaultRequestHeaders.Accept.Clear();
             client.Timeout = new TimeSpan(0, 30, 0);
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -52,7 +52,7 @@ namespace SocNet.Controllers
         public ActionResult TwitterNetwork(FormTwitterNetwork form)
         {
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:53125/");
+            client.BaseAddress = new Uri("http://localhost:56837/");
             client.DefaultRequestHeaders.Accept.Clear();
             client.Timeout = new TimeSpan(0, 30, 0);
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
