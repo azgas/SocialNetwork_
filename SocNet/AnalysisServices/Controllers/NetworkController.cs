@@ -6,9 +6,11 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Results;
 using AnalysisServices.Models;
+using System.Web.Http.Cors;
 
 namespace AnalysisServices.Controllers
 {
+    [EnableCors(origins: "http://localhost:60701", headers: "*", methods: "*")]
     public class NetworkController : ApiController
     {
 
@@ -331,16 +333,17 @@ namespace AnalysisServices.Controllers
         {
             NetworkFactors ans = new NetworkFactors();
             DateTime dateT = DateTime.Parse(date);
+            string if_not_count = "Nie obliczono jeszcze";
             if (db.NetworkFactorsDb.Any(row => row.network_id == id && row.date == dateT && row.up_to_date))
             {
                 var row = db.NetworkFactorsDb.ToList().Find(v => v.network_id == id && v.date == dateT && v.up_to_date);
                 ans.status = "";
-                ans.avBetCen = row.bet_cen_count ? row.avg_betweenness_centrality.ToString() : "Nie obliczono jeszcze";
-                ans.avCloCen = row.clos_cen_count ? row.avg_closeness_centrality.ToString() : "Nie obliczono jeszcze";
-                ans.avInCen = row.ind_cen_count ? row.avg_indegree_centrality.ToString() : "Nie obliczono jeszcze";
-                ans.avInfRan = row.inf_range_count ? row.avg_influence_range.ToString() : "Nie obliczono jeszcze";
-                ans.avOutCen = row.out_cen_count ? row.avg_outdegree_centrality.ToString() : "Nie obliczono jeszcze";
-                ans.density = row.density_count ? row.density.ToString() : "Nie obliczono jeszcze";
+                ans.avBetCen = row.bet_cen_count ? row.avg_betweenness_centrality.ToString() : if_not_count;
+                ans.avCloCen = row.clos_cen_count ? row.avg_closeness_centrality.ToString() : if_not_count;
+                ans.avInCen = row.ind_cen_count ? row.avg_indegree_centrality.ToString() : if_not_count;
+                ans.avInfRan = row.inf_range_count ? row.avg_influence_range.ToString() : if_not_count;
+                ans.avOutCen = row.out_cen_count ? row.avg_outdegree_centrality.ToString() : if_not_count;
+                ans.density = row.density_count ? row.density.ToString() : if_not_count;
             }
             else
             {

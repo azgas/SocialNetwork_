@@ -4,11 +4,13 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Http.Results;
 using AnalysisServices.Models;
 
 namespace AnalysisServices.Controllers
 {
+    [EnableCors(origins: "http://localhost:60701", headers: "*", methods: "*")]
     public class CountFactorsController : ApiController
     {
 

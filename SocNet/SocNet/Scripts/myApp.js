@@ -9,7 +9,10 @@ myApp.controller("refreshCtrl",
             $scope.ref = myService.toggleval($scope.ref);
         };
         $scope.getNetworks = function () {
-            $http.get("http://localhost:8641/api/network/GetListOfNetworks")
+            $http({
+                method: 'GET',
+                url: "http://localhost:8641/api/network/GetListOfNetworks"
+            })
                 .success(function (data) {
                     $scope.networks = data;
                     $scope.selectedNetwork = data[0];
