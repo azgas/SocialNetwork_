@@ -16,7 +16,7 @@
 
         .page1 {
             text-align: center;
-            width: 75%;
+            width: 72%;
             height: 100%;
             float: left;
         }
@@ -25,7 +25,7 @@
             text-align: left;
             padding-left: 10px;
             padding-right: 10px;
-            width: 25%;
+            width: 28%;
             height: 100%;
             float: left;
             background-color: lightgray;
@@ -35,6 +35,11 @@
             overflow: auto;
             width: 100%;
             height: 600px;
+        }
+        .inputbox {
+            width: 90px;
+            height: 20px;
+            vertical-align: middle;
         }
     </style>
     @section scripts{
@@ -104,15 +109,15 @@
                 <div ng-model="factors">{{factors.status}}</div>
                 <div ng-show="showFactors" ng-model="factors">
                     <ul>
-                        <li>Gęstość sieci: {{factors.density | limitTo: 8}}</li>
+                        <li>Gęstość sieci: <input type="text" class = "inputbox" ng-model="factors.density"></li>
                     </ul>
                     <h5>Średnie współczynniki:</h5>
                     <ul>
-                        <li>Indegree centrality: {{factors.avInCen | limitTo: 8}}</li>
-                        <li>Outdegree centrality: {{factors.avOutCen | limitTo: 8}}</li>
-                        <li>Closeness centrality: {{factors.avCloCen | limitTo: 8}}</li>
-                        <li>Betweenness centrality: {{factors.avBetCen | limitTo: 8}}</li>
-                        <li>Influence range: {{factors.avInfRan | limitTo: 8}}</li>
+                        <li>Indegree centrality: <input type="text" class = "inputbox" ng-model="factors.avInCen"></li>
+                        <li>Outdegree centrality: <input type="text" class = "inputbox" ng-model="factors.avOutCen"></li>
+                        <li>Closeness centrality: <input type="text" class = "inputbox" ng-model="factors.avCloCen"></li>
+                        <li>Betweenness centrality: <input type="text" class = "inputbox" ng-model="factors.avBetCen"></li>
+                        <li>Influence range: <input type="text" class = "inputbox" ng-model="factors.avInfRan"></li>
                     </ul>
                 </div>
 
