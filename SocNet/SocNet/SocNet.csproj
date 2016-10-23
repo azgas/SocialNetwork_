@@ -371,7 +371,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\CountFactorsController.cs" />
     <Compile Include="Controllers\CredentialsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LinkDbsController.cs" />
@@ -407,7 +406,6 @@
     <Compile Include="Models\LinkDb.cs">
       <DependentUpon>BazaDanych.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Network.cs" />
     <Compile Include="Models\NetworkDb.cs">
       <DependentUpon>BazaDanych.tt</DependentUpon>
     </Compile>

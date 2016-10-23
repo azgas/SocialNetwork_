@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Data.Entity;
-using System.IO;
-using Newtonsoft.Json;
 
-namespace AlgorytmyMVC.Models
+namespace AnalysisServices.Models
 {
     public class Network
     {
@@ -35,7 +32,7 @@ namespace AlgorytmyMVC.Models
                 v.outdegreeCentralityValue = CentralityOut(index);
                 v.closenessCentralityValue = ClosenessCentrality(index);
             }
-            
+
         }
 
         public int CountAllPaths()
@@ -95,7 +92,7 @@ namespace AlgorytmyMVC.Models
                 }
             }
             float pathsv = (float)pathsV;
-            if(allPaths == default(int))
+            if (allPaths == default(int))
                 allPaths = CountAllPaths();
             result = pathsv / (float)allPaths;
             return result;
@@ -177,9 +174,9 @@ namespace AlgorytmyMVC.Models
             {
                 float a = CountDistance(index, vertices[i].id);
                 if (a != 0 && a != Int32.MaxValue)
-                    result +=  1/a;
+                    result += 1 / a;
             }
-            
+
             return result;
         }
 
@@ -390,7 +387,7 @@ namespace AlgorytmyMVC.Models
                 int result = 0;
                 foreach (Vertex vv in vertices)
                 {
-                    
+
                     if (vv.edges.Contains(v.id))
                     {
                         result += 1;
@@ -429,7 +426,7 @@ namespace AlgorytmyMVC.Models
             return result;
         }
 
-        public void Normalize() 
+        public void Normalize()
         {
             var maxb =
                 vertices.OrderByDescending(vertex => vertex.betweennessCentralityValue)
@@ -506,13 +503,13 @@ namespace AlgorytmyMVC.Models
 
         public List<int> edges;
 
-        [JsonIgnore]
+        
         public int distance { get; set; }
-        [JsonIgnore]
+        
         public Vertex parent;
-        [JsonIgnore]
+       
         public bool visited = false;
-        [JsonIgnore]
+   
         public int numberOfPaths { get; set; }
 
         public string name { get; set; }

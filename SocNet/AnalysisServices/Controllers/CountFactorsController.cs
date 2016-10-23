@@ -5,14 +5,14 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Results;
-using AlgorytmyMVC.Models;
-using SocNet.Models;
+using AnalysisServices.Models;
 
-namespace SocNet.Controllers
+namespace AnalysisServices.Controllers
 {
     public class CountFactorsController : ApiController
     {
-        private Networkv3Entities1 db = new Networkv3Entities1();
+
+        private Networkv3Entities db = new Networkv3Entities();
 
         public Network MakeNetworkFromDb(int id, string date, int incl)
         {
@@ -460,7 +460,7 @@ namespace SocNet.Controllers
         {
             Network net = MakeNetworkFromDb(id, date, 1);
             DateTime dateT = DateTime.Parse(date);
-            
+
             var density = net.Density();
             var previousN = db.NetworkFactorsDb.SingleOrDefault(o => o.network_id == net.id && o.date == dateT && o.up_to_date);
             if (previousN != null)

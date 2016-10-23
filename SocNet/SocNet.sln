@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlickrServices", "FlickrSer
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwitterServices", "TwitterServices\TwitterServices.csproj", "{DDF18378-364A-4F12-9796-CC02359DA3B2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnalysisServices", "AnalysisServices\AnalysisServices.csproj", "{5FEAFA5A-8163-4C04-925D-32EC7A7A96B2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{DDF18378-364A-4F12-9796-CC02359DA3B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDF18378-364A-4F12-9796-CC02359DA3B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDF18378-364A-4F12-9796-CC02359DA3B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FEAFA5A-8163-4C04-925D-32EC7A7A96B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FEAFA5A-8163-4C04-925D-32EC7A7A96B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FEAFA5A-8163-4C04-925D-32EC7A7A96B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FEAFA5A-8163-4C04-925D-32EC7A7A96B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
