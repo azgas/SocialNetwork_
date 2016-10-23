@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AnalysisServices2.Models
+namespace AnalysisServices.Models
 {
     using System;
     using System.Data.Entity;

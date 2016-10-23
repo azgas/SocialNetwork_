@@ -503,13 +503,13 @@ namespace AnalysisServices.Models
 
         public List<int> edges;
 
-        
+
         public int distance { get; set; }
-        
+
         public Vertex parent;
-       
+
         public bool visited = false;
-   
+
         public int numberOfPaths { get; set; }
 
         public string name { get; set; }
