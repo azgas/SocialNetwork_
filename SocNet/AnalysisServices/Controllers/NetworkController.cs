@@ -291,8 +291,6 @@ namespace AnalysisServices.Controllers
         }
 
         [System.Web.Http.HttpGet]
-        [System.Web.Http.Route("api/apinetwork/getlistofnetworks")]
-        [System.Web.Http.Route("Visualisation/api/apinetwork/getlistofnetworks")]
         public JsonResult<List<NetworkList>> GetListOfNetworks()
         {
             List<NetworkList> networks = new List<NetworkList>();
@@ -329,90 +327,6 @@ namespace AnalysisServices.Controllers
         }
 
         [System.Web.Http.HttpGet]
-        public IHttpActionResult Count(int id, string date, int incl)
-        {
-            Network networkTemp = MakeNetworkFromDb(id, date, 1); //liczy zawsze z wierzchołkiem początkowym
-            DateTime dateT = DateTime.Parse(date);
-            networkTemp.ClosenessCentrality2();
-            networkTemp.InfluenceRange2();
-            networkTemp.CentralityIn2();
-            networkTemp.CentralityOut2();
-            networkTemp.BetweennessCentrality2();
-            networkTemp.Normalize();
-            foreach (Vertex vert in networkTemp.vertices)
-            {
-                //zmienione - nadpisuje stary wiersz; dodać jakieś ostrzeżenie typu "czy chcesz policzyć dane na nowo"?
-                var previous = db.VertexFactorsDb.SingleOrDefault(o => o.vertex_id == vert.id && o.date == dateT && o.up_to_date);
-                if (previous != null)
-                {
-                    var row_ = from o in db.VertexFactorsDb where o.vertex_id == vert.id && o.date == dateT select o;
-                    foreach (var o in row_)
-                    {
-                        o.betweenness_centrality = vert.betweennessCentralityValue;
-                        o.closeness_centrality = vert.closenessCentralityValue;
-                        o.indegree_centrality = vert.indegreeCentralityValue;
-                        o.influence_range = vert.influenceRangeValue;
-                        o.outdegree_centrality = vert.outdegreeCentralityValue;
-                    }
-                }
-                else
-                {
-                    var row = new VertexFactorsDb
-                    {
-                        vertex_id = vert.id,
-                        betweenness_centrality = vert.betweennessCentralityValue,
-                        closeness_centrality = vert.closenessCentralityValue,
-                        indegree_centrality = vert.indegreeCentralityValue,
-                        influence_range = vert.influenceRangeValue,
-                        outdegree_centrality = vert.outdegreeCentralityValue,
-                        date = DateTime.Parse(date),
-                        up_to_date = true,
-                        network_id = id
-
-                    };
-                    db.VertexFactorsDb.Add(row);
-                    db.SaveChanges();
-                }
-            }
-            var previousN = db.NetworkFactorsDb.SingleOrDefault(o => o.network_id == networkTemp.id && o.date == dateT && o.up_to_date);
-            if (previousN != null)
-            {
-                var row_ = from o in db.NetworkFactorsDb
-                           where o.network_id == networkTemp.id && o.date == dateT && o.up_to_date
-                           select o;
-                foreach (var o in row_)
-                {
-                    o.avg_indegree_centrality = networkTemp.AverageFactor(1);
-                    o.avg_outdegree_centrality = networkTemp.AverageFactor(2);
-                    o.avg_closeness_centrality = networkTemp.AverageFactor(3);
-                    o.avg_betweenness_centrality = networkTemp.AverageFactor(4);
-                    o.avg_influence_range = networkTemp.AverageFactor(5);
-                    o.density = networkTemp.Density();
-                }
-                db.SaveChanges();
-            }
-            else
-            {
-                var rowN = new NetworkFactorsDb
-                {
-                    network_id = id,
-                    avg_indegree_centrality = networkTemp.AverageFactor(1),
-                    avg_outdegree_centrality = networkTemp.AverageFactor(2),
-                    avg_closeness_centrality = networkTemp.AverageFactor(3),
-                    avg_betweenness_centrality = networkTemp.AverageFactor(4),
-                    avg_influence_range = networkTemp.AverageFactor(5),
-                    density = networkTemp.Density(),
-                    date = DateTime.Parse(date),
-                    up_to_date = true
-                };
-                db.NetworkFactorsDb.Add(rowN);
-                db.SaveChanges();
-            }
-
-            return Ok();
-        }
-
-        [System.Web.Http.HttpGet]
         public JsonResult<NetworkFactors> GetFactors(int id, string date)
         {
             NetworkFactors ans = new NetworkFactors();
@@ -421,12 +335,12 @@ namespace AnalysisServices.Controllers
             {
                 var row = db.NetworkFactorsDb.ToList().Find(v => v.network_id == id && v.date == dateT && v.up_to_date);
                 ans.status = "";
-                ans.avBetCen = row.avg_betweenness_centrality.ToString();
-                ans.avCloCen = row.avg_closeness_centrality.ToString();
-                ans.avInCen = row.avg_indegree_centrality.ToString();
-                ans.avInfRan = row.avg_influence_range.ToString();
-                ans.avOutCen = row.avg_outdegree_centrality.ToString();
-                ans.density = row.density.ToString();
+                ans.avBetCen = row.bet_cen_count ? row.avg_betweenness_centrality.ToString() : "Nie obliczono jeszcze";
+                ans.avCloCen = row.clos_cen_count ? row.avg_closeness_centrality.ToString() : "Nie obliczono jeszcze";
+                ans.avInCen = row.ind_cen_count ? row.avg_indegree_centrality.ToString() : "Nie obliczono jeszcze";
+                ans.avInfRan = row.inf_range_count ? row.avg_influence_range.ToString() : "Nie obliczono jeszcze";
+                ans.avOutCen = row.out_cen_count ? row.avg_outdegree_centrality.ToString() : "Nie obliczono jeszcze";
+                ans.density = row.density_count ? row.density.ToString() : "Nie obliczono jeszcze";
             }
             else
             {

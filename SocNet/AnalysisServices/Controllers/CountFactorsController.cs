@@ -193,6 +193,7 @@ namespace AnalysisServices.Controllers
                 foreach (var o in row_)
                 {
                     o.avg_betweenness_centrality = betweenness;
+                    o.bet_cen_count = true;
                 }
                 db.SaveChanges();
             }
@@ -203,7 +204,8 @@ namespace AnalysisServices.Controllers
                     network_id = id,
                     avg_betweenness_centrality = betweenness,
                     date = DateTime.Parse(date),
-                    up_to_date = true
+                    up_to_date = true,
+                    bet_cen_count = true
                 };
                 db.NetworkFactorsDb.Add(rowN);
                 db.SaveChanges();
@@ -254,6 +256,7 @@ namespace AnalysisServices.Controllers
                 foreach (var o in row_)
                 {
                     o.avg_closeness_centrality = closeness;
+                    o.clos_cen_count = true;
                 }
                 db.SaveChanges();
             }
@@ -264,7 +267,8 @@ namespace AnalysisServices.Controllers
                     network_id = id,
                     avg_closeness_centrality = closeness,
                     date = DateTime.Parse(date),
-                    up_to_date = true
+                    up_to_date = true,
+                    clos_cen_count = true
                 };
                 db.NetworkFactorsDb.Add(rowN);
                 db.SaveChanges();
@@ -315,6 +319,7 @@ namespace AnalysisServices.Controllers
                 foreach (var o in row_)
                 {
                     o.avg_indegree_centrality = indegree;
+                    o.ind_cen_count = true;
                 }
                 db.SaveChanges();
             }
@@ -325,7 +330,8 @@ namespace AnalysisServices.Controllers
                     network_id = id,
                     avg_indegree_centrality = indegree,
                     date = DateTime.Parse(date),
-                    up_to_date = true
+                    up_to_date = true,
+                    ind_cen_count = true
                 };
                 db.NetworkFactorsDb.Add(rowN);
                 db.SaveChanges();
@@ -376,6 +382,7 @@ namespace AnalysisServices.Controllers
                 foreach (var o in row_)
                 {
                     o.avg_influence_range = influence;
+                    o.inf_range_count = true;
                 }
                 db.SaveChanges();
             }
@@ -386,7 +393,8 @@ namespace AnalysisServices.Controllers
                     network_id = id,
                     avg_influence_range = influence,
                     date = DateTime.Parse(date),
-                    up_to_date = true
+                    up_to_date = true,
+                    inf_range_count = true
                 };
                 db.NetworkFactorsDb.Add(rowN);
                 db.SaveChanges();
@@ -409,7 +417,6 @@ namespace AnalysisServices.Controllers
                     foreach (var o in row_)
                     {
                         o.outdegree_centrality = vert.outdegreeCentralityValue;
-
                     }
                 }
                 else
@@ -437,6 +444,7 @@ namespace AnalysisServices.Controllers
                 foreach (var o in row_)
                 {
                     o.avg_outdegree_centrality = outdegree;
+                    o.out_cen_count = true;
                 }
                 db.SaveChanges();
             }
@@ -447,7 +455,8 @@ namespace AnalysisServices.Controllers
                     network_id = id,
                     avg_outdegree_centrality = outdegree,
                     date = DateTime.Parse(date),
-                    up_to_date = true
+                    up_to_date = true,
+                    out_cen_count = true
                 };
                 db.NetworkFactorsDb.Add(rowN);
                 db.SaveChanges();
@@ -471,6 +480,7 @@ namespace AnalysisServices.Controllers
                 foreach (var o in row_)
                 {
                     o.density = density;
+                    o.density_count = true;
                 }
                 db.SaveChanges();
             }
@@ -481,7 +491,8 @@ namespace AnalysisServices.Controllers
                     network_id = id,
                     density = density,
                     date = DateTime.Parse(date),
-                    up_to_date = true
+                    up_to_date = true,
+                    density_count = true
                 };
                 db.NetworkFactorsDb.Add(rowN);
                 db.SaveChanges();
@@ -489,5 +500,100 @@ namespace AnalysisServices.Controllers
             return Json(density);
         }
 
+        [HttpGet]
+        public IHttpActionResult CountAll(int id, string date, int incl)
+        {
+            Network networkTemp = MakeNetworkFromDb(id, date, 1); //liczy zawsze z wierzchołkiem początkowym
+            DateTime dateT = DateTime.Parse(date);
+            networkTemp.ClosenessCentrality2();
+            networkTemp.InfluenceRange2();
+            networkTemp.CentralityIn2();
+            networkTemp.CentralityOut2();
+            networkTemp.BetweennessCentrality2();
+            networkTemp.Normalize();
+            foreach (Vertex vert in networkTemp.vertices)
+            {
+                //zmienione - nadpisuje stary wiersz; dodać jakieś ostrzeżenie typu "czy chcesz policzyć dane na nowo"?
+                var previous = db.VertexFactorsDb.SingleOrDefault(o => o.vertex_id == vert.id && o.date == dateT && o.up_to_date);
+                if (previous != null)
+                {
+                    var row_ = from o in db.VertexFactorsDb where o.vertex_id == vert.id && o.date == dateT select o;
+                    foreach (var o in row_)
+                    {
+                        o.betweenness_centrality = vert.betweennessCentralityValue;
+                        o.closeness_centrality = vert.closenessCentralityValue;
+                        o.indegree_centrality = vert.indegreeCentralityValue;
+                        o.influence_range = vert.influenceRangeValue;
+                        o.outdegree_centrality = vert.outdegreeCentralityValue;
+                    }
+                }
+                else
+                {
+                    var row = new VertexFactorsDb
+                    {
+                        vertex_id = vert.id,
+                        betweenness_centrality = vert.betweennessCentralityValue,
+                        closeness_centrality = vert.closenessCentralityValue,
+                        indegree_centrality = vert.indegreeCentralityValue,
+                        influence_range = vert.influenceRangeValue,
+                        outdegree_centrality = vert.outdegreeCentralityValue,
+                        date = DateTime.Parse(date),
+                        up_to_date = true,
+                        network_id = id
+
+                    };
+                    db.VertexFactorsDb.Add(row);
+                    db.SaveChanges();
+                }
+            }
+            var previousN = db.NetworkFactorsDb.SingleOrDefault(o => o.network_id == networkTemp.id && o.date == dateT && o.up_to_date);
+            if (previousN != null)
+            {
+                var row_ = from o in db.NetworkFactorsDb
+                           where o.network_id == networkTemp.id && o.date == dateT && o.up_to_date
+                           select o;
+                foreach (var o in row_)
+                {
+                    o.avg_indegree_centrality = networkTemp.AverageFactor(1);
+                    o.avg_outdegree_centrality = networkTemp.AverageFactor(2);
+                    o.avg_closeness_centrality = networkTemp.AverageFactor(3);
+                    o.avg_betweenness_centrality = networkTemp.AverageFactor(4);
+                    o.avg_influence_range = networkTemp.AverageFactor(5);
+                    o.density = networkTemp.Density();
+                    o.bet_cen_count = true;
+                    o.clos_cen_count = true;
+                    o.density_count = true;
+                    o.ind_cen_count = true;
+                    o.inf_range_count = true;
+                    o.out_cen_count = true;
+                }
+                db.SaveChanges();
+            }
+            else
+            {
+                var rowN = new NetworkFactorsDb
+                {
+                    network_id = id,
+                    avg_indegree_centrality = networkTemp.AverageFactor(1),
+                    avg_outdegree_centrality = networkTemp.AverageFactor(2),
+                    avg_closeness_centrality = networkTemp.AverageFactor(3),
+                    avg_betweenness_centrality = networkTemp.AverageFactor(4),
+                    avg_influence_range = networkTemp.AverageFactor(5),
+                    density = networkTemp.Density(),
+                    date = DateTime.Parse(date),
+                    up_to_date = true,
+                    bet_cen_count = true,
+                    clos_cen_count = true,
+                    density_count = true,
+                    ind_cen_count = true,
+                    inf_range_count = true,
+                    out_cen_count = true
+                };
+                db.NetworkFactorsDb.Add(rowN);
+                db.SaveChanges();
+            }
+
+            return Ok();
+        }
     }
 }
