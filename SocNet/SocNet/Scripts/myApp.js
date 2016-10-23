@@ -9,7 +9,7 @@ myApp.controller("refreshCtrl",
             $scope.ref = myService.toggleval($scope.ref);
         };
         $scope.getNetworks = function () {
-            $http.get("api/apinetwork/GetListOfNetworks")
+            $http.get("http://localhost:8641/api/network/GetListOfNetworks")
                 .success(function (data) {
                     $scope.networks = data;
                     $scope.selectedNetwork = data[0];
@@ -33,35 +33,7 @@ myApp.controller("refreshCtrl",
             $scope.vertices.unshift(all);
             $scope.selectedVertex = $scope.vertices[1];
         };
-        $scope.addNew = function () {
-            $scope.visible = true;
-            $scope.networkName = "Wprowadź nazwę";
-            $scope.untouched = true;
-        }
-        $scope.hide = function () {
-            $scope.visible = false;
-        }
-        $scope.clear = function () {
-            if ($scope.networkName === "Wprowadź nazwę") {
-                $scope.networkName = "";
-                $scope.untouched = false;
-            }
-        }
-        $scope.addNetwork = function () {
-            if ($scope.networkName === "" || $scope.untouched) {
-                alert("Wprowadź najpierw nazwę!");
-            } else {
-                var name = $scope.networkName;
-                $http.post("api/apinetwork/CreateNew", '"' + name + '"')
-                    .success(function () {
-                        $scope.getNetworks();
-                        $scope.networkName = "";
-                        $scope.selectedNetwork = { id: 3 };
-                        $scope.hide();
-                    })
-                    .error(function () { alert("błąd") });
-            }
-        }
+
     }
 ]);
 myApp.controller("myCtrl",
@@ -71,7 +43,7 @@ myApp.controller("myCtrl",
 
         //to niżej - do znajdywania kolejnego indeksu (nie wykorzystywane teraz)
         $scope.nextindex = function () {
-            $http.get("api/apinetwork/GetNetwork/" + $scope.selectedNetwork.id + "?date=" + $scope.selectedDate + "&incl=" + $scope.checkInclude)
+            $http.get("http://localhost:8641/api/network/GetNetwork/" + $scope.selectedNetwork.id + "?date=" + $scope.selectedDate + "&incl=" + $scope.checkInclude)
                 .success(function (data) {
                     var max = Math.max.apply(Math, data.vertices.map(function (o) { return o.id; }));
                     myService.toggle(max + 1, null);
@@ -81,7 +53,7 @@ myApp.controller("myCtrl",
 
         $scope.$watch("ref",
             function () {
-                $http.get("/api/apinetwork/GetFactors/" + $scope.selectedNetwork.id + "?date=" + $scope.selectedDate)
+                $http.get("http://localhost:8641/api/network/GetFactors/" + $scope.selectedNetwork.id + "?date=" + $scope.selectedDate)
                     .success(function (data) {
                         $scope.factors = data;
                         if ($scope.factors.status !== "Nie obliczono jeszcze współczynników dla tej sieci") {
@@ -98,7 +70,7 @@ myApp.controller("myCtrl",
         $scope.showFactors = false;
         $scope.countFactors = function () {
             if ($scope.checkIndegree)
-                $http.get("/api/CountFactors/IndegreeCentrality/" +
+                $http.get("http://localhost:8641/api/CountFactors/IndegreeCentrality/" +
                         $scope.selectedNetwork.id +
                         "?date=" +
                         $scope.selectedDate +
@@ -108,7 +80,7 @@ myApp.controller("myCtrl",
                         $scope.refresh();
                     });
             if ($scope.checkOutdegree)
-                $http.get("/api/CountFactors/OutdegreeCentrality/" +
+                $http.get("http://localhost:8641/api/CountFactors/OutdegreeCentrality/" +
                         $scope.selectedNetwork.id +
                         "?date=" +
                         $scope.selectedDate +
@@ -118,7 +90,7 @@ myApp.controller("myCtrl",
                         $scope.refresh();
                     });
             if ($scope.checkBetweenness)
-                $http.get("/api/CountFactors/BetweennessCentrality/" +
+                $http.get("http://localhost:8641/api/CountFactors/BetweennessCentrality/" +
                         $scope.selectedNetwork.id +
                         "?date=" +
                         $scope.selectedDate +
@@ -128,7 +100,7 @@ myApp.controller("myCtrl",
                         $scope.refresh();
                     });
             if ($scope.checkCloseness)
-                $http.get("/api/CountFactors/ClosenessCentrality/" +
+                $http.get("http://localhost:8641/api/CountFactors/ClosenessCentrality/" +
                         $scope.selectedNetwork.id +
                         "?date=" +
                         $scope.selectedDate +
@@ -138,7 +110,7 @@ myApp.controller("myCtrl",
                         $scope.refresh();
                     });
             if ($scope.checkInfluence)
-                $http.get("/api/CountFactors/InfluenceRange/" +
+                $http.get("http://localhost:8641/api/CountFactors/InfluenceRange/" +
                         $scope.selectedNetwork.id +
                         "?date=" +
                         $scope.selectedDate +
@@ -148,7 +120,7 @@ myApp.controller("myCtrl",
                         $scope.refresh();
                     });
             if ($scope.checkDensity)
-                $http.get("/api/CountFactors/Density/" +
+                $http.get("http://localhost:8641/api/CountFactors/Density/" +
                         $scope.selectedNetwork.id +
                         "?date=" +
                         $scope.selectedDate +
@@ -213,7 +185,7 @@ myApp.directive("myGraph",
                             .force("collide", d3.forceCollide(10).strength(0.9));
 
 
-                        d3.json("/api/apinetwork/GetNetwork/" + $scope.selectedNetwork.id + "?date=" + $scope.selectedDate + "&vertid=" + $scope.selectedVertex.id + "&incl=" + +$scope.checkInclude,
+                        d3.json("http://localhost:8641/api/network/GetNetwork/" + $scope.selectedNetwork.id + "?date=" + $scope.selectedDate + "&vertid=" + $scope.selectedVertex.id + "&incl=" + +$scope.checkInclude,
                             function (error, graph) {
                                 if (error) alert(error);
 
