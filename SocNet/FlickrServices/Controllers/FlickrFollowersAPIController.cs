@@ -11,6 +11,7 @@ namespace FlickrServices.Controllers
 {
     public class FlickrFollowersAPIController : ApiController
     {
+        private Networkv3Entities network = new Networkv3Entities();
         //POST: /api/FlickrFollowersAPI/FlickrFollowers
         public void IsUserIdInVertex(string VertexId, int serviceID, string VertexName = null)
         {

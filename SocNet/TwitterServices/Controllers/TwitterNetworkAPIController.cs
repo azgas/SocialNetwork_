@@ -11,6 +11,7 @@ namespace TwitterServices.Controllers
 {
     public class TwitterNetworkAPIController : ApiController
     {
+        private Networkv3Entities network = new Networkv3Entities();
         //dodawanie nowych wierzchołków do bayz danych
         public void IsUserIdInVertex(long VertexId, int serviceID, string VertexName = null)
         {

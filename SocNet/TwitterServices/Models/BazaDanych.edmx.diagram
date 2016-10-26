@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f26765f50cd240aba6f3fea782744834" Name="Diagram1">
+        <EntityTypeShape EntityType="Networkv3Model.Credentials" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Networkv3Model.LinkDb" Width="1.5" PointX="8.25" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="Networkv3Model.NetworkDb" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Networkv3Model.NetworkFactorsDb" Width="1.5" PointX="5.25" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Networkv3Model.ServiceDb" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Networkv3Model.VertexDb" Width="1.5" PointX="3" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Networkv3Model.VertexFactorsDb" Width="1.5" PointX="5.25" PointY="15" IsExpanded="true" />
+        <AssociationConnector Association="Networkv3Model.FK_Credentials_ServiceDb" ManuallyRouted="false" />
+        <AssociationConnector Association="Networkv3Model.FK_Link_Network" ManuallyRouted="false" />
+        <AssociationConnector Association="Networkv3Model.FK_Link_Vertex" ManuallyRouted="false" />
+        <AssociationConnector Association="Networkv3Model.FK_Link_Vertex1" ManuallyRouted="false" />
+        <AssociationConnector Association="Networkv3Model.FK_Network_factors_Network" ManuallyRouted="false" />
+        <AssociationConnector Association="Networkv3Model.FK_Network_Service" ManuallyRouted="false" />
+        <AssociationConnector Association="Networkv3Model.FK_Vertex_Service" ManuallyRouted="false" />
+        <AssociationConnector Association="Networkv3Model.FK_Factors_Vertex" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
