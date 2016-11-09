@@ -72,64 +72,60 @@ myApp.controller("myCtrl",
 
         $scope.showFactors = false;
         $scope.countFactors = function () {
-            if ($scope.checkIndegree)
+            if ($scope.checkIndegree && $scope.checkOutdegree && $scope.checkBetweenness && $scope.checkCloseness && $scope.checkInfluence && $scope.checkDensity)
+                $http.get("http://localhost:8641/api/CountFactors/CountAll/" +
+                        $scope.selectedNetwork.id +
+                        "?date=" +
+                        $scope.selectedDate)
+                    .success(function () {
+                        $scope.refresh();
+                    });
+            else if ($scope.checkIndegree)
                 $http.get("http://localhost:8641/api/CountFactors/IndegreeCentrality/" +
                         $scope.selectedNetwork.id +
                         "?date=" +
-                        $scope.selectedDate +
-                        "&incl=" +
-                        $scope.checkInclude)
-                    .success(function(data) {
+                        $scope.selectedDate)
+                    .success(function() {
                         $scope.refresh();
                     });
-            if ($scope.checkOutdegree)
+            else if ($scope.checkOutdegree)
                 $http.get("http://localhost:8641/api/CountFactors/OutdegreeCentrality/" +
                         $scope.selectedNetwork.id +
                         "?date=" +
-                        $scope.selectedDate +
-                        "&incl=" +
-                        $scope.checkInclude)
-                    .success(function (data) {
+                        $scope.selectedDate)
+                    .success(function () {
                         $scope.refresh();
                     });
-            if ($scope.checkBetweenness)
+            else if ($scope.checkBetweenness)
                 $http.get("http://localhost:8641/api/CountFactors/BetweennessCentrality/" +
                         $scope.selectedNetwork.id +
                         "?date=" +
-                        $scope.selectedDate +
-                        "&incl=" +
-                        $scope.checkInclude)
-                    .success(function (data) {
+                        $scope.selectedDate)
+                    .success(function () {
                         $scope.refresh();
                     });
-            if ($scope.checkCloseness)
+            else if ($scope.checkCloseness)
                 $http.get("http://localhost:8641/api/CountFactors/ClosenessCentrality/" +
                         $scope.selectedNetwork.id +
                         "?date=" +
-                        $scope.selectedDate +
-                        "&incl=" +
-                        $scope.checkInclude)
-                    .success(function (data) {
+                        $scope.selectedDate)
+                    .success(function () {
                         $scope.refresh();
                     });
-            if ($scope.checkInfluence)
+            else if ($scope.checkInfluence)
                 $http.get("http://localhost:8641/api/CountFactors/InfluenceRange/" +
                         $scope.selectedNetwork.id +
                         "?date=" +
-                        $scope.selectedDate +
-                        "&incl=" +
-                        $scope.checkInclude)
-                    .success(function (data) {
+                        $scope.selectedDate)
+                    .success(function () {
                         $scope.refresh();
                     });
-            if ($scope.checkDensity)
+            else if ($scope.checkDensity)
                 $http.get("http://localhost:8641/api/CountFactors/Density/" +
                         $scope.selectedNetwork.id +
                         "?date=" +
-                        $scope.selectedDate +
-                        "&incl=" +
-                        $scope.checkInclude)
-                    .success(function (data) {
+                        $scope.selectedDate)
+                    .success(function () {
                         $scope.refresh();
                     });
             if (!$scope.checkIndegree && !$scope.checkOutdegree && !$scope.checkBetweenness && !$scope.checkCloseness && !$scope.checkInfluence && !$scope.checkDensity) {
@@ -259,12 +255,12 @@ myApp.directive("myGraph",
                                         .on("drag", dragged)
                                         .on("end", dragended));
 
-                                // build the arrow.
+                                // strzałki
                                 svg.append("svg:defs")
                                     .selectAll("marker")
-                                    .data(["end"]) // Different link/path types can be defined here
+                                    .data(["end"]) 
                                     .enter()
-                                    .append("svg:marker") // This section adds in the arrows
+                                    .append("svg:marker") 
                                     .attr("id", String)
                                     .attr("viewBox", "0 -5 10 10")
                                     .attr("refX", 20)
@@ -305,12 +301,6 @@ myApp.directive("myGraph",
                                     node.attr("transform", positionNode);
 
                                 }
-
-                                /*                    var p = d3.select("svg")
-                                                    .append("text")
-                                                    .attr("x", 50)
-                                                    .attr("y", 50)
-                                                    .text(function (d) { return "Gęstość grafu: nie ma bo nie" });*/
                             });
 
                         function positionLink(d) {
@@ -346,22 +336,7 @@ myApp.directive("myGraph",
                             d.fx = null, d.fy = null;
                         }
 
-                        //to niżej może posłuszyć do wygaszania, tylko trzeba przerobić
-                        /*                function fade(opacity) {
-                                            return function (d, i) {
-                                                svg.selectAll("circle, .link").style("opacity", opacity);
-                                                var associated_links = svg.selectAll(".link").filter(function (d) {
-                                                    return d.source.index == i || d.target.index == i;
-                                                }).each(function (dLink, iLink) {
-                                                    d3.select(this).style("opacity", 1);
-                                                    d3.select(dLink.source).style("opacity", 1);
-                                                    d3.select(dLink.target).style("opacity", 1);
-                                                });
-                                            };
-                        
-                        
-                        
-                                        };*/
+                       
                     });
 
             }

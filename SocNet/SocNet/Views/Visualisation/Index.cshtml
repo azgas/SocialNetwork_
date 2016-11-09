@@ -16,7 +16,7 @@
 
         .page1 {
             text-align: center;
-            width: 72%;
+            width: 73%;
             height: 100%;
             float: left;
         }
@@ -25,7 +25,7 @@
             text-align: left;
             padding-left: 10px;
             padding-right: 10px;
-            width: 28%;
+            width: 27%;
             height: 100%;
             float: left;
             background-color: lightgray;
@@ -34,12 +34,21 @@
         .pageHolder {
             overflow: auto;
             width: 100%;
-            height: 600px;
+            height: 610px;
+            margin-bottom: 5%;
         }
+
         .inputbox {
             width: 90px;
             height: 20px;
             vertical-align: middle;
+        }
+
+        .checkboxfactors {
+            position: relative;
+            right: 5px;
+            margin-left: 4px;
+            vertical-align: -3px;
         }
     </style>
     @section scripts{
@@ -60,64 +69,60 @@
                 Wybierz sieć:
                 <select ng-model="selectedNetwork" ng-options="x.name for x in networks" ng-change="refresh(); getDates(); getVertex()"></select>
                 @*<button ng-click="addNew()">Dodaj nową sieć</button>*@
-                <br />
+                <br/>
                 <div>
                     Wybierz datę:
                     <select ng-model="selectedDate" ng-options="date for date in dates" ng-change="refresh()"></select>
                     Wyświetl otoczenie wierzchołka:
                     <select ng-model="selectedVertex" ng-options="vertex.name for vertex in vertices" ng-change="refresh()"></select>
                     <br/>
-                    Wyłącz z widoku grafu wierzchołek początkowy:
-                    <input type="checkbox" ng-model="checkInclude" ng-true-value="0" ng-false-value="1" ng-click="refresh()"/>
+                    @*                    Wyłącz z widoku grafu wierzchołek początkowy:
+                    <input type="checkbox" ng-model="checkInclude" ng-true-value="0" ng-false-value="1" ng-click="refresh()" />*@
                 </div>
-                <br />
-                <br />
-                <input type="text" name="newNetworkName" ng-show="visible" ng-model="networkName" ng-click="clear()" />
-                <button ng-click="addNetwork()" ng-show="visible">Ok</button>
-                <button ng-click="hide()" ng-show="visible">Anuluj</button>
             </div>
-            <svg style="width:100%;height:100%;"></svg>
-            <div my-graph></div>
+            @*<svg style="width:100%;height:100%;"></svg>*@
+            <svg style="width:100%;height:92%;"><div my-graph></div></svg>
 
         </div>
         <div id="id2" class="page2" ng-controller="myCtrl">
             <form name="form1">
                 @*<h5>(Kliknij na wierzchołek, aby go wybrać)</h5>
-                Id wierzchołka: <br /><input type="text" name="index" ng-model="vert.index">
+                    Id wierzchołka: <br /><input type="text" name="index" ng-model="vert.index">
+                    <br />
+                    Nazwa: <br /><input type="text" name="name" ng-model="vert.name">
+                    <br />
+                    Krawędzie wychodzące: <br /> <input type="text" name="edges" ng-model="vert.edges"/>*@
+                <h3>Współczynniki sieci</h3>
+                <p>(zaznacz, które chcesz obliczyć: )</p>
                 <br />
-                Nazwa: <br /><input type="text" name="name" ng-model="vert.name">
+                <label><input type="checkbox" class="checkboxfactors" ng-model="checkIndegree" />Indegree centrality</label>
                 <br />
-                Krawędzie wychodzące: <br /> <input type="text" name="edges" ng-model="vert.edges"/>*@
-                <h4>Współczynniki sieci (zaznacz, które chcesz obliczyć:)</h4>
+                <label><input type="checkbox" class="checkboxfactors" ng-model="checkOutdegree" />Outdegree centrality</label>
                 <br />
-                <label>Indegree centrality<input type="checkbox" ng-model="checkIndegree" /></label>
-                <br/>
-                <label>Outdegree centrality<input type="checkbox" ng-model="checkOutdegree" /></label>
-                <br/>
-                <label>Betweenness centrality<input type="checkbox" ng-model="checkBetweenness" /></label>
-                <br/>
-                <label>Closeness centrality<input type="checkbox" ng-model="checkCloseness" /></label>
-                <br/>
-                <label>Influence range<input type="checkbox" ng-model="checkInfluence" /></label>
-                <br/>
-                <label>Density<input type="checkbox" ng-model="checkDensity" /></label>
+                <label><input type="checkbox" class="checkboxfactors" ng-model="checkBetweenness" />Betweenness centrality</label>
+                <br />
+                <label><input type="checkbox" class="checkboxfactors" ng-model="checkCloseness" />Closeness centrality</label>
+                <br />
+                <label><input type="checkbox" class="checkboxfactors" ng-model="checkInfluence" />Influence range</label>
+                <br />
+                <label><input type="checkbox" class="checkboxfactors" ng-model="checkDensity" />Density</label>
                 <br />
                 <br />
-                <button ng-click="countFactors()" style="display: block; margin: 0 auto;">Oblicz</button>
+                <button ng-click="countFactors(); uncheckAll()" style="display: block; margin: 0 auto;">Oblicz</button>
                 <br />
                 <br />
                 <div ng-model="factors">{{factors.status}}</div>
                 <div ng-show="showFactors" ng-model="factors">
                     <ul>
-                        <li>Gęstość sieci: <input type="text" class = "inputbox" ng-model="factors.density"></li>
+                        <li>Gęstość sieci: <input type="text" class="inputbox" ng-model="factors.density"></li>
                     </ul>
                     <h5>Średnie współczynniki:</h5>
                     <ul>
-                        <li>Indegree centrality: <input type="text" class = "inputbox" ng-model="factors.avInCen"></li>
-                        <li>Outdegree centrality: <input type="text" class = "inputbox" ng-model="factors.avOutCen"></li>
-                        <li>Closeness centrality: <input type="text" class = "inputbox" ng-model="factors.avCloCen"></li>
-                        <li>Betweenness centrality: <input type="text" class = "inputbox" ng-model="factors.avBetCen"></li>
-                        <li>Influence range: <input type="text" class = "inputbox" ng-model="factors.avInfRan"></li>
+                        <li>Indegree centrality: <input type="text" class="inputbox" ng-model="factors.avInCen"></li>
+                        <li>Outdegree centrality: <input type="text" class="inputbox" ng-model="factors.avOutCen"></li>
+                        <li>Closeness centrality: <input type="text" class="inputbox" ng-model="factors.avCloCen"></li>
+                        <li>Betweenness centrality: <input type="text" class="inputbox" ng-model="factors.avBetCen"></li>
+                        <li>Influence range: <input type="text" class="inputbox" ng-model="factors.avInfRan"></li>
                     </ul>
                 </div>
 
