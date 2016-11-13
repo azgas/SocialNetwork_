@@ -35,30 +35,6 @@ namespace TwitterServices.Controllers
                 network.SaveChanges();
             }
         }
-        //POST: /api/TwitterNetworkAPI/TwitterFollowers
-        [HttpPost]
-        public IHttpActionResult TwitterFollowers([FromBody] FormTwitterNetwork form)
-        {
-            return Ok();
-        }
-        //POST: /api/TwitterNetworkAPI/TwitterFriends
-        [HttpPost]
-        public IHttpActionResult TwitterFriends([FromBody] FormTwitterNetwork form)
-        {
-            return Ok();
-        }
-        //POST: /api/TwitterNetworkAPI/TwitterFollowersNetwork
-        [HttpPost]
-        public IHttpActionResult TwitterFollowersNetwork([FromBody] FormTwitterNetwork form)
-        {
-            return Ok();
-        }
-        //POST: /api/TwitterNetworkAPI/TwitterFriendsNetwork
-        [HttpPost]
-        public IHttpActionResult TwitterFriendsNetwork([FromBody] FormTwitterNetwork form)
-        {
-            return Ok();
-        }
         //POST: /api/TwitterNetworkAPI/TwitterNetwork
         [HttpPost]
         public IHttpActionResult TwitterNetwork([FromBody] FormTwitterNetwork form)

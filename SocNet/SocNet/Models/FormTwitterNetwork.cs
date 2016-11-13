@@ -11,8 +11,5 @@ namespace SocNet.Models
         public int NetworkID { get; set; }
         public int NumberQueries { get; set; }
         public int QueryLimit { get; set; }
-        public bool DownloadNetwork { get; set; }
-        public bool DownloadFriends { get; set; }
-        public bool DownloadFollowers { get; set; }
     }
 }
