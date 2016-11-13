@@ -158,33 +158,7 @@ namespace AnalysisServices.Controllers
             Network net = MakeNetworkFromDb(id, date, 1);
             net.BetweennessCentrality2();
             DateTime dateT = DateTime.Parse(date);
-            foreach (Vertex vert in net.vertices)
-            {
-                var previous = db.VertexFactorsDb.SingleOrDefault(o => o.vertex_id == vert.id && o.date == dateT && o.up_to_date);
-                if (previous != null)
-                {
-                    var row_ = from o in db.VertexFactorsDb where o.vertex_id == vert.id && o.date == dateT select o;
-                    foreach (var o in row_)
-                    {
-                        o.betweenness_centrality = vert.betweennessCentralityValue;
 
-                    }
-                }
-                else
-                {
-                    var row = new VertexFactorsDb
-                    {
-                        vertex_id = vert.id,
-                        betweenness_centrality = vert.betweennessCentralityValue,
-                        date = DateTime.Parse(date),
-                        up_to_date = true,
-                        network_id = id
-
-                    };
-                    db.VertexFactorsDb.Add(row);
-                    db.SaveChanges();
-                }
-            }
             var betweenness = net.AverageFactor(4);
             var previousN = db.NetworkFactorsDb.SingleOrDefault(o => o.network_id == net.id && o.date == dateT && o.up_to_date);
             if (previousN != null)
@@ -212,16 +186,10 @@ namespace AnalysisServices.Controllers
                 db.NetworkFactorsDb.Add(rowN);
                 db.SaveChanges();
             }
-            return Json(betweenness);
-        }
 
-        [HttpGet]
-        public JsonResult<float> ClosenessCentrality(int id, string date)
-        {
-            Network net = MakeNetworkFromDb(id, date, 1);
-            net.ClosenessCentrality2();
-            DateTime dateT = DateTime.Parse(date);
-            foreach (Vertex vert in net.vertices)
+            net.Normalize(); // normalizacja
+            
+            foreach (Vertex vert in net.vertices) //zapis do tablicy współczynników wierzchołków
             {
                 var previous = db.VertexFactorsDb.SingleOrDefault(o => o.vertex_id == vert.id && o.date == dateT && o.up_to_date);
                 if (previous != null)
@@ -229,7 +197,7 @@ namespace AnalysisServices.Controllers
                     var row_ = from o in db.VertexFactorsDb where o.vertex_id == vert.id && o.date == dateT select o;
                     foreach (var o in row_)
                     {
-                        o.closeness_centrality = vert.closenessCentralityValue;
+                        o.betweenness_centrality = vert.betweennessCentralityValue;
 
                     }
                 }
@@ -238,7 +206,7 @@ namespace AnalysisServices.Controllers
                     var row = new VertexFactorsDb
                     {
                         vertex_id = vert.id,
-                        closeness_centrality = vert.closenessCentralityValue,
+                        betweenness_centrality = vert.betweennessCentralityValue,
                         date = DateTime.Parse(date),
                         up_to_date = true,
                         network_id = id
@@ -248,6 +216,17 @@ namespace AnalysisServices.Controllers
                     db.SaveChanges();
                 }
             }
+            
+            return Json(betweenness);
+        }
+
+        [HttpGet]
+        public JsonResult<float> ClosenessCentrality(int id, string date)
+        {
+            Network net = MakeNetworkFromDb(id, date, 1);
+            net.ClosenessCentrality2();
+            
+            DateTime dateT = DateTime.Parse(date);
             var closeness = net.AverageFactor(3);
             var previousN = db.NetworkFactorsDb.SingleOrDefault(o => o.network_id == net.id && o.date == dateT && o.up_to_date);
             if (previousN != null)
@@ -275,15 +254,9 @@ namespace AnalysisServices.Controllers
                 db.NetworkFactorsDb.Add(rowN);
                 db.SaveChanges();
             }
-            return Json(closeness);
-        }
 
-        [HttpGet]
-        public JsonResult<float> IndegreeCentrality(int id, string date)
-        {
-            Network net = MakeNetworkFromDb(id, date, 1);
-            DateTime dateT = DateTime.Parse(date);
-            net.CentralityIn2();
+            net.Normalize();
+
             foreach (Vertex vert in net.vertices)
             {
                 var previous = db.VertexFactorsDb.SingleOrDefault(o => o.vertex_id == vert.id && o.date == dateT && o.up_to_date);
@@ -292,7 +265,7 @@ namespace AnalysisServices.Controllers
                     var row_ = from o in db.VertexFactorsDb where o.vertex_id == vert.id && o.date == dateT select o;
                     foreach (var o in row_)
                     {
-                        o.indegree_centrality = vert.indegreeCentralityValue;
+                        o.closeness_centrality = vert.closenessCentralityValue;
 
                     }
                 }
@@ -301,7 +274,7 @@ namespace AnalysisServices.Controllers
                     var row = new VertexFactorsDb
                     {
                         vertex_id = vert.id,
-                        indegree_centrality = vert.indegreeCentralityValue,
+                        closeness_centrality = vert.closenessCentralityValue,
                         date = DateTime.Parse(date),
                         up_to_date = true,
                         network_id = id
@@ -311,6 +284,17 @@ namespace AnalysisServices.Controllers
                     db.SaveChanges();
                 }
             }
+            
+            return Json(closeness);
+        }
+
+        [HttpGet]
+        public JsonResult<float> IndegreeCentrality(int id, string date)
+        {
+            Network net = MakeNetworkFromDb(id, date, 1);
+            DateTime dateT = DateTime.Parse(date);
+            net.CentralityIn2();
+
             var indegree = net.AverageFactor(1);
             var previousN = db.NetworkFactorsDb.SingleOrDefault(o => o.network_id == net.id && o.date == dateT && o.up_to_date);
             if (previousN != null)
@@ -338,15 +322,7 @@ namespace AnalysisServices.Controllers
                 db.NetworkFactorsDb.Add(rowN);
                 db.SaveChanges();
             }
-            return Json(indegree);
-        }
-
-        [HttpGet]
-        public JsonResult<float> InfluenceRange(int id, string date)
-        {
-            Network net = MakeNetworkFromDb(id, date, 1);
-            net.InfluenceRange2();
-            DateTime dateT = DateTime.Parse(date);
+            net.Normalize();
             foreach (Vertex vert in net.vertices)
             {
                 var previous = db.VertexFactorsDb.SingleOrDefault(o => o.vertex_id == vert.id && o.date == dateT && o.up_to_date);
@@ -355,7 +331,7 @@ namespace AnalysisServices.Controllers
                     var row_ = from o in db.VertexFactorsDb where o.vertex_id == vert.id && o.date == dateT select o;
                     foreach (var o in row_)
                     {
-                        o.influence_range = vert.influenceRangeValue;
+                        o.indegree_centrality = vert.indegreeCentralityValue;
 
                     }
                 }
@@ -364,7 +340,7 @@ namespace AnalysisServices.Controllers
                     var row = new VertexFactorsDb
                     {
                         vertex_id = vert.id,
-                        influence_range = vert.influenceRangeValue,
+                        indegree_centrality = vert.indegreeCentralityValue,
                         date = DateTime.Parse(date),
                         up_to_date = true,
                         network_id = id
@@ -374,6 +350,16 @@ namespace AnalysisServices.Controllers
                     db.SaveChanges();
                 }
             }
+            
+            return Json(indegree);
+        }
+
+        [HttpGet]
+        public JsonResult<float> InfluenceRange(int id, string date)
+        {
+            Network net = MakeNetworkFromDb(id, date, 1);
+            net.InfluenceRange2();
+            DateTime dateT = DateTime.Parse(date);
             var influence = net.AverageFactor(5);
             var previousN = db.NetworkFactorsDb.SingleOrDefault(o => o.network_id == net.id && o.date == dateT && o.up_to_date);
             if (previousN != null)
@@ -401,15 +387,8 @@ namespace AnalysisServices.Controllers
                 db.NetworkFactorsDb.Add(rowN);
                 db.SaveChanges();
             }
-            return Json(influence);
-        }
-
-        [HttpGet]
-        public JsonResult<float> OutdegreeCentrality(int id, string date)
-        {
-            Network net = MakeNetworkFromDb(id, date, 1);
-            net.CentralityOut2();
-            DateTime dateT = DateTime.Parse(date);
+            net.Normalize();
+            
             foreach (Vertex vert in net.vertices)
             {
                 var previous = db.VertexFactorsDb.SingleOrDefault(o => o.vertex_id == vert.id && o.date == dateT && o.up_to_date);
@@ -418,7 +397,8 @@ namespace AnalysisServices.Controllers
                     var row_ = from o in db.VertexFactorsDb where o.vertex_id == vert.id && o.date == dateT select o;
                     foreach (var o in row_)
                     {
-                        o.outdegree_centrality = vert.outdegreeCentralityValue;
+                        o.influence_range = vert.influenceRangeValue;
+
                     }
                 }
                 else
@@ -426,7 +406,7 @@ namespace AnalysisServices.Controllers
                     var row = new VertexFactorsDb
                     {
                         vertex_id = vert.id,
-                        outdegree_centrality = vert.outdegreeCentralityValue,
+                        influence_range = vert.influenceRangeValue,
                         date = DateTime.Parse(date),
                         up_to_date = true,
                         network_id = id
@@ -436,6 +416,16 @@ namespace AnalysisServices.Controllers
                     db.SaveChanges();
                 }
             }
+            
+            return Json(influence);
+        }
+
+        [HttpGet]
+        public JsonResult<float> OutdegreeCentrality(int id, string date)
+        {
+            Network net = MakeNetworkFromDb(id, date, 1);
+            net.CentralityOut2();
+            DateTime dateT = DateTime.Parse(date);
             var outdegree = net.AverageFactor(2);
             var previousN = db.NetworkFactorsDb.SingleOrDefault(o => o.network_id == net.id && o.date == dateT && o.up_to_date);
             if (previousN != null)
@@ -463,6 +453,35 @@ namespace AnalysisServices.Controllers
                 db.NetworkFactorsDb.Add(rowN);
                 db.SaveChanges();
             }
+            net.Normalize();
+
+            foreach (Vertex vert in net.vertices)
+            {
+                var previous = db.VertexFactorsDb.SingleOrDefault(o => o.vertex_id == vert.id && o.date == dateT && o.up_to_date);
+                if (previous != null)
+                {
+                    var row_ = from o in db.VertexFactorsDb where o.vertex_id == vert.id && o.date == dateT select o;
+                    foreach (var o in row_)
+                    {
+                        o.outdegree_centrality = vert.outdegreeCentralityValue;
+                    }
+                }
+                else
+                {
+                    var row = new VertexFactorsDb
+                    {
+                        vertex_id = vert.id,
+                        outdegree_centrality = vert.outdegreeCentralityValue,
+                        date = DateTime.Parse(date),
+                        up_to_date = true,
+                        network_id = id
+
+                    };
+                    db.VertexFactorsDb.Add(row);
+                    db.SaveChanges();
+                }
+            }
+            
             return Json(outdegree);
         }
 
@@ -503,7 +522,7 @@ namespace AnalysisServices.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult CountAll(int id, string date, int incl)
+        public IHttpActionResult CountAll(int id, string date)
         {
             Network networkTemp = MakeNetworkFromDb(id, date, 1); //liczy zawsze z wierzchołkiem początkowym
             DateTime dateT = DateTime.Parse(date);
@@ -512,42 +531,7 @@ namespace AnalysisServices.Controllers
             networkTemp.CentralityIn2();
             networkTemp.CentralityOut2();
             networkTemp.BetweennessCentrality2();
-            networkTemp.Normalize();
-            foreach (Vertex vert in networkTemp.vertices)
-            {
-                //zmienione - nadpisuje stary wiersz; dodać jakieś ostrzeżenie typu "czy chcesz policzyć dane na nowo"?
-                var previous = db.VertexFactorsDb.SingleOrDefault(o => o.vertex_id == vert.id && o.date == dateT && o.up_to_date);
-                if (previous != null)
-                {
-                    var row_ = from o in db.VertexFactorsDb where o.vertex_id == vert.id && o.date == dateT select o;
-                    foreach (var o in row_)
-                    {
-                        o.betweenness_centrality = vert.betweennessCentralityValue;
-                        o.closeness_centrality = vert.closenessCentralityValue;
-                        o.indegree_centrality = vert.indegreeCentralityValue;
-                        o.influence_range = vert.influenceRangeValue;
-                        o.outdegree_centrality = vert.outdegreeCentralityValue;
-                    }
-                }
-                else
-                {
-                    var row = new VertexFactorsDb
-                    {
-                        vertex_id = vert.id,
-                        betweenness_centrality = vert.betweennessCentralityValue,
-                        closeness_centrality = vert.closenessCentralityValue,
-                        indegree_centrality = vert.indegreeCentralityValue,
-                        influence_range = vert.influenceRangeValue,
-                        outdegree_centrality = vert.outdegreeCentralityValue,
-                        date = DateTime.Parse(date),
-                        up_to_date = true,
-                        network_id = id
 
-                    };
-                    db.VertexFactorsDb.Add(row);
-                    db.SaveChanges();
-                }
-            }
             var previousN = db.NetworkFactorsDb.SingleOrDefault(o => o.network_id == networkTemp.id && o.date == dateT && o.up_to_date);
             if (previousN != null)
             {
@@ -594,8 +578,55 @@ namespace AnalysisServices.Controllers
                 db.NetworkFactorsDb.Add(rowN);
                 db.SaveChanges();
             }
+            networkTemp.Normalize();
+            foreach (Vertex vert in networkTemp.vertices)
+            {
+                //zmienione - nadpisuje stary wiersz
+                var previous = db.VertexFactorsDb.SingleOrDefault(o => o.vertex_id == vert.id && o.date == dateT && o.up_to_date);
+                if (previous != null)
+                {
+                    var row_ = from o in db.VertexFactorsDb where o.vertex_id == vert.id && o.date == dateT select o;
+                    foreach (var o in row_)
+                    {
+                        o.betweenness_centrality = vert.betweennessCentralityValue;
+                        o.closeness_centrality = vert.closenessCentralityValue;
+                        o.indegree_centrality = vert.indegreeCentralityValue;
+                        o.influence_range = vert.influenceRangeValue;
+                        o.outdegree_centrality = vert.outdegreeCentralityValue;
+                    }
+                }
+                else
+                {
+                    var row = new VertexFactorsDb
+                    {
+                        vertex_id = vert.id,
+                        betweenness_centrality = vert.betweennessCentralityValue,
+                        closeness_centrality = vert.closenessCentralityValue,
+                        indegree_centrality = vert.indegreeCentralityValue,
+                        influence_range = vert.influenceRangeValue,
+                        outdegree_centrality = vert.outdegreeCentralityValue,
+                        date = DateTime.Parse(date),
+                        up_to_date = true,
+                        network_id = id
+
+                    };
+                    db.VertexFactorsDb.Add(row);
+                    db.SaveChanges();
+                }
+            }
+            
 
             return Ok();
+        }
+
+        [HttpGet]
+        public JsonResult<long> GetFactorsId(int id)
+        {
+            var searched = db.NetworkDb.ToList().Find(net => net.id == id);
+            long factors_id = 0;
+            factors_id = searched.NetworkFactorsDb.Max(x => x.id);
+            return Json(factors_id);
+
         }
     }
 }
