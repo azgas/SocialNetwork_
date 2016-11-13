@@ -95,7 +95,7 @@ namespace TwitterServices.Controllers
             //tworzenie listy followersow i friendsow wierzcholka poczatkowego
             var twitterFollowers = Tweetinvi.User.GetFollowerIds(form.InitialVertex, form.QueryLimit);
             var twitterFriends = Tweetinvi.User.GetFriendIds(form.InitialVertex, form.QueryLimit);
-            queries++;
+            queries=queries+2;
             //zapis followersow dobazy danych
             foreach (var follower in twitterFollowers)
             {
@@ -156,7 +156,7 @@ namespace TwitterServices.Controllers
                 bool bool2 = (twitterFollowersList.Any()) ? true : false;
                 if (rand.Next(100) % 2 == 1 && bool1 == true)
                 {
-                    queries++;
+                    queries=queries+2;
                     var newInitialVertexId = twitterFriendsList[0];
                     userId = network.VertexDb.Where<VertexDb>(x => x.identifier == newInitialVertexId.ToString() && x.service_id == serviceId).ToList();
                     usedUsers.Add(newInitialVertexId);
@@ -213,7 +213,7 @@ namespace TwitterServices.Controllers
                 }
                 else if (rand.Next(100) % 2 == 0 && bool2 == true)
                 {
-                    queries++;
+                    queries = queries + 2; ;
                     var newInitialVertexId = twitterFollowersList[0];
                     userId = network.VertexDb.Where<VertexDb>(x => x.identifier == newInitialVertexId.ToString() && x.service_id == serviceId).ToList();
                     usedUsers.Add(newInitialVertexId);

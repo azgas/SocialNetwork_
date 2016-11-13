@@ -9,7 +9,6 @@ namespace SocNet.Models
     {
         public string InitialVertex { get; set; }
         public int NetworkID { get; set; }
-        public bool DownloadNetwork { get; set; }
         public int NumberQueries { get; set; }
     }
 }
