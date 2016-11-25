@@ -200,6 +200,7 @@ namespace AnalysisServices.Controllers
                         o.betweenness_centrality = vert.betweennessCentralityValue;
 
                     }
+                    db.SaveChanges();
                 }
                 else
                 {
@@ -266,8 +267,9 @@ namespace AnalysisServices.Controllers
                     foreach (var o in row_)
                     {
                         o.closeness_centrality = vert.closenessCentralityValue;
-
+                        
                     }
+                    db.SaveChanges();
                 }
                 else
                 {
@@ -334,6 +336,7 @@ namespace AnalysisServices.Controllers
                         o.indegree_centrality = vert.indegreeCentralityValue;
 
                     }
+                    db.SaveChanges();
                 }
                 else
                 {
@@ -400,6 +403,7 @@ namespace AnalysisServices.Controllers
                         o.influence_range = vert.influenceRangeValue;
 
                     }
+                    db.SaveChanges();
                 }
                 else
                 {
@@ -465,6 +469,7 @@ namespace AnalysisServices.Controllers
                     {
                         o.outdegree_centrality = vert.outdegreeCentralityValue;
                     }
+                    db.SaveChanges();
                 }
                 else
                 {
@@ -594,6 +599,7 @@ namespace AnalysisServices.Controllers
                         o.influence_range = vert.influenceRangeValue;
                         o.outdegree_centrality = vert.outdegreeCentralityValue;
                     }
+                    db.SaveChanges();
                 }
                 else
                 {
