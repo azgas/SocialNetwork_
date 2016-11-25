@@ -114,7 +114,7 @@ namespace TwitterServices.Controllers
                 var followerId = network.VertexDb.Where<VertexDb>(x => x.identifier == follower.ToString() && x.service_id == serviceId).ToList();
                 var link = new LinkDb();
                 link.date_modified = data;
-                link.network_id = form.NetowrkID;
+                link.network_id = form.NetworkID;
                 link.source_id = followerId[0].id;
                 link.target_id = userId[0].id;
                 network.LinkDb.Add(link);
@@ -137,7 +137,7 @@ namespace TwitterServices.Controllers
                 var friendId = network.VertexDb.Where<VertexDb>(x => x.identifier == friend.ToString() && x.service_id == serviceId).ToList();
                 var link = new LinkDb();
                 link.date_modified = data;
-                link.network_id = form.NetowrkID;
+                link.network_id = form.NetworkID;
                 link.source_id = userId[0].id;
                 link.target_id = friendId[0].id;
                 network.LinkDb.Add(link);
@@ -182,7 +182,7 @@ namespace TwitterServices.Controllers
                         var followerId = network.VertexDb.Where<VertexDb>(x => x.identifier == follower.ToString() && x.service_id == serviceId).ToList();
                         var link = new LinkDb();
                         link.date_modified = data;
-                        link.network_id = form.NetowrkID;
+                        link.network_id = form.NetworkID;
                         link.source_id = followerId[0].id;
                         link.target_id = userId[0].id;
                         network.LinkDb.Add(link);
@@ -205,7 +205,7 @@ namespace TwitterServices.Controllers
                         var friendId = network.VertexDb.Where<VertexDb>(x => x.identifier == friend.ToString() && x.service_id == serviceId).ToList();
                         var link = new LinkDb();
                         link.date_modified = data;
-                        link.network_id = form.NetowrkID;
+                        link.network_id = form.NetworkID;
                         link.source_id = userId[0].id;
                         link.target_id = friendId[0].id;
                         network.LinkDb.Add(link);
@@ -239,7 +239,7 @@ namespace TwitterServices.Controllers
                         var followerId = network.VertexDb.Where<VertexDb>(x => x.identifier == follower.ToString() && x.service_id == serviceId).ToList();
                         var link = new LinkDb();
                         link.date_modified = data;
-                        link.network_id = form.NetowrkID;
+                        link.network_id = form.NetworkID;
                         link.source_id = followerId[0].id;
                         link.target_id = userId[0].id;
                         network.LinkDb.Add(link);
@@ -262,7 +262,7 @@ namespace TwitterServices.Controllers
                         var friendId = network.VertexDb.Where<VertexDb>(x => x.identifier == friend.ToString() && x.service_id == serviceId).ToList();
                         var link = new LinkDb();
                         link.date_modified = data;
-                        link.network_id = form.NetowrkID;
+                        link.network_id = form.NetworkID;
                         link.source_id = userId[0].id;
                         link.target_id = friendId[0].id;
                         network.LinkDb.Add(link);
@@ -350,7 +350,7 @@ namespace TwitterServices.Controllers
                 var followerId = network.VertexDb.Where<VertexDb>(x => x.identifier == follower.ToString() && x.service_id == serviceId).ToList();
                 var link = new LinkDb();
                 link.date_modified = data;
-                link.network_id = form.NetowrkID;
+                link.network_id = form.NetworkID;
                 link.source_id = followerId[0].id;
                 link.target_id = userId[0].id;
                 network.LinkDb.Add(link);
@@ -373,7 +373,7 @@ namespace TwitterServices.Controllers
                 var friendId = network.VertexDb.Where<VertexDb>(x => x.identifier == friend.ToString() && x.service_id == serviceId).ToList();
                 var link = new LinkDb();
                 link.date_modified = data;
-                link.network_id = form.NetowrkID;
+                link.network_id = form.NetworkID;
                 link.source_id = userId[0].id;
                 link.target_id = friendId[0].id;
                 network.LinkDb.Add(link);
@@ -418,7 +418,7 @@ namespace TwitterServices.Controllers
                         var followerId = network.VertexDb.Where<VertexDb>(x => x.identifier == follower.ToString() && x.service_id == serviceId).ToList();
                         var link = new LinkDb();
                         link.date_modified = data;
-                        link.network_id = form.NetowrkID;
+                        link.network_id = form.NetworkID;
                         link.source_id = followerId[0].id;
                         link.target_id = userId[0].id;
                         network.LinkDb.Add(link);
@@ -441,7 +441,7 @@ namespace TwitterServices.Controllers
                         var friendId = network.VertexDb.Where<VertexDb>(x => x.identifier == friend.ToString() && x.service_id == serviceId).ToList();
                         var link = new LinkDb();
                         link.date_modified = data;
-                        link.network_id = form.NetowrkID;
+                        link.network_id = form.NetworkID;
                         link.source_id = userId[0].id;
                         link.target_id = friendId[0].id;
                         network.LinkDb.Add(link);
@@ -475,7 +475,7 @@ namespace TwitterServices.Controllers
                         var followerId = network.VertexDb.Where<VertexDb>(x => x.identifier == follower.ToString() && x.service_id == serviceId).ToList();
                         var link = new LinkDb();
                         link.date_modified = data;
-                        link.network_id = form.NetowrkID;
+                        link.network_id = form.NetworkID;
                         link.source_id = followerId[0].id;
                         link.target_id = userId[0].id;
                         network.LinkDb.Add(link);
@@ -498,7 +498,7 @@ namespace TwitterServices.Controllers
                         var friendId = network.VertexDb.Where<VertexDb>(x => x.identifier == friend.ToString() && x.service_id == serviceId).ToList();
                         var link = new LinkDb();
                         link.date_modified = data;
-                        link.network_id = form.NetowrkID;
+                        link.network_id = form.NetworkID;
                         link.source_id = userId[0].id;
                         link.target_id = friendId[0].id;
                         network.LinkDb.Add(link);
