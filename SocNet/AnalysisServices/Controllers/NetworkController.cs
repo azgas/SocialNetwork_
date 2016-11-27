@@ -283,7 +283,6 @@ namespace AnalysisServices.Controllers
             public string name { get; set; }
             public int id { get; set; }
             public List<DateTime> datesOfUpdates { get; set; }
-            public List<VertexN> vertices { get; set; }
         }
 
         public class VertexN
@@ -308,7 +307,7 @@ namespace AnalysisServices.Controllers
                 net.datesOfUpdates = distinctDates;
                 if (distinctDates.Count == 0)
                     net.datesOfUpdates = new List<DateTime> { i.date_created };
-                List<VertexN> vertices = new List<VertexN>();
+/*                List<VertexN> vertices = new List<VertexN>();
                 foreach (var link in i.LinkDb)
                 {
                     if (vertices.All(v => v.id != link.VertexDb.id))
@@ -321,13 +320,36 @@ namespace AnalysisServices.Controllers
                         VertexN vert = new VertexN { id = (int)link.VertexDb1.id, name = link.VertexDb1.name };
                         vertices.Add(vert);
                     }
-                }
-                net.vertices = vertices;
+                }*/
+
                 networks.Add(net);
             }
             return Json(networks);
         }
 
+        [System.Web.Http.HttpGet]
+        public JsonResult<List<VertexN>> GetListOfVertices(int id, string date)
+        {
+            var searched = db.NetworkDb.ToList().Find(net => net.id == id);
+            DateTime dateT = DateTime.Parse(date);
+            List<VertexN> vertices = new List<VertexN>();
+            foreach (var link in searched.LinkDb)
+                if(link.date_modified == dateT) {
+                    {
+                        if (vertices.All(v => v.id != link.VertexDb.id))
+                        {
+                            VertexN vert = new VertexN {id = (int) link.VertexDb.id, name = link.VertexDb.name};
+                            vertices.Add(vert);
+                        }
+                        if (vertices.All(v => v.id != link.VertexDb1.id))
+                        {
+                            VertexN vert = new VertexN {id = (int) link.VertexDb1.id, name = link.VertexDb1.name};
+                            vertices.Add(vert);
+                        }
+                    }
+                }
+            return Json(vertices);
+        }
         [System.Web.Http.HttpGet]
         public JsonResult<NetworkFactors> GetFactors(int id, string date)
         {

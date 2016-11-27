@@ -19,7 +19,7 @@ myApp.controller("refreshCtrl",
 
                     $scope.getDates();
                     $scope.getVertex();
-                    $scope.refresh();
+                    
                 })
                 .error(function () {
                     alert("nie udało się pobrać listy sieci");
@@ -31,10 +31,20 @@ myApp.controller("refreshCtrl",
             $scope.selectedDate = $scope.dates[0];
         };
         $scope.getVertex = function () {
-            $scope.vertices = $scope.selectedNetwork.vertices;
-            var all = { "name": "Pokaż całość", "id": 0 };
-            $scope.vertices.unshift(all);
-            $scope.selectedVertex = $scope.vertices[1];
+            $http({
+                method: 'GET',
+                url: "http://localhost:8641/api/network/GetListOfVertices/" + $scope.selectedNetwork.id + "?date=" + $scope.selectedDate
+            })
+                .success(function (data) {
+                    $scope.vertices = data;
+                    var all = { "name": "Pokaż całość", "id": 0 };
+                    $scope.vertices.unshift(all);
+                    $scope.selectedVertex = $scope.vertices[1];
+                    $scope.refresh();
+                })
+                .error(function () {
+                    alert("nie udało się pobrać listy wierzchołków");
+                });
         };
 
     }
