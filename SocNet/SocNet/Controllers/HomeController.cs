@@ -29,10 +29,9 @@ namespace SocNet.Controllers
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri("http://localhost:56662/");
             client.DefaultRequestHeaders.Accept.Clear();
-            client.Timeout = new TimeSpan(0, 30, 0);
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             HttpResponseMessage response = client.PostAsJsonAsync("api/FlickrFollowersAPI/FlickrNetwork", form).Result;
-            return RedirectToAction("Index", "VisualisationController");
+            return RedirectToAction("Index", "Visualisation");
         }
         //GET: /Home/TwitterFollowers
         [HttpGet]
@@ -47,10 +46,9 @@ namespace SocNet.Controllers
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri("http://localhost:56837/");
             client.DefaultRequestHeaders.Accept.Clear();
-            client.Timeout = new TimeSpan(0, 30, 0);
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             HttpResponseMessage response = client.PostAsJsonAsync("api/TwitterNetworkAPI/TwitterNetwork", form).Result;
-            return RedirectToAction("Index", "VisualisationController");
+            return RedirectToAction("Index", "Visualisation");
         }
     }
 }
