@@ -108,7 +108,7 @@
                 <label><input type="checkbox" class="checkboxfactors" ng-model="checkDensity" />Density</label>
                 <br />
                 <br />
-                <button ng-click="countFactors(); uncheckAll()" style="display: block; margin: 0 auto;">Oblicz</button>
+                <button ng-click="countFactors(); disableButton()" ng-disabled="disabled" style="display: block; margin: 0 auto;">Oblicz</button>
                 <br />
                 <br />
                 <div ng-model="factors">{{factors.status}}</div>

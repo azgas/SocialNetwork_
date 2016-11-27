@@ -69,8 +69,14 @@ myApp.controller("myCtrl",
                         alert(err.Message);
                     });
             });
-
+        $scope.disabled = false;
         $scope.showFactors = false;
+        $scope.disableButton = function() {
+            $scope.disabled = true;
+        };
+        $scope.enableButton = function() {
+            $scope.disabled = false;
+        }
         $scope.countFactors = function () {
             if ($scope.checkIndegree && $scope.checkOutdegree && $scope.checkBetweenness && $scope.checkCloseness && $scope.checkInfluence && $scope.checkDensity)
                 $http.get("http://localhost:8641/api/CountFactors/CountAll/" +
@@ -78,6 +84,7 @@ myApp.controller("myCtrl",
                         "?date=" +
                         $scope.selectedDate)
                     .success(function () {
+                        $scope.disabled = false;
                         $scope.refresh();
                     });
             else if ($scope.checkIndegree)
@@ -85,7 +92,8 @@ myApp.controller("myCtrl",
                         $scope.selectedNetwork.id +
                         "?date=" +
                         $scope.selectedDate)
-                    .success(function() {
+                    .success(function () {
+                        $scope.disabled = false;
                         $scope.refresh();
                     });
             else if ($scope.checkOutdegree)
@@ -94,6 +102,7 @@ myApp.controller("myCtrl",
                         "?date=" +
                         $scope.selectedDate)
                     .success(function () {
+                        $scope.disabled = false;
                         $scope.refresh();
                     });
             else if ($scope.checkBetweenness)
@@ -102,6 +111,7 @@ myApp.controller("myCtrl",
                         "?date=" +
                         $scope.selectedDate)
                     .success(function () {
+                        $scope.disabled = false;
                         $scope.refresh();
                     });
             else if ($scope.checkCloseness)
@@ -110,6 +120,7 @@ myApp.controller("myCtrl",
                         "?date=" +
                         $scope.selectedDate)
                     .success(function () {
+                        $scope.disabled = false;
                         $scope.refresh();
                     });
             else if ($scope.checkInfluence)
@@ -118,6 +129,7 @@ myApp.controller("myCtrl",
                         "?date=" +
                         $scope.selectedDate)
                     .success(function () {
+                        $scope.disabled = false;
                         $scope.refresh();
                     });
             else if ($scope.checkDensity)
@@ -126,10 +138,11 @@ myApp.controller("myCtrl",
                         "?date=" +
                         $scope.selectedDate)
                     .success(function () {
+                        $scope.disabled = false;
                         $scope.refresh();
                     });
             if (!$scope.checkIndegree && !$scope.checkOutdegree && !$scope.checkBetweenness && !$scope.checkCloseness && !$scope.checkInfluence && !$scope.checkDensity) {
-                alert("Nic nie zaznaczono!");
+                alert("nic nie zaznaczono");
             }
 
         };
