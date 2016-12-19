@@ -1,0 +1,663 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7342D899-F54E-4452-BA14-00A71B6A86F8}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EPX_Template1</RootNamespace>
+    <AssemblyName>EPX_Template1</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort>44300</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
+    <TargetFrameworkProfile />
+    <DontImportPostSharp>True</DontImportPostSharp>
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac">
+      <HintPath>..\packages\Autofac.3.4.1\lib\net40\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc">
+      <HintPath>..\packages\Autofac.Mvc5.3.3.4\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.4.0.4\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="EPXOS.Api, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPXOS.Api.1.1.10\lib\EPXOS.Api.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EPXOS.Contracts.Api, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPXOS.Api.1.1.10\lib\EPXOS.Contracts.Api.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EPXOS.Contracts.Logic, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPXOS.Logic.1.1.7\lib\EPXOS.Contracts.Logic.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EPXOS.Domain, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPXOS.Domain.1.1.9\lib\EPXOS.Domain.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EPXOS.Logic, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPXOS.Logic.1.1.7\lib\EPXOS.Logic.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="IdentityModel.Net45">
+      <HintPath>..\packages\IdentityModel.1.0.0\lib\net45\IdentityModel.Net45.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.IdentityModel.Protocol.Extensions">
+      <HintPath>..\packages\Microsoft.IdentityModel.Protocol.Extensions.1.0.2.206221351\lib\net45\Microsoft.IdentityModel.Protocol.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.2.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OpenIdConnect">
+      <HintPath>..\packages\Microsoft.Owin.Security.OpenIdConnect.3.0.1\lib\net45\Microsoft.Owin.Security.OpenIdConnect.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="PostSharp, Version=4.1.23.0, Culture=neutral, PublicKeyToken=b13fd38b8f9c99d7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\PostSharp.4.1.23\lib\net35-client\PostSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt">
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.4.0.2.206221351\lib\net45\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Thinktecture.IdentityModel.Client.Net45">
+      <HintPath>..\packages\Thinktecture.IdentityModel.Client.4.0.1\lib\net45\Thinktecture.IdentityModel.Client.Net45.dll</HintPath>
+    </Reference>
+    <Reference Include="Thinktecture.IdentityServer3">
+      <HintPath>..\packages\Thinktecture.IdentityServer3.1.6.2\lib\net45\Thinktecture.IdentityServer3.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx">
+      <HintPath>..\packages\WebActivatorEx.2.0.6\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TemplateContent\Core\skin-blue.css" />
+    <Content Include="TemplateContent\Core\skin-brown.css" />
+    <Content Include="TemplateContent\Core\skin-gray.css" />
+    <Content Include="TemplateContent\Core\skin-green.css" />
+    <Content Include="TemplateContent\Core\skin-orange.css" />
+    <Content Include="TemplateContent\Core\skin-pink.css" />
+    <Content Include="TemplateContent\Core\skin-prusia.css" />
+    <Content Include="TemplateContent\Core\skin-purple.css" />
+    <Content Include="TemplateContent\Core\skin-red.css" />
+    <Content Include="TemplateContent\Core\skin-yellow.css" />
+    <Content Include="TemplateScripts\Localization\get-resources.js" />
+    <Content Include="TemplateAssets\fonts\fontawesome-webfont.svg" />
+    <Content Include="TemplateAssets\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="packages.config" />
+    <Content Include="TemplateAssets\fonts\fontawesome-webfont.eot" />
+    <Content Include="TemplateAssets\fonts\fontawesome-webfont.ttf" />
+    <Content Include="TemplateAssets\fonts\fontawesome-webfont.woff" />
+    <Content Include="TemplateAssets\fonts\FontAwesome.otf" />
+    <Content Include="TemplateAssets\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="TemplateAssets\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="TemplateAssets\fonts\glyphicons-halflings-regular.woff" />
+    <None Include="Properties\PublishProfiles\web.pubxml" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="TemplateAssets\plugins\jquery.gritter\gritter-bg.png" />
+    <Content Include="TemplateAssets\plugins\jquery.gritter\gritter-light.png" />
+    <Content Include="TemplateAssets\plugins\jquery.gritter\gritter-long.png" />
+    <Content Include="TemplateAssets\plugins\jquery.gritter\gritter.png" />
+    <Content Include="TemplateAssets\plugins\jquery.gritter\ie-spacer.gif" />
+    <Content Include="TemplateAssets\site\ajaxloader.gif" />
+    <Content Include="TemplateAssets\site\ajaxLoaderAltBackground.gif" />
+    <Content Include="TemplateAssets\site\ajaxLoaderSmallWhiteBackground.gif" />
+    <Content Include="TemplateAssets\site\bubble-tail-l-white.png" />
+    <Content Include="TemplateAssets\site\bubble-tail.png" />
+    <Content Include="TemplateAssets\site\logo.png" />
+    <Content Include="TemplateAssets\site\menu-tail-left.png" />
+    <Content Include="TemplateAssets\site\menu-tail-up.png" />
+    <Content Include="TemplateAssets\site\stat-down.png" />
+    <Content Include="TemplateAssets\site\stat-same.png" />
+    <Content Include="TemplateAssets\site\stat-up.png" />
+    <Content Include="TemplateContent\Base\bootstrap.css" />
+    <Content Include="TemplateContent\Base\font-awesome.css" />
+    <Content Include="TemplateContent\Core\commons.css" />
+    <Content Include="TemplateContent\Core\style.css" />
+    <Content Include="TemplateContent\Plugins\jPushMenu.css" />
+    <Content Include="TemplateContent\Plugins\jquery.gritter.css" />
+    <Content Include="TemplateContent\Plugins\nanoscroller.css" />
+    <Content Include="TemplateScripts\ApplicationBar\applications.js" />
+    <Content Include="TemplateScripts\ApplicationBar\projects.js" />
+    <Content Include="TemplateScripts\ApplicationBar\template-utilities.js" />
+    <Content Include="TemplateScripts\Bootstrap\bootstrap-modified.js" />
+    <Content Include="TemplateScripts\Core\core.js" />
+    <Content Include="TemplateScripts\Utilities\ModalWindows\constant-modal-window.js" />
+    <Content Include="TemplateScripts\Utilities\ModalWindows\modal-window.js" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\web.config" />
+    <Content Include="TemplateViews\web.config" />
+    <Content Include="TemplateViews\Shared\_Layout.cshtml" />
+    <Content Include="TemplateViews\Shared\CoreScriptSpecification.cshtml" />
+    <Content Include="TemplateViews\Shared\CoreStyleSpecification.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="TemplateViews\Shared\SideBar.cshtml" />
+    <Content Include="Views\Shared\SideMenu.cshtml" />
+    <Content Include="TemplateViews\Shared\TopBar.cshtml" />
+    <Content Include="TemplateViews\User\GetRepresentation.cshtml" />
+    <Content Include="TemplateViews\User\ManageAccount.cshtml" />
+    <Content Include="TemplateViews\Shared\UtilitiesScriptSpecification.cshtml" />
+    <Content Include="TemplateViews\Application\GetApplicationName.cshtml" />
+    <Content Include="TemplateViews\Shared\AppBarScriptSpecification.cshtml" />
+    <Content Include="TemplateViews\Project\GetUserSelectedProject.cshtml" />
+    <Content Include="TemplateViews\Project\GetUserAllowedProjects.cshtml" />
+    <Content Include="TemplateViews\Application\Error.cshtml" />
+    <Content Include="TemplateViews\Shared\_ErrorLayout.cshtml" />
+    <Content Include="TemplateViews\Application\PageNotFound.cshtml" />
+    <Content Include="TemplateViews\Application\GetPlatformApplications.cshtml" />
+    <Content Include="TemplateViews\Shared\_NoSideBarLayout.cshtml" />
+    <Content Include="TemplateViews\Application\GetPlatformStyleBundle.cshtml" />
+    <Content Include="TemplateViews\Application\NoPlatformSelected.cshtml" />
+    <Content Include="TemplateViews\Shared\_NoPlatformLayout.cshtml" />
+    <Content Include="TemplateViews\Shared\CoreDefaultStyleSpecification.cshtml" />
+    <Content Include="TemplateViews\Application\PlatformNotAllowed.cshtml" />
+    <Content Include="TemplateViews\Application\UserRoleNotAllowed.cshtml" />
+    <Content Include="Views\Shared\ApplicationScripts.cshtml" />
+    <Content Include="Views\Shared\ApplicationStyles.cshtml" />
+    <Content Include="TemplateViews\Shared\Scripts.cshtml" />
+    <Content Include="TemplateViews\Shared\Styles.cshtml" />
+    <Content Include="TemplateViews\Application\UserHasNoAccess.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TemplateScripts\Jquery\jquery-2.1.1.js" />
+    <Content Include="TemplateScripts\Jquery\Plugins\jPushMenu.js" />
+    <Content Include="TemplateScripts\Jquery\Plugins\jquery-ui.js" />
+    <Content Include="TemplateScripts\Jquery\Plugins\jquery.cookie.js" />
+    <Content Include="TemplateScripts\Jquery\Plugins\jquery.gritter.js" />
+    <Content Include="TemplateScripts\Jquery\Plugins\jquery.nanoscroller.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\ApplicationDIConfig.cs" />
+    <Compile Include="App_Start\DIConfig.cs" />
+    <Compile Include="App_Start\TemplateDIConfig\FilterDIConfig.cs" />
+    <Compile Include="App_Start\TemplateDIConfig\LocalTemplateDIConfig.cs" />
+    <Compile Include="App_Start\TemplateRouteConfig.cs" />
+    <Compile Include="App_Start\TemplateAppBarBundleConfig.cs" />
+    <Compile Include="App_Start\TemplateCoreBundleConfig.cs" />
+    <Compile Include="App_Start\TemplateDIConfig\EPXOSApiDiConfig.cs" />
+    <Compile Include="App_Start\TemplateDIConfig\EPXOSLogicDiConfig.cs" />
+    <Compile Include="App_Start\TemplateFilterConfig.cs" />
+    <Compile Include="App_Start\TemplateMappingsConfig.cs" />
+    <Compile Include="App_Start\TemplateUtilitiesBundleConfig.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\Template\ApplicationController.cs" />
+    <Compile Include="Controllers\Template\ProjectController.cs" />
+    <Compile Include="Controllers\Template\ResourcesController.cs" />
+    <Compile Include="Controllers\Template\UserController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Home\Index.Designer.cs">
+      <DependentUpon>Index.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Home\Index.pl.Designer.cs">
+      <DependentUpon>Index.pl.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="TemplateResources\Application\Error.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Error.resx</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateResources\Application\Error.pl.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Error.pl.resx</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateResources\Application\GetPlatformApplications.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GetPlatformApplications.resx</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateResources\Application\GetPlatformApplications.pl.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GetPlatformApplications.pl.resx</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateResources\Application\NoPlatformSelected.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NoPlatformSelected.resx</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateResources\Application\NoPlatformSelected.pl.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NoPlatformSelected.pl.resx</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateResources\Application\PageNotFound.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PageNotFound.resx</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateResources\Application\PageNotFound.pl.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PageNotFound.pl.resx</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateResources\Application\PlatformNotAllowed.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PlatformNotAllowed.resx</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateResources\Application\PlatformNotAllowed.pl.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PlatformNotAllowed.pl.resx</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateResources\Application\UserHasNoAccess.pl.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserHasNoAccess.pl.resx</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateResources\Application\UserHasNoAccess.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserHasNoAccess.resx</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateResources\Application\UserRoleNotAllowed.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserRoleNotAllowed.resx</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateResources\Application\UserRoleNotAllowed.pl.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserRoleNotAllowed.pl.resx</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateResources\Languages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Languages.resx</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateResources\Project\GetUserAllowedProjects.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GetUserAllowedProjects.resx</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateResources\Project\GetUserAllowedProjects.pl.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GetUserAllowedProjects.pl.resx</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateResources\Project\GetUserSelectedProject.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GetUserSelectedProject.resx</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateResources\Project\GetUserSelectedProject.pl.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GetUserSelectedProject.pl.resx</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateResources\ResourceCollection.cs" />
+    <Compile Include="TemplateResources\Shared\TopBar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TopBar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateResources\Shared\TopBar.pl.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TopBar.pl.resx</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateResources\Things\ThingsView.Designer.cs">
+      <DependentUpon>ThingsView.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="TemplateResources\Things\ThingsView.pl.Designer.cs">
+      <DependentUpon>ThingsView.pl.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Startup.cs" />
+    <Compile Include="TemplateModels\Application\Application.cs" />
+    <Compile Include="TemplateModels\Application\ApplicationMappings.cs" />
+    <Compile Include="TemplateModels\Project\Project.cs" />
+    <Compile Include="TemplateModels\Project\ProjectMappings.cs" />
+    <Compile Include="TemplateModels\User\User.cs" />
+    <Compile Include="TemplateModels\User\UserMappings.cs" />
+    <Compile Include="TemplateResources\User\ManageAccount.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ManageAccount.resx</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateResources\User\ManageAccount.pl.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ManageAccount.pl.resx</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateUtilities\Authorization\ApplicationRoleAuthorizationAttribute.cs" />
+    <Compile Include="TemplateUtilities\Authorization\PlatformAuthorizationAttribute.cs" />
+    <Compile Include="TemplateUtilities\Authorization\SkipPlatformAuthorizationAttribute.cs" />
+    <Compile Include="TemplateUtilities\ColorTheme\BlueThemeProvider.cs" />
+    <Compile Include="TemplateUtilities\ColorTheme\BrownThemeProvider.cs" />
+    <Compile Include="TemplateUtilities\ColorTheme\DefaultThemeProvider.cs" />
+    <Compile Include="TemplateUtilities\ColorTheme\GrayThemeProvider.cs" />
+    <Compile Include="TemplateUtilities\ColorTheme\GreenThemeProvider.cs" />
+    <Compile Include="TemplateUtilities\ColorTheme\IThemeProvider.cs" />
+    <Compile Include="TemplateUtilities\ColorTheme\IThemesManager.cs" />
+    <Compile Include="TemplateUtilities\ColorTheme\NoDefaultThemeProviderSpecifiedException.cs" />
+    <Compile Include="TemplateUtilities\ColorTheme\OrangeThemeProvider.cs" />
+    <Compile Include="TemplateUtilities\ColorTheme\PinkThemeProvider.cs" />
+    <Compile Include="TemplateUtilities\ColorTheme\PrusiaThemeProvider.cs" />
+    <Compile Include="TemplateUtilities\ColorTheme\PurpleThemeProvider.cs" />
+    <Compile Include="TemplateUtilities\ColorTheme\RedThemeProvider.cs" />
+    <Compile Include="TemplateUtilities\ColorTheme\ThemesManager.cs" />
+    <Compile Include="TemplateUtilities\ColorTheme\YellowThemeProvider.cs" />
+    <Compile Include="TemplateUtilities\Exceptions\ContextDataNotAvailableException.cs" />
+    <Compile Include="TemplateUtilities\Exceptions\DuplicateResourceNameException.cs" />
+    <Compile Include="TemplateUtilities\AppConfiguration\AppConfig.cs" />
+    <Compile Include="TemplateUtilities\Exceptions\UserNotAuthorizedException.cs" />
+    <Compile Include="TemplateUtilities\Localization\CultureHelpers.cs" />
+    <Compile Include="TemplateUtilities\Localization\Language.cs" />
+    <Compile Include="TemplateUtilities\Localization\LocalizedController.cs" />
+    <Compile Include="TemplateUtilities\MethodCaching\CacheableResultAttribute.cs" />
+    <Compile Include="TemplateUtilities\MethodCaching\ClearCachedResultAttribute.cs" />
+    <Compile Include="TemplateUtilities\MethodCaching\MethodResultCache.cs" />
+    <Compile Include="TemplateUtilities\ModalWindows\ModalActionLinkExtensions.cs" />
+    <Compile Include="TemplateUtilities\ModalWindows\ModalInnerActionLinkExtensions.cs" />
+    <Compile Include="TemplateUtilities\ModalWindows\ModalRedirectResult.cs" />
+    <Compile Include="TemplateUtilities\ModalWindows\ModalWindowStructureHelpers.cs" />
+    <Compile Include="TemplateUtilities\ModalWindows\RedirectToActionForModalExtensions.cs" />
+    <Compile Include="TemplateUtilities\PlatformExtensions\PlatformController.cs" />
+    <Compile Include="TemplateUtilities\PlatformRouting\PlatformRoute.cs" />
+    <Compile Include="TemplateUtilities\PlatformRouting\RouteExtension.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Scripts\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Home\Index.pl.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Index.pl.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Home\Index.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Index.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TemplateResources\Application\Error.pl.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Error.pl.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TemplateResources\Application\Error.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Error.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TemplateResources\Application\GetPlatformApplications.pl.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>GetPlatformApplications.pl.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TemplateResources\Application\GetPlatformApplications.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>GetPlatformApplications.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TemplateResources\Application\NoPlatformSelected.pl.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>NoPlatformSelected.pl.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TemplateResources\Application\NoPlatformSelected.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>NoPlatformSelected.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TemplateResources\Application\PageNotFound.pl.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PageNotFound.pl.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TemplateResources\Application\PageNotFound.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PageNotFound.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TemplateResources\Application\PlatformNotAllowed.pl.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PlatformNotAllowed.pl.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TemplateResources\Application\PlatformNotAllowed.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PlatformNotAllowed.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TemplateResources\Application\UserHasNoAccess.pl.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UserHasNoAccess.pl.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TemplateResources\Application\UserHasNoAccess.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UserHasNoAccess.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TemplateResources\Application\UserRoleNotAllowed.pl.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UserRoleNotAllowed.pl.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TemplateResources\Application\UserRoleNotAllowed.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UserRoleNotAllowed.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TemplateResources\Languages.pl.resx" />
+    <EmbeddedResource Include="TemplateResources\Languages.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Languages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TemplateResources\Project\GetUserAllowedProjects.pl.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>GetUserAllowedProjects.pl.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TemplateResources\Project\GetUserAllowedProjects.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>GetUserAllowedProjects.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TemplateResources\Project\GetUserSelectedProject.pl.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>GetUserSelectedProject.pl.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TemplateResources\Project\GetUserSelectedProject.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>GetUserSelectedProject.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TemplateResources\Shared\TopBar.pl.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>TopBar.pl.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TemplateResources\Shared\TopBar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>TopBar.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TemplateResources\Things\ThingsView.pl.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ThingsView.pl.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TemplateResources\Things\ThingsView.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ThingsView.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TemplateResources\User\ManageAccount.pl.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ManageAccount.pl.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TemplateResources\User\ManageAccount.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ManageAccount.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>37445</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44301/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="..\packages\PostSharp.4.1.23\tools\PostSharp.targets" Condition="Exists('..\packages\PostSharp.4.1.23\tools\PostSharp.targets')" />
+  <Target Name="EnsurePostSharpImported" BeforeTargets="BeforeBuild" Condition="'$(PostSharp30Imported)' == ''">
+    <Error Condition="!Exists('..\packages\PostSharp.4.1.23\tools\PostSharp.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://www.postsharp.net/links/nuget-restore." />
+    <Error Condition="Exists('..\packages\PostSharp.4.1.23\tools\PostSharp.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://www.postsharp.net/links/nuget-restore." />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

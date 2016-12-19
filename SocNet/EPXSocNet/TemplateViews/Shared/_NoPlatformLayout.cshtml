@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+
+    <!--Google fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,400italic,700,800&subset=latin-ext' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Raleway:300,200,100' rel='stylesheet' type='text/css'>
+
+    <!--Style specification-->
+    @{Html.RenderPartial("~/TemplateViews/Shared/Styles.cshtml");}
+</head>
+<body>
+    <!--Error page url for scripts-->
+    <span class="hidden" data-error-url="@Url.Action("Error", "Application")"></span>
+
+    <div id="cl-wrapper">
+        <div class="container-fluid" id="pcont">
+            <!--Main nav bar-->
+            <div id="head-nav" class="topbar navbar navbar-default">
+                <div class="container-fluid">
+                    <div>
+                        <!--Top bar-->
+                        <!--Application name-->
+                        <ul class="nav navbar-nav horizontal">
+                            <li><a href="#">@Html.Action("GetApplicationName", "Application")</a></li>
+                        </ul>
+
+                        <!--User menu-->
+                        <ul class="nav navbar-nav navbar-right user-nav">
+                            <li class="dropdown profile_menu">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="padding: 22px;">
+                                    <span>@Html.Action("GetRepresentation", "User")</span>
+                                    <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        @Ajax.ModalActionLink(EPXSocNet.TemplateResources.Shared.TopBar.UserAccountManagement, "manage-account-modal", EPXSocNet.TemplateResources.Shared.TopBar.UserAccountManagement,
+                                        Url.Content("~/TemplateAssets/site/ajaxloader.gif"), null, "ManageAccount", "User")
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        @Html.ActionLink(EPXSocNet.TemplateResources.Shared.TopBar.Logout, "Logout", "User")
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!--Main content-->
+            <div class="cl-mcont">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+    <!--Scripts specification-->
+    @{Html.RenderPartial("~/TemplateViews/Shared/Scripts.cshtml");}
+</body>
+</html>

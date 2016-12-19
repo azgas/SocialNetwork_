@@ -1,0 +1,11 @@
+﻿<!--Basic style bundle-->
+@Styles.Render("~/content/template/base")
+
+<!--Plugins style bundle-->
+@Styles.Render("~/content/template/plugins")
+
+<!--Template core style bundle-->
+@Html.Action("GetPlatformStyleBundle","Application")
+
+<!--Template commons style bundle-->
+@Styles.Render("~/content/template/commons")

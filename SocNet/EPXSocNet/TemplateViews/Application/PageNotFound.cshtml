@@ -1,0 +1,7 @@
+﻿@{
+    Layout = "~/TemplateViews/Shared/_ErrorLayout.cshtml";
+}
+
+<h1 class="number text-center">404</h1>
+<h2 class="description text-center">@EPXSocNet.TemplateResources.Application.PageNotFound.PageDoesNotExist</h2>
+<h3 class="text-center">@EPXSocNet.TemplateResources.Application.PageNotFound.WouldYouLikeToGoToThe <a href="@Url.Action("Index", "Home")">@EPXSocNet.TemplateResources.Application.PageNotFound.HomePage</a></h3>

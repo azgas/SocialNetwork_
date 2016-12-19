@@ -1,0 +1,91 @@
+﻿.wide-modal-window .modal-dialog .modal-content {
+    width: 1000px;
+    margin-left: -200px;
+}
+
+.little-wide-modal-window .modal-dialog .modal-content {
+    width: 800px;
+    margin-left: -100px;
+}
+
+#processing-modal .modal-dialog .modal-content .modal-header {
+    height: 50px;
+    padding: 3px 10px;
+}
+
+#processing-modal .modal-dialog .modal-content {
+    width: 300px;
+    margin-left: 150px;
+}
+
+.dropzone {
+    z-index:10;
+    position: relative;
+    background-color: #7761A7;
+    color: white;
+    border: dashed 2px gray;
+    font-size: 18px;
+    display: none;
+    height: inherit;
+    margin-bottom: 25px;
+}
+
+.dropzone-placeholder {
+    z-index:10;
+    position: relative;
+    background-color: #7761A7;
+    color: white;
+    border: dashed 2px gray;
+    font-size: 18px;
+    visibility: hidden;
+    height: inherit;
+}
+
+.dropzone-text {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 30%;
+    margin: auto;
+    text-align: center;
+}
+
+.fade-in {
+    -webkit-animation: fadein 0.5s; /* Safari and Chrome */
+    -moz-animation: fadein 0.5s; /* Firefox */
+    -ms-animation: fadein 0.5s; /* Internet Explorer */
+    -o-animation: fadein 0.5s; /* Opera */
+    animation: fadein 0.5s;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Firefox */
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Safari and Chrome */
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Opera */ 
+ @-o-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}

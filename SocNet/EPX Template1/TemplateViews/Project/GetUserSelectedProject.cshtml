@@ -1,0 +1,10 @@
+﻿@model string
+
+@if(string.IsNullOrEmpty(Model))
+{
+    @EPX_Template1.TemplateResources.Project.GetUserSelectedProject.NoProjectSelected
+}
+else
+{
+    @Model
+}
