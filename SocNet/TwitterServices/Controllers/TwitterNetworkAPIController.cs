@@ -507,7 +507,8 @@ namespace TwitterServices.Controllers
                 }
             }
             //return Ok();
-            string dataString = data.ToString().Substring(0, 10);
+            //string dataString = data.ToString().Substring(0, 10);
+            string dataString = data.Day.ToString() + "-" + data.Month.ToString() + "-" + data.Year.ToString();
             return Json(dataString);
         }
 
