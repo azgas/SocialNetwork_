@@ -1,0 +1,29 @@
+﻿@model EPXSocNet.Models.FormTwitterNetwork
+
+@{
+    ViewBag.Title = "TwitterNetwork";
+}
+
+<h2>Data acquisition from Twitter</h2>
+@using (Html.BeginForm())
+{
+    <div>
+        @Html.LabelFor(model => model.InitialVertex)
+        @Html.TextBoxFor(model => model.InitialVertex)
+    </div>
+    <div>
+        @Html.LabelFor(model => model.QueryLimit)
+        @Html.TextBoxFor(model => model.QueryLimit)
+    </div>
+    <div>
+        @Html.LabelFor(model => model.NetworkID)
+        @Html.TextBoxFor(model => model.NetworkID)
+    </div>
+    <div>
+        @Html.LabelFor(model => model.NumberQueries)
+        @Html.TextBoxFor(model => model.NumberQueries)
+    </div>
+
+    <input type="submit" value="Collect data" />
+}
+

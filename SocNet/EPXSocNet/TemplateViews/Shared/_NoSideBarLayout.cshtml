@@ -44,5 +44,7 @@
 
     <!--Scripts specification-->
     @{Html.RenderPartial("~/TemplateViews/Shared/Scripts.cshtml");}
+
+    @RenderSection("scripts", required: false)
 </body>
 </html>

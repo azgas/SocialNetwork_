@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="ApplicationName" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">EPX Template</Value>
+      <Value Profile="(Default)">SocNet</Value>
     </Setting>
   </Settings>
 </SettingsFile>

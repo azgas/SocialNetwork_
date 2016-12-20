@@ -1,0 +1,585 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Networkv3Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Credentials">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="key" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="secret" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="service id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LinkDb">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="network id" Type="bigint" Nullable="false" />
+          <Property Name="source id" Type="bigint" Nullable="false" />
+          <Property Name="target id" Type="bigint" Nullable="false" />
+          <Property Name="date modified" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NetworkDb">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="date created" Type="date" Nullable="false" />
+          <Property Name="last modified" Type="date" Nullable="false" />
+          <Property Name="service id" Type="int" Nullable="false" />
+          <Property Name="directed" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NetworkFactorsDb">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="network id" Type="bigint" Nullable="false" />
+          <Property Name="date" Type="date" Nullable="false" />
+          <Property Name="density" Type="float" Nullable="false" />
+          <Property Name="avg betweenness centrality" Type="float" Nullable="false" />
+          <Property Name="avg closeness centrality" Type="float" Nullable="false" />
+          <Property Name="avg indegree centrality" Type="float" Nullable="false" />
+          <Property Name="avg influence range" Type="float" Nullable="false" />
+          <Property Name="avg outdegree centrality" Type="float" Nullable="false" />
+          <Property Name="up to date" Type="bit" Nullable="false" />
+          <Property Name="density count" Type="bit" Nullable="false" />
+          <Property Name="bet cen count" Type="bit" Nullable="false" />
+          <Property Name="clos cen count" Type="bit" Nullable="false" />
+          <Property Name="ind cen count" Type="bit" Nullable="false" />
+          <Property Name="inf range count" Type="bit" Nullable="false" />
+          <Property Name="out cen count" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ServiceDb">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VertexDb">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="identifier" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="service id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VertexFactorsDb">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="vertex id" Type="bigint" Nullable="false" />
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date" Type="date" Nullable="false" />
+          <Property Name="betweenness centrality" Type="float" Nullable="false" />
+          <Property Name="closeness centrality" Type="float" Nullable="false" />
+          <Property Name="indegree centrality" Type="float" Nullable="false" />
+          <Property Name="influence range" Type="float" Nullable="false" />
+          <Property Name="outdegree centrality" Type="float" Nullable="false" />
+          <Property Name="up to date" Type="bit" Nullable="false" />
+          <Property Name="network id" Type="bigint" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Credentials_ServiceDb">
+          <End Role="ServiceDb" Type="Self.ServiceDb" Multiplicity="1" />
+          <End Role="Credentials" Type="Self.Credentials" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceDb">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Credentials">
+              <PropertyRef Name="service id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Factors_Vertex">
+          <End Role="VertexDb" Type="Self.VertexDb" Multiplicity="1" />
+          <End Role="VertexFactorsDb" Type="Self.VertexFactorsDb" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VertexDb">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="VertexFactorsDb">
+              <PropertyRef Name="vertex id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Link_Network">
+          <End Role="NetworkDb" Type="Self.NetworkDb" Multiplicity="1" />
+          <End Role="LinkDb" Type="Self.LinkDb" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NetworkDb">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="LinkDb">
+              <PropertyRef Name="network id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Link_Vertex">
+          <End Role="VertexDb" Type="Self.VertexDb" Multiplicity="1" />
+          <End Role="LinkDb" Type="Self.LinkDb" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VertexDb">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="LinkDb">
+              <PropertyRef Name="source id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Link_Vertex1">
+          <End Role="VertexDb" Type="Self.VertexDb" Multiplicity="1" />
+          <End Role="LinkDb" Type="Self.LinkDb" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VertexDb">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="LinkDb">
+              <PropertyRef Name="target id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Network factors_Network">
+          <End Role="NetworkDb" Type="Self.NetworkDb" Multiplicity="1" />
+          <End Role="NetworkFactorsDb" Type="Self.NetworkFactorsDb" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NetworkDb">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="NetworkFactorsDb">
+              <PropertyRef Name="network id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Network_Service">
+          <End Role="ServiceDb" Type="Self.ServiceDb" Multiplicity="1" />
+          <End Role="NetworkDb" Type="Self.NetworkDb" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceDb">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="NetworkDb">
+              <PropertyRef Name="service id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vertex_Service">
+          <End Role="ServiceDb" Type="Self.ServiceDb" Multiplicity="1" />
+          <End Role="VertexDb" Type="Self.VertexDb" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceDb">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="VertexDb">
+              <PropertyRef Name="service id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Networkv3ModelStoreContainer">
+          <EntitySet Name="Credentials" EntityType="Self.Credentials" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LinkDb" EntityType="Self.LinkDb" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NetworkDb" EntityType="Self.NetworkDb" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NetworkFactorsDb" EntityType="Self.NetworkFactorsDb" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceDb" EntityType="Self.ServiceDb" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VertexDb" EntityType="Self.VertexDb" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VertexFactorsDb" EntityType="Self.VertexFactorsDb" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Credentials_ServiceDb" Association="Self.FK_Credentials_ServiceDb">
+            <End Role="ServiceDb" EntitySet="ServiceDb" />
+            <End Role="Credentials" EntitySet="Credentials" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Factors_Vertex" Association="Self.FK_Factors_Vertex">
+            <End Role="VertexDb" EntitySet="VertexDb" />
+            <End Role="VertexFactorsDb" EntitySet="VertexFactorsDb" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Link_Network" Association="Self.FK_Link_Network">
+            <End Role="NetworkDb" EntitySet="NetworkDb" />
+            <End Role="LinkDb" EntitySet="LinkDb" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Link_Vertex" Association="Self.FK_Link_Vertex">
+            <End Role="VertexDb" EntitySet="VertexDb" />
+            <End Role="LinkDb" EntitySet="LinkDb" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Link_Vertex1" Association="Self.FK_Link_Vertex1">
+            <End Role="VertexDb" EntitySet="VertexDb" />
+            <End Role="LinkDb" EntitySet="LinkDb" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Network factors_Network" Association="Self.FK_Network factors_Network">
+            <End Role="NetworkDb" EntitySet="NetworkDb" />
+            <End Role="NetworkFactorsDb" EntitySet="NetworkFactorsDb" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Network_Service" Association="Self.FK_Network_Service">
+            <End Role="ServiceDb" EntitySet="ServiceDb" />
+            <End Role="NetworkDb" EntitySet="NetworkDb" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vertex_Service" Association="Self.FK_Vertex_Service">
+            <End Role="ServiceDb" EntitySet="ServiceDb" />
+            <End Role="VertexDb" EntitySet="VertexDb" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Networkv3Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Credentials">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="key" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="secret" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="service_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ServiceDb" Relationship="Self.FK_Credentials_ServiceDb" FromRole="Credentials" ToRole="ServiceDb" />
+        </EntityType>
+        <EntityType Name="LinkDb">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="network_id" Type="Int64" Nullable="false" />
+          <Property Name="source_id" Type="Int64" Nullable="false" />
+          <Property Name="target_id" Type="Int64" Nullable="false" />
+          <Property Name="date_modified" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="NetworkDb" Relationship="Self.FK_Link_Network" FromRole="LinkDb" ToRole="NetworkDb" />
+          <NavigationProperty Name="VertexDb" Relationship="Self.FK_Link_Vertex" FromRole="LinkDb" ToRole="VertexDb" />
+          <NavigationProperty Name="VertexDb1" Relationship="Self.FK_Link_Vertex1" FromRole="LinkDb" ToRole="VertexDb" />
+        </EntityType>
+        <EntityType Name="NetworkDb">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="date_created" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="last_modified" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="service_id" Type="Int32" Nullable="false" />
+          <Property Name="directed" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="LinkDb" Relationship="Self.FK_Link_Network" FromRole="NetworkDb" ToRole="LinkDb" />
+          <NavigationProperty Name="NetworkFactorsDb" Relationship="Self.FK_Network_factors_Network" FromRole="NetworkDb" ToRole="NetworkFactorsDb" />
+          <NavigationProperty Name="ServiceDb" Relationship="Self.FK_Network_Service" FromRole="NetworkDb" ToRole="ServiceDb" />
+        </EntityType>
+        <EntityType Name="NetworkFactorsDb">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="network_id" Type="Int64" Nullable="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="density" Type="Double" Nullable="false" />
+          <Property Name="avg_betweenness_centrality" Type="Double" Nullable="false" />
+          <Property Name="avg_closeness_centrality" Type="Double" Nullable="false" />
+          <Property Name="avg_indegree_centrality" Type="Double" Nullable="false" />
+          <Property Name="avg_influence_range" Type="Double" Nullable="false" />
+          <Property Name="avg_outdegree_centrality" Type="Double" Nullable="false" />
+          <Property Name="up_to_date" Type="Boolean" Nullable="false" />
+          <Property Name="density_count" Type="Boolean" Nullable="false" />
+          <Property Name="bet_cen_count" Type="Boolean" Nullable="false" />
+          <Property Name="clos_cen_count" Type="Boolean" Nullable="false" />
+          <Property Name="ind_cen_count" Type="Boolean" Nullable="false" />
+          <Property Name="inf_range_count" Type="Boolean" Nullable="false" />
+          <Property Name="out_cen_count" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="NetworkDb" Relationship="Self.FK_Network_factors_Network" FromRole="NetworkFactorsDb" ToRole="NetworkDb" />
+        </EntityType>
+        <EntityType Name="ServiceDb">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Credentials" Relationship="Self.FK_Credentials_ServiceDb" FromRole="ServiceDb" ToRole="Credentials" />
+          <NavigationProperty Name="NetworkDb" Relationship="Self.FK_Network_Service" FromRole="ServiceDb" ToRole="NetworkDb" />
+          <NavigationProperty Name="VertexDb" Relationship="Self.FK_Vertex_Service" FromRole="ServiceDb" ToRole="VertexDb" />
+        </EntityType>
+        <EntityType Name="VertexDb">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="identifier" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="service_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="LinkDb" Relationship="Self.FK_Link_Vertex" FromRole="VertexDb" ToRole="LinkDb" />
+          <NavigationProperty Name="LinkDb1" Relationship="Self.FK_Link_Vertex1" FromRole="VertexDb" ToRole="LinkDb" />
+          <NavigationProperty Name="ServiceDb" Relationship="Self.FK_Vertex_Service" FromRole="VertexDb" ToRole="ServiceDb" />
+          <NavigationProperty Name="VertexFactorsDb" Relationship="Self.FK_Factors_Vertex" FromRole="VertexDb" ToRole="VertexFactorsDb" />
+        </EntityType>
+        <EntityType Name="VertexFactorsDb">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="vertex_id" Type="Int64" Nullable="false" />
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="betweenness_centrality" Type="Double" Nullable="false" />
+          <Property Name="closeness_centrality" Type="Double" Nullable="false" />
+          <Property Name="indegree_centrality" Type="Double" Nullable="false" />
+          <Property Name="influence_range" Type="Double" Nullable="false" />
+          <Property Name="outdegree_centrality" Type="Double" Nullable="false" />
+          <Property Name="up_to_date" Type="Boolean" Nullable="false" />
+          <Property Name="network_id" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="VertexDb" Relationship="Self.FK_Factors_Vertex" FromRole="VertexFactorsDb" ToRole="VertexDb" />
+        </EntityType>
+        <Association Name="FK_Credentials_ServiceDb">
+          <End Role="ServiceDb" Type="Self.ServiceDb" Multiplicity="1" />
+          <End Role="Credentials" Type="Self.Credentials" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceDb">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Credentials">
+              <PropertyRef Name="service_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Link_Network">
+          <End Role="NetworkDb" Type="Self.NetworkDb" Multiplicity="1" />
+          <End Role="LinkDb" Type="Self.LinkDb" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NetworkDb">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="LinkDb">
+              <PropertyRef Name="network_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Link_Vertex">
+          <End Role="VertexDb" Type="Self.VertexDb" Multiplicity="1" />
+          <End Role="LinkDb" Type="Self.LinkDb" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VertexDb">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="LinkDb">
+              <PropertyRef Name="source_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Link_Vertex1">
+          <End Role="VertexDb" Type="Self.VertexDb" Multiplicity="1" />
+          <End Role="LinkDb" Type="Self.LinkDb" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VertexDb">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="LinkDb">
+              <PropertyRef Name="target_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Network_factors_Network">
+          <End Role="NetworkDb" Type="Self.NetworkDb" Multiplicity="1" />
+          <End Role="NetworkFactorsDb" Type="Self.NetworkFactorsDb" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NetworkDb">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="NetworkFactorsDb">
+              <PropertyRef Name="network_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Network_Service">
+          <End Role="ServiceDb" Type="Self.ServiceDb" Multiplicity="1" />
+          <End Role="NetworkDb" Type="Self.NetworkDb" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceDb">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="NetworkDb">
+              <PropertyRef Name="service_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vertex_Service">
+          <End Role="ServiceDb" Type="Self.ServiceDb" Multiplicity="1" />
+          <End Role="VertexDb" Type="Self.VertexDb" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceDb">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="VertexDb">
+              <PropertyRef Name="service_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Factors_Vertex">
+          <End Role="VertexDb" Type="Self.VertexDb" Multiplicity="1" />
+          <End Role="VertexFactorsDb" Type="Self.VertexFactorsDb" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VertexDb">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="VertexFactorsDb">
+              <PropertyRef Name="vertex_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Networkv3Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Credentials" EntityType="Self.Credentials" />
+          <EntitySet Name="LinkDb" EntityType="Self.LinkDb" />
+          <EntitySet Name="NetworkDb" EntityType="Self.NetworkDb" />
+          <EntitySet Name="NetworkFactorsDb" EntityType="Self.NetworkFactorsDb" />
+          <EntitySet Name="ServiceDb" EntityType="Self.ServiceDb" />
+          <EntitySet Name="VertexDb" EntityType="Self.VertexDb" />
+          <EntitySet Name="VertexFactorsDb" EntityType="Self.VertexFactorsDb" />
+          <AssociationSet Name="FK_Credentials_ServiceDb" Association="Self.FK_Credentials_ServiceDb">
+            <End Role="ServiceDb" EntitySet="ServiceDb" />
+            <End Role="Credentials" EntitySet="Credentials" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Link_Network" Association="Self.FK_Link_Network">
+            <End Role="NetworkDb" EntitySet="NetworkDb" />
+            <End Role="LinkDb" EntitySet="LinkDb" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Link_Vertex" Association="Self.FK_Link_Vertex">
+            <End Role="VertexDb" EntitySet="VertexDb" />
+            <End Role="LinkDb" EntitySet="LinkDb" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Link_Vertex1" Association="Self.FK_Link_Vertex1">
+            <End Role="VertexDb" EntitySet="VertexDb" />
+            <End Role="LinkDb" EntitySet="LinkDb" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Network_factors_Network" Association="Self.FK_Network_factors_Network">
+            <End Role="NetworkDb" EntitySet="NetworkDb" />
+            <End Role="NetworkFactorsDb" EntitySet="NetworkFactorsDb" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Network_Service" Association="Self.FK_Network_Service">
+            <End Role="ServiceDb" EntitySet="ServiceDb" />
+            <End Role="NetworkDb" EntitySet="NetworkDb" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vertex_Service" Association="Self.FK_Vertex_Service">
+            <End Role="ServiceDb" EntitySet="ServiceDb" />
+            <End Role="VertexDb" EntitySet="VertexDb" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Factors_Vertex" Association="Self.FK_Factors_Vertex">
+            <End Role="VertexDb" EntitySet="VertexDb" />
+            <End Role="VertexFactorsDb" EntitySet="VertexFactorsDb" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Networkv3ModelStoreContainer" CdmEntityContainer="Networkv3Entities">
+          <EntitySetMapping Name="Credentials">
+            <EntityTypeMapping TypeName="Networkv3Model.Credentials">
+              <MappingFragment StoreEntitySet="Credentials">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="key" ColumnName="key" />
+                <ScalarProperty Name="secret" ColumnName="secret" />
+                <ScalarProperty Name="service_id" ColumnName="service id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LinkDb">
+            <EntityTypeMapping TypeName="Networkv3Model.LinkDb">
+              <MappingFragment StoreEntitySet="LinkDb">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="network_id" ColumnName="network id" />
+                <ScalarProperty Name="source_id" ColumnName="source id" />
+                <ScalarProperty Name="target_id" ColumnName="target id" />
+                <ScalarProperty Name="date_modified" ColumnName="date modified" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NetworkDb">
+            <EntityTypeMapping TypeName="Networkv3Model.NetworkDb">
+              <MappingFragment StoreEntitySet="NetworkDb">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="date_created" ColumnName="date created" />
+                <ScalarProperty Name="last_modified" ColumnName="last modified" />
+                <ScalarProperty Name="service_id" ColumnName="service id" />
+                <ScalarProperty Name="directed" ColumnName="directed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NetworkFactorsDb">
+            <EntityTypeMapping TypeName="Networkv3Model.NetworkFactorsDb">
+              <MappingFragment StoreEntitySet="NetworkFactorsDb">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="network_id" ColumnName="network id" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="density" ColumnName="density" />
+                <ScalarProperty Name="avg_betweenness_centrality" ColumnName="avg betweenness centrality" />
+                <ScalarProperty Name="avg_closeness_centrality" ColumnName="avg closeness centrality" />
+                <ScalarProperty Name="avg_indegree_centrality" ColumnName="avg indegree centrality" />
+                <ScalarProperty Name="avg_influence_range" ColumnName="avg influence range" />
+                <ScalarProperty Name="avg_outdegree_centrality" ColumnName="avg outdegree centrality" />
+                <ScalarProperty Name="up_to_date" ColumnName="up to date" />
+                <ScalarProperty Name="density_count" ColumnName="density count" />
+                <ScalarProperty Name="bet_cen_count" ColumnName="bet cen count" />
+                <ScalarProperty Name="clos_cen_count" ColumnName="clos cen count" />
+                <ScalarProperty Name="ind_cen_count" ColumnName="ind cen count" />
+                <ScalarProperty Name="inf_range_count" ColumnName="inf range count" />
+                <ScalarProperty Name="out_cen_count" ColumnName="out cen count" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceDb">
+            <EntityTypeMapping TypeName="Networkv3Model.ServiceDb">
+              <MappingFragment StoreEntitySet="ServiceDb">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VertexDb">
+            <EntityTypeMapping TypeName="Networkv3Model.VertexDb">
+              <MappingFragment StoreEntitySet="VertexDb">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="identifier" ColumnName="identifier" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="service_id" ColumnName="service id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VertexFactorsDb">
+            <EntityTypeMapping TypeName="Networkv3Model.VertexFactorsDb">
+              <MappingFragment StoreEntitySet="VertexFactorsDb">
+                <ScalarProperty Name="vertex_id" ColumnName="vertex id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="betweenness_centrality" ColumnName="betweenness centrality" />
+                <ScalarProperty Name="closeness_centrality" ColumnName="closeness centrality" />
+                <ScalarProperty Name="indegree_centrality" ColumnName="indegree centrality" />
+                <ScalarProperty Name="influence_range" ColumnName="influence range" />
+                <ScalarProperty Name="outdegree_centrality" ColumnName="outdegree centrality" />
+                <ScalarProperty Name="up_to_date" ColumnName="up to date" />
+                <ScalarProperty Name="network_id" ColumnName="network id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,22 +1,31 @@
 ﻿<!--Application name-->
 <ul class="nav navbar-nav horizontal">
     <li><a href="#">@Html.Action("GetApplicationName", "Application")</a></li>
+    <li>@Html.ActionLink("Visualisation", "Index", "Visualisation")</li>
+    <li>@Html.ActionLink("Networks", "Index", "NetworkDbs")</li>
+    <li>@Html.ActionLink("Vertices", "Index", "VertexDbs")</li>
+    <li>@Html.ActionLink("Edges", "Index", "LinkDbs")</li>
+    <li>@Html.ActionLink("Services", "Index", "ServiceDbs")</li>
+    <li>@Html.ActionLink("Keys", "Index", "Credentials")</li>
 </ul>
 
 <!--Project selection-->
 <ul class="nav navbar-nav">
     <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            @Html.Action("GetUserSelectedProject", "Project")<b class="caret"></b>
+            Collect data<b class="caret"></b>
         </a>
         <ul class="dropdown-menu" style="padding: 0; left: -30px; min-width: 260px; max-width: 280px; word-break: break-all;">
             <li>
-                <div class="nano nscroller" style="width: 100%; height: 200px;">
+                <div class="nano nscroller" style="width: 100%; height: 100px;">
                     <div class="nano-content">
                         <ul class="no-padding">
-                            <li data-projects-url="@Url.Action("GetUserAllowedProjects", "Project")">
-                                <a href="">@EPXSocNet.TemplateResources.Shared.TopBar.Loading</a>
-                            </li>
+                            <li>
+                                @Html.ActionLink("Flickr", "FlickrFollowers", "Acquisition")
+                        </li>
+                        <li>
+                            @Html.ActionLink("Twitter", "TwitterNetwork", "Acquisition")
+                        </li>
                         </ul>
                     </div>
                 </div>

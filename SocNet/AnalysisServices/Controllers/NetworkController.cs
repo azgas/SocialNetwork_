@@ -10,7 +10,7 @@ using System.Web.Http.Cors;
 
 namespace AnalysisServices.Controllers
 {
-    [EnableCors(origins: "http://localhost:60701", headers: "*", methods: "*")]
+    [EnableCors(origins: "http://localhost:60701,https://localhost:44301,https://gnaanalysis:44301", headers: "*", methods: "*")]
     public class NetworkController : ApiController
     {
 

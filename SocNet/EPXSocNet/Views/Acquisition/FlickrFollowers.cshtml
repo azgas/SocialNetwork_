@@ -1,0 +1,25 @@
+﻿@model EPXSocNet.Models.FormFlickrFollowers
+
+@{
+    ViewBag.Title = "FlickrFollowers";
+}
+
+<h2>Data acqusition from Flickr</h2>
+@using (Html.BeginForm())
+{
+    <div>
+        @Html.LabelFor(model => model.InitialVertex)
+        @Html.TextBoxFor(model => model.InitialVertex)
+    </div>
+    <div>
+        @Html.LabelFor(model => model.NetworkID)
+        @Html.TextBoxFor(model => model.NetworkID)
+    </div>
+    <div>
+        @Html.LabelFor(model => model.NumberQueries)
+        @Html.TextBoxFor(model => model.NumberQueries)
+    </div>
+
+    <input type="submit" value="Collect data" />
+}
+
