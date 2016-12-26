@@ -261,6 +261,7 @@
     <Content Include="Models\BazaDanych.edmx.diagram">
       <DependentUpon>BazaDanych.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\EPXSocNet.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

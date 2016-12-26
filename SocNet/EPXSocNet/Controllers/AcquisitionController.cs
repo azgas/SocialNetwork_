@@ -30,7 +30,7 @@ namespace EPXSocNet.Controllers
         public ActionResult FlickrFollowers(FormFlickrFollowers form)
         {
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("https://localhost:44348/");
+            client.BaseAddress = new Uri("https://gnanalysis:444/");
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             HttpResponseMessage response = client.PostAsJsonAsync("api/FlickrFollowersAPI/FlickrNetwork", form).Result;
@@ -47,7 +47,7 @@ namespace EPXSocNet.Controllers
         public ActionResult TwitterNetwork(FormTwitterNetwork form)
         {
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("https://localhost:44342/");
+            client.BaseAddress = new Uri("https://gnanalysis:4451/");
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             HttpResponseMessage response = client.PostAsJsonAsync("api/TwitterNetworkAPI/TwitterNetwork", form).Result;
